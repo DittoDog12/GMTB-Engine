@@ -16,8 +16,11 @@ namespace GMTB
         #region Constructor
         public Player()
         {
-            mTexturename = "foward1";
+            mTexturename = "square";
             mSpeed = 3;
+            mPosition.X = Game1.ScreenWidth / 2;
+            mPosition.Y = Game1.ScreenHeight / 2;
+
         }
         #endregion
 
@@ -28,16 +31,18 @@ namespace GMTB
             switch (mDirection)
             {
                 case "Up":
-                    mPosition.Y += mSpeed;
+                    mPosition.Y -= mSpeed;
                     break;
                 case "Left":
                     mPosition.X -= mSpeed;
                     break;
                 case "Down":
-                    mPosition.Y -= mSpeed;
+                    mPosition.Y += mSpeed;
                     break;
                 case "Right":
                     mPosition.X += mSpeed;
+                    break;
+                default:
                     break;
             }
 

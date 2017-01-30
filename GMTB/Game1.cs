@@ -55,6 +55,7 @@ namespace GMTB
             // TODO: use this.Content to load your game content here
             Entities.Add(new Player());
             Entities.ForEach(IEntity => IEntity.aTexture = Content.Load<Texture2D>(IEntity.aTexturename));
+
         }
 
         /// <summary>
@@ -90,6 +91,7 @@ namespace GMTB
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            Entities.ForEach(IEntity => IEntity.Draw(spriteBatch));
 
             base.Draw(gameTime);
         }

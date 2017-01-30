@@ -13,7 +13,7 @@ namespace GMTB
         protected int mSpeed;
         protected Texture2D mTexture;
         protected string mTexturename;
-        protected Vector3 mPosition;
+        protected Vector2 mPosition;
         #endregion
 
         #region Accessors
@@ -34,6 +34,13 @@ namespace GMTB
         public virtual void Update()
         {
 
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Begin();
+            spriteBatch.Draw(mTexture, mPosition, Color.AntiqueWhite);
+            spriteBatch.End();
         }
         #endregion
     }

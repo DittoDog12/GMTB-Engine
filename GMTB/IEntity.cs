@@ -9,8 +9,14 @@ namespace GMTB
 {
     public interface IEntity
     {
+        #region Accessors
         Texture2D aTexture { set; }
         String aTexturename { get; }
+        #endregion
+
+        #region Methods
         void Update();
+        void Draw(SpriteBatch spriteBatch);
+        #endregion
     }
 }

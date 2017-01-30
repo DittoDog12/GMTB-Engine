@@ -28,18 +28,23 @@ namespace GMTB
             {
                 mDirection = "Up";
             }
-            if (keyboardState.IsKeyDown(Keys.A) == true)
+            else if (keyboardState.IsKeyDown(Keys.A) == true)
             {
                 mDirection = "Left";
             }
-            if (keyboardState.IsKeyDown(Keys.S) == true)
+            else if (keyboardState.IsKeyDown(Keys.S) == true)
             {
                 mDirection = "Down";
             }
-            if (keyboardState.IsKeyDown(Keys.D) == true)
+            else if (keyboardState.IsKeyDown(Keys.D) == true)
             {
                 mDirection = "Right";
             }
+            else
+            {
+                mDirection = null;
+            }
+
             return mDirection;
         }
         #endregion
