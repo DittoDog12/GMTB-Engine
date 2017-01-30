@@ -1,4 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -11,6 +15,11 @@ namespace GMTB
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        public static int ScreenWidth;
+        public static int ScreenHeight;
+
+        public List<IEntity> Entities;
 
         public Game1()
         {
@@ -27,6 +36,9 @@ namespace GMTB
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            ScreenHeight = GraphicsDevice.Viewport.Height;
+            ScreenWidth = GraphicsDevice.Viewport.Width;
+            Entities = new List<IEntity>();
 
             base.Initialize();
         }
@@ -41,6 +53,8 @@ namespace GMTB
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            Entities.Add(new Player());
+            Entities.ForEach(IEntity => IEntity.aTexture = Content.Load<Texture2D>(IEntity.aTexturename));
         }
 
         /// <summary>
@@ -63,7 +77,7 @@ namespace GMTB
                 Exit();
 
             // TODO: Add your update logic here
-
+            Entities.ForEach(IEntity => IEntity.Update()); 
             base.Update(gameTime);
         }
 
