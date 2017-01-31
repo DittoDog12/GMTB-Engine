@@ -7,16 +7,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GMTB
 {
-    class Player : Entity
+    class Player : MovingEntity
     {
         #region Data Members
-        private string mDirection;
+
         #endregion
 
         #region Constructor
-        public Player()
+        public Player() : base()
         {
-            mTexturename = "square";
+            mTexturename = "squaresheet";
             mSpeed = 3;
             mPosition.X = Game1.ScreenWidth / 2;
             mPosition.Y = Game1.ScreenHeight / 2;
@@ -27,20 +27,25 @@ namespace GMTB
         #region Methods
         public override void Update()
         {
+            base.Update();
             mDirection = Input.GetKeyboardInputDirection(PlayerIndex.One);
             switch (mDirection)
             {
                 case "Up":
                     mPosition.Y -= mSpeed;
+                    CurrentFrame++;
                     break;
                 case "Left":
                     mPosition.X -= mSpeed;
+                    CurrentFrame++;
                     break;
                 case "Down":
                     mPosition.Y += mSpeed;
+                    CurrentFrame++;
                     break;
                 case "Right":
                     mPosition.X += mSpeed;
+                    CurrentFrame++;
                     break;
                 default:
                     break;

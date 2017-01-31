@@ -78,6 +78,7 @@ namespace GMTB
                 Exit();
 
             // TODO: Add your update logic here
+            Entities.ForEach(IEntity => IEntity.aTexture = Content.Load<Texture2D>(IEntity.aTexturename));
             Entities.ForEach(IEntity => IEntity.Update()); 
             base.Update(gameTime);
         }
