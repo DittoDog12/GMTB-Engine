@@ -17,8 +17,6 @@ namespace GMTB
         //--Texture
         protected Texture2D mTexture;
         protected string mTexturename;
-        protected int Frames;
-        protected int CurrentFrame;
         #endregion
 
         #region Accessors
@@ -33,35 +31,24 @@ namespace GMTB
         #endregion
 
         #region Constructor
-        public Entity()
+        public Entity(int pXpos, int pYpos)
         {
-            Frames = 4;
-            CurrentFrame = 0;
+            mPosition.X = pXpos;
+            mPosition.Y = pYpos;
+
         }
         #endregion
 
         #region Methods
         public virtual void Update()
         {
-            if (CurrentFrame == Frames)
-                CurrentFrame = 0;
+
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
-            // Calculate size of each animation frame
-            int width = mTexture.Width / 4;
-            int height = mTexture.Height;
-            int row = (int)((float)CurrentFrame / (float) 4);
-            int column = CurrentFrame % 4;
-
-            // Position selection around frame of spritesheet
-            Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)mPosition.X, (int)mPosition.Y, width, height);
-             
-            // Run spritebatch update with each frame of the animation
             spriteBatch.Begin();
-            spriteBatch.Draw(mTexture, destinationRectangle, sourceRectangle, Color.AntiqueWhite);
+            spriteBatch.Draw(mTexture, mPosition, Color.AntiqueWhite);
             spriteBatch.End();
         }
         #endregion

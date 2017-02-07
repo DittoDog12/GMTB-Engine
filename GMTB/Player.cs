@@ -14,12 +14,10 @@ namespace GMTB
         #endregion
 
         #region Constructor
-        public Player() : base()
+        public Player(int pXpos, int pYpos) : base(pXpos, pYpos)
         {
-            mTexturename = "squaresheet";
+            mTexturename = "Player Images/JFW";
             mSpeed = 3;
-            mPosition.X = Game1.ScreenWidth / 2;
-            mPosition.Y = Game1.ScreenHeight / 2;
 
         }
         #endregion
@@ -33,21 +31,26 @@ namespace GMTB
             {
                 case "Up":
                     mPosition.Y -= mSpeed;
+                    mTexturename = "Player Images/JBW";
                     CurrentFrame++;
                     break;
                 case "Left":
                     mPosition.X -= mSpeed;
+                    mTexturename = "Player Images/JLW";
                     CurrentFrame++;
                     break;
                 case "Down":
                     mPosition.Y += mSpeed;
+                    mTexturename = "Player Images/JFW";
                     CurrentFrame++;
                     break;
                 case "Right":
                     mPosition.X += mSpeed;
+                    mTexturename = "Player Images/JRW";
                     CurrentFrame++;
                     break;
                 default:
+                    CurrentFrame = 0;
                     break;
             }
 

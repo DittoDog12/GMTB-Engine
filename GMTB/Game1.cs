@@ -53,7 +53,8 @@ namespace GMTB
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            Entities.Add(new Player());
+            Entities.Add(new Player(ScreenWidth - 23, ScreenHeight / 2));
+            Entities.Add(new SquareObject(ScreenWidth/2, ScreenHeight / 2));
             Entities.ForEach(IEntity => IEntity.aTexture = Content.Load<Texture2D>(IEntity.aTexturename));
 
         }
