@@ -10,6 +10,9 @@ namespace GMTB
     public class Entity : IEntity
     {
         #region Data Members
+        //--Key Variables
+        protected int mUID;
+        protected string mUName;
         //--Movement
         protected int mSpeed;
         protected Vector2 mPosition;
@@ -20,6 +23,14 @@ namespace GMTB
         #endregion
 
         #region Accessors
+        public int UID
+        {
+            get { return mUID; }
+        }
+        public string UName
+        {
+            get { return mUName; }
+        }
         public Texture2D aTexture
         {
             set { mTexture = value; }
@@ -27,6 +38,10 @@ namespace GMTB
         public string aTexturename
         {
             get { return mTexturename; }
+        }
+        public Vector2 Position
+        {
+            get { return mPosition; }
         }
         #endregion
 

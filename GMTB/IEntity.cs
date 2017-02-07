@@ -10,8 +10,11 @@ namespace GMTB
     public interface IEntity
     {
         #region Accessors
+        int UID { get; }
+        string UName { get; }
         Texture2D aTexture { set; }
         String aTexturename { get; }
+        Vector2 Position { get; }
         #endregion
 
         #region Methods

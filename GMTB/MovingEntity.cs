@@ -23,7 +23,9 @@ namespace GMTB
             CurrentFrame = 0;
 
         }
+        #endregion
 
+        #region Methods
         public override void Update()
         {
             if (CurrentFrame == Frames)

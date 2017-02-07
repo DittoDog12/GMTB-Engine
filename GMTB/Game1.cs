@@ -19,7 +19,10 @@ namespace GMTB
         public static int ScreenWidth;
         public static int ScreenHeight;
 
-        public List<IEntity> Entities;
+        public IEntityManager EManager;
+        public ISceneManager SManager;
+
+
 
         public Game1()
         {
@@ -38,8 +41,8 @@ namespace GMTB
             // TODO: Add your initialization logic here
             ScreenHeight = GraphicsDevice.Viewport.Height;
             ScreenWidth = GraphicsDevice.Viewport.Width;
-            Entities = new List<IEntity>();
-
+            EManager = new EntityManager(Content);
+            SManager = new SceneManager(EManager);
             base.Initialize();
         }
 
@@ -53,9 +56,9 @@ namespace GMTB
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            Entities.Add(new Player(ScreenWidth - 23, ScreenHeight / 2));
-            Entities.Add(new SquareObject(ScreenWidth/2, ScreenHeight / 2));
-            Entities.ForEach(IEntity => IEntity.aTexture = Content.Load<Texture2D>(IEntity.aTexturename));
+            EManager.Player(ScreenWidth / 2, ScreenHeight / 2);
+            //Entities.Add(new SquareObject(ScreenWidth/2, ScreenHeight / 2));
+            
 
         }
 
@@ -79,8 +82,8 @@ namespace GMTB
                 Exit();
 
             // TODO: Add your update logic here
-            Entities.ForEach(IEntity => IEntity.aTexture = Content.Load<Texture2D>(IEntity.aTexturename));
-            Entities.ForEach(IEntity => IEntity.Update()); 
+            EManager.Update(gameTime);
+            
             base.Update(gameTime);
         }
 
@@ -93,7 +96,7 @@ namespace GMTB
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            Entities.ForEach(IEntity => IEntity.Draw(spriteBatch));
+            SManager.Draw(spriteBatch);
 
             base.Draw(gameTime);
         }
