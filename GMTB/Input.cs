@@ -21,28 +21,57 @@ namespace GMTB
         #endregion
 
         #region Methods
-        public static string GetKeyboardInputDirection(PlayerIndex playerIndex)
+        public static string GetInput(PlayerIndex playerIndex)
         {
             KeyboardState keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.W) == true)
+            // Player 1 Controls, will read WASD and Gamepad in Player One slot
+            if (playerIndex == PlayerIndex.One)
             {
-                mDirection = "Up";
+                if (keyboardState.IsKeyDown(Keys.W) == true || GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed)
+                {
+                    mDirection = "Up";
+                }
+                else if (keyboardState.IsKeyDown(Keys.A) == true || GamePad.GetState(PlayerIndex.One).DPad.Left == ButtonState.Pressed)
+                {
+                    mDirection = "Left";
+                }
+                else if (keyboardState.IsKeyDown(Keys.S) == true || GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed)
+                {
+                    mDirection = "Down";
+                }
+                else if (keyboardState.IsKeyDown(Keys.D) == true || GamePad.GetState(PlayerIndex.One).DPad.Right== ButtonState.Pressed)
+                {
+                    mDirection = "Right";
+                }
+                else
+                {
+                    mDirection = null;
+                }
             }
-            else if (keyboardState.IsKeyDown(Keys.A) == true)
+            // Player 2 Controls, will read Arrow Keys and Gamepad in Player Two slot
+            if (playerIndex == PlayerIndex.Two)
             {
-                mDirection = "Left";
-            }
-            else if (keyboardState.IsKeyDown(Keys.S) == true)
-            {
-                mDirection = "Down";
-            }
-            else if (keyboardState.IsKeyDown(Keys.D) == true)
-            {
-                mDirection = "Right";
-            }
-            else
-            {
-                mDirection = null;
+
+                if (keyboardState.IsKeyDown(Keys.Up) == true || GamePad.GetState(PlayerIndex.Two).DPad.Up == ButtonState.Pressed)
+                {
+                    mDirection = "Up";
+                }
+                else if (keyboardState.IsKeyDown(Keys.Left) == true || GamePad.GetState(PlayerIndex.Two).DPad.Left == ButtonState.Pressed)
+                {
+                    mDirection = "Left";
+                }
+                else if (keyboardState.IsKeyDown(Keys.Down) == true || GamePad.GetState(PlayerIndex.Two).DPad.Down == ButtonState.Pressed)
+                {
+                    mDirection = "Down";
+                }
+                else if (keyboardState.IsKeyDown(Keys.Right) == true || GamePad.GetState(PlayerIndex.Two).DPad.Right == ButtonState.Pressed)
+                {
+                    mDirection = "Right";
+                }
+                else
+                {
+                    mDirection = null;
+                }
             }
 
             return mDirection;

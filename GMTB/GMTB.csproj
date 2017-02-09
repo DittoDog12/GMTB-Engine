@@ -45,7 +45,7 @@
     <Compile Include="IEntityManager.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="ISceneManager.cs" />
-    <Compile Include="MovingEntity.cs" />
+    <Compile Include="AnimatingEntity.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Pong\Ball.cs" />
     <Compile Include="Program.cs" />

@@ -41,6 +41,8 @@ namespace GMTB
             // TODO: Add your initialization logic here
             ScreenHeight = GraphicsDevice.Viewport.Height;
             ScreenWidth = GraphicsDevice.Viewport.Width;
+
+            // Create Entity and Scene Managers
             EManager = new EntityManager(Content);
             SManager = new SceneManager(EManager);
             base.Initialize();
@@ -56,9 +58,11 @@ namespace GMTB
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            EManager.Player(ScreenWidth / 2, ScreenHeight / 2);
+            EManager.NewPlayer(ScreenWidth - 28, ScreenHeight / 2, PlayerIndex.One);
+            EManager.NewPlayer(0, ScreenHeight / 2, PlayerIndex.Two);
+            EManager.Ball(ScreenWidth / 2, ScreenHeight / 2);
             //Entities.Add(new SquareObject(ScreenWidth/2, ScreenHeight / 2));
-            
+
 
         }
 

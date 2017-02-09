@@ -15,11 +15,15 @@ namespace GMTB
         Texture2D aTexture { set; }
         String aTexturename { get; }
         Vector2 Position { get; }
+        bool Collidable { get; }
+        Rectangle HitBox { get; }
         #endregion
 
         #region Methods
-        void Update();
+        void Update(GameTime gameTime);
         void Draw(SpriteBatch spriteBatch);
+        void Collision();
+        bool CheckCollision(IEntity pObject);
         #endregion
     }
 }

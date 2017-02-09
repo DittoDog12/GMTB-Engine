@@ -14,7 +14,8 @@ namespace GMTB
 
         #region Methods
         void Update(GameTime gameTime);
-        void Player(int pXpos, int pYpos);
+        void NewPlayer(int pXpos, int pYpos, PlayerIndex pPlayerNum);
+        void Ball(int pXpos, int pYpos);
     #endregion
-}
+    }
 }

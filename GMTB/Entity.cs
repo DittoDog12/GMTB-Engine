@@ -16,10 +16,18 @@ namespace GMTB
         //--Movement
         protected int mSpeed;
         protected Vector2 mPosition;
+        protected bool mCollidable;
+        protected string mDirection;
 
         //--Texture
         protected Texture2D mTexture;
         protected string mTexturename;
+
+        //--Hitbox for Collision Detection
+        public Rectangle HitBox
+        {
+            get { return new Rectangle((int)mPosition.X, (int)mPosition.Y, mTexture.Width, mTexture.Height); }
+        }
         #endregion
 
         #region Accessors
@@ -43,6 +51,10 @@ namespace GMTB
         {
             get { return mPosition; }
         }
+        public bool Collidable
+        {
+            get { return mCollidable; }
+        }
         #endregion
 
         #region Constructor
@@ -50,12 +62,12 @@ namespace GMTB
         {
             mPosition.X = pXpos;
             mPosition.Y = pYpos;
-
+            mCollidable = false;
         }
         #endregion
 
         #region Methods
-        public virtual void Update()
+        public virtual void Update(GameTime gameTime)
         {
 
         }
@@ -65,6 +77,16 @@ namespace GMTB
             spriteBatch.Begin();
             spriteBatch.Draw(mTexture, mPosition, Color.AntiqueWhite);
             spriteBatch.End();
+        }
+        public virtual void Collision()
+        {
+            
+        }
+
+        public virtual bool CheckCollision(IEntity pObject)
+        {
+            bool rtnval = false;
+            return rtnval;
         }
         #endregion
     }

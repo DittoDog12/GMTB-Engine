@@ -7,18 +7,18 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GMTB
 {
-    class MovingEntity : Entity
+    class AnimatingEntity : Entity
     {
         #region Data Members
-        protected string mDirection;
-
+        // Sets frame information for the Draw Method to read the spritesheets
         protected int Frames;
         protected int CurrentFrame;
         #endregion
 
         #region Constructor
-        public MovingEntity(int pXpos, int pYpos) : base(pXpos, pYpos)
+        public AnimatingEntity(int pXpos, int pYpos) : base(pXpos, pYpos)
         {
+            // Initialise Frame information
             Frames = 4;
             CurrentFrame = 0;
 
@@ -26,13 +26,16 @@ namespace GMTB
         #endregion
 
         #region Methods
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
+            // Used to reset the animation when it reaches the end of the spritesheet
             if (CurrentFrame == Frames)
                 CurrentFrame = 0;
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
+            // Override normal draw method with specialised animating one
+
             // Calculate size of each animation frame
             int width = mTexture.Width / 4;
             int height = mTexture.Height;
