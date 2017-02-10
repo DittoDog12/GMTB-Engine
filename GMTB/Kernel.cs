@@ -11,7 +11,7 @@ namespace GMTB
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class Kernel : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -24,7 +24,7 @@ namespace GMTB
 
 
 
-        public Game1()
+        public Kernel()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";

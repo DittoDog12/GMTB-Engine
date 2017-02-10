@@ -34,11 +34,11 @@ namespace GMTB.Pong
         private void CheckWallCollision()
         {
 
-            if (mPosition.X >= Game1.ScreenWidth || mPosition.X <= 0)
+            if (mPosition.X >= Kernel.ScreenWidth || mPosition.X <= 0)
             {
                 serve();
             }
-            if (mPosition.Y >= Game1.ScreenHeight || mPosition.Y <= 0)
+            if (mPosition.Y >= Kernel.ScreenHeight || mPosition.Y <= 0)
             {
                 velocity.Y *= -1;
             }
@@ -46,8 +46,8 @@ namespace GMTB.Pong
 
         private void serve()
         {
-            mPosition.X = Game1.ScreenWidth / 2;
-            mPosition.Y = Game1.ScreenHeight / 2;
+            mPosition.X = Kernel.ScreenWidth / 2;
+            mPosition.Y = Kernel.ScreenHeight / 2;
             float rotation = (float)(Math.PI / 2 + (randomNum.NextDouble() * (Math.PI / 1.5f) - Math.PI / 3));
             velocity.X = (float)Math.Sin(rotation);
             velocity.Y = (float)Math.Cos(rotation);
@@ -59,7 +59,7 @@ namespace GMTB.Pong
 
         public override void Collision()
         {
-            velocity.Y *= -1;
+            velocity.X *= -1;
         }
         #endregion
     }

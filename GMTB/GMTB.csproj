@@ -40,7 +40,7 @@
   <ItemGroup>
     <Compile Include="Entity.cs" />
     <Compile Include="EntityManager.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="Kernel.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IEntityManager.cs" />
     <Compile Include="Input.cs" />
@@ -61,6 +61,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Enemy\MFW.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Player Images\JBW.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

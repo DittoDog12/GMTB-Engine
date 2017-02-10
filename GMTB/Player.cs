@@ -11,16 +11,21 @@ namespace GMTB
     {
         #region Data Members
         private PlayerIndex mPlayerNum;
-
-        
         #endregion
 
         #region Constructor
         public Player(int pXpos, int pYpos, PlayerIndex pPlayerNum) : base(pXpos, pYpos)
         {
-            mTexturename = "Player Images/JFW";
-            mSpeed = 1;
+            mSpeed = 5;
             mPlayerNum = pPlayerNum;
+            if (mPlayerNum == PlayerIndex.One)
+            {
+                mTexturename = "Player Images/JFW";
+            }
+            if (mPlayerNum == PlayerIndex.Two)
+            {
+                mTexturename = "Enemy/MFW";
+            }
         }
         #endregion
 
@@ -53,8 +58,10 @@ namespace GMTB
                         mTexturename = "Player Images/JRW";
                         CurrentFrame++;
                         break;
-                    default:
+                    case "stop":
                         CurrentFrame = 0;
+                        break;
+                    default:
                         break;
                 }
             }
@@ -65,26 +72,28 @@ namespace GMTB
                 {
                     case "Up":
                         mPosition.Y -= mSpeed;
-                        mTexturename = "Player Images/JBW";
+                        mTexturename = "Enemy/MFW";
                         CurrentFrame++;
                         break;
                     case "Left":
                         mPosition.X -= mSpeed;
-                        mTexturename = "Player Images/JLW";
+                        mTexturename = "Enemy/MFW";
                         CurrentFrame++;
                         break;
                     case "Down":
                         mPosition.Y += mSpeed;
-                        mTexturename = "Player Images/JFW";
+                        mTexturename = "Enemy/MFW";
                         CurrentFrame++;
                         break;
                     case "Right":
                         mPosition.X += mSpeed;
-                        mTexturename = "Player Images/JRW";
+                        mTexturename = "Enemy/MFW";
                         CurrentFrame++;
                         break;
-                    default:
+                    case "stop":
                         CurrentFrame = 0;
+                        break;
+                    default:
                         break;
                 }
             }

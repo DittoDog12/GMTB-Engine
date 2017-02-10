@@ -34,6 +34,7 @@ namespace GMTB
         public int UID
         {
             get { return mUID; }
+            set { mUID = value; }
         }
         public string UName
         {
