@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GMTB
 {
-    class AnimatingEntity : Entity
+    abstract class AnimatingEntity : Entity
     {
         #region Data Members
         // Sets frame information for the Draw Method to read the spritesheets
@@ -28,7 +28,7 @@ namespace GMTB
         #endregion
 
         #region Constructor
-        public AnimatingEntity(int pXpos, int pYpos) : base(pXpos, pYpos)
+        public AnimatingEntity()
         {
             // Initialise Frame information
             Frames = 4;

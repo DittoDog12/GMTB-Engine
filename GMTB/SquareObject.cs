@@ -8,7 +8,7 @@ namespace GMTB
     class SquareObject : Entity
     {
         #region Constructor
-        public SquareObject(int pXpos, int pYpos) : base(pXpos, pYpos)
+        public SquareObject()
         {
             mTexturename = "square";
         }

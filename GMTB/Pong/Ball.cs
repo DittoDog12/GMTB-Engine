@@ -14,11 +14,11 @@ namespace GMTB.Pong
         #endregion
 
         #region Constructor
-        public Ball(int pXpos, int pYpos) :base(pXpos, pYpos)
+        public Ball()
         {
-            mTexturename = "square";
+            mTexturename = "BlueDoll";
             mCollidable = true;
-            mSpeed = 5;
+            mSpeed = 2;
             randomNum = new Random();
             serve();
         }

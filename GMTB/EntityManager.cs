@@ -3,85 +3,66 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using GMTB.Pong;
+
 
 namespace GMTB
 {
-    public class EntityManager : IEntityManager
+    // Declare Generic class for entity types
+    
+
+    public class EntityManager : IEntityManager 
     {
         #region Data Members
         // Create Master List for all entities
         public List<IEntity> mEntities;
-        // Create Sublists for each Entity Type 
-        //public List<IEntity> mPlayers;
-        //public List<IEntity> mWorldObjects;
-        // Create Reference to the Content Manager
-        Microsoft.Xna.Framework.Content.ContentManager Content;  
-        #endregion
-
-        #region Accessors
-        public List<IEntity> Entities
-        {
-            get { return mEntities; }
-        }
+        // Create UID 
+        private int UID;
         #endregion
 
         #region Constructor
-        public EntityManager(Microsoft.Xna.Framework.Content.ContentManager pContent)
+        public EntityManager()
         {
             // Initialise Lists and Content Manager Reference
-            Content = pContent;
             mEntities = new List<IEntity>();
-            //mPlayers = new List<IEntity>();
-            //mWorldObjects = new List<IEntity>();
+            // Set UID counter to 0 for first object
+            UID = 0;
         }
         #endregion
 
         #region Methods
-        // ----------- Cannot add multiple lists to master list, duplicates are created, change asap ---------- //
-        public void ApplyCommon(/**List<IEntity> OtherList**/)
+        public IEntity newEntity<T>() where T : IEntity, new()
         {
-            // Applies Common factors to every entity
-            // Applies Texture to each entity using Class Specified texture name
-            mEntities.ForEach(IEntity => IEntity.aTexture = Content.Load<Texture2D>(IEntity.aTexturename));
-            // Adds contents of additional lists to the Master List
-            //mEntities.AddRange(OtherList);
-            // Set UID
-            for (int i = 0; i < mEntities.Count; i++)
+            // Create an entity of the type specifed by the Kernel
+            IEntity createdEntity = new T();
+            // Store in the list
+            mEntities.Add(createdEntity);
+            // Set the entities UID
+            createdEntity.setVars(UID);
+            // Increment the UID counter
+            UID++;
+            // Return the new entity to the kernel
+            return createdEntity;
+        }
+        public IEntity newEntity<T>(PlayerIndex pPlayerNum) where T : IEntity, new()
+        {
+            // Same as above but allow for the Player ID for controls
+            IEntity createdEntity = new T();
+            mEntities.Add(createdEntity);
+            createdEntity.setVars(UID, pPlayerNum);
+            UID++;
+            return createdEntity;
+        }
+
+        public void removeEntity(int uid)
+        {
+            for (int i = 0; i <mEntities.Count; i++)
             {
-                mEntities[i].UID = i;
+                if(mEntities[i].UID == uid)
+                {
+                    mEntities.RemoveAt(i);
+                    mEntities[i] = null;
+                }
             }
-        }
-
-        public void Update(GameTime gameTime)
-        {
-            // Reaply textures for Animating Entities only
-            mEntities.ForEach(AnimatingEntity => AnimatingEntity.aTexture = Content.Load<Texture2D>(AnimatingEntity.aTexturename));
-            // Call All Entities Update
-            mEntities.ForEach(IEntity => IEntity.Update(gameTime));
-            // Call Collision Check
-            CheckCollision();
-        }
-
-        public void NewPlayer(int pXpos, int pYpos, PlayerIndex pPlayerNum)
-        {
-            // Adds a new Player to the Player List
-            //mPlayers.Add(new Player(pXpos, pYpos, pPlayerNum));
-            mEntities.Add(new Player(pXpos, pYpos, pPlayerNum));
-            // Calls Common factor application method
-            //ApplyCommon(mPlayers);
-            ApplyCommon();
-        }
-
-        public void Ball(int pXpos, int pYpos)
-        {
-            // Adds a new Ball to the World Object List
-            // mWorldObjects.Add(new Ball(pXpos, pYpos));
-            mEntities.Add(new Ball(pXpos, pYpos));
-            // Calls Common factor application method
-            //ApplyCommon(mWorldObjects);
-            ApplyCommon();
         }
 
         public void CheckCollision()
@@ -111,10 +92,7 @@ namespace GMTB
             }
             
         }
-        
-
-
-            
+  
         #endregion
     }
 }

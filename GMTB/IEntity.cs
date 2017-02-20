@@ -20,6 +20,9 @@ namespace GMTB
         #endregion
 
         #region Methods
+        void setVars(int uid);
+        void setVars(int uid, PlayerIndex pPlayer);
+        void setPos(int x, int y);
         void Update(GameTime gameTime);
         void Draw(SpriteBatch spriteBatch);
         void Collision();

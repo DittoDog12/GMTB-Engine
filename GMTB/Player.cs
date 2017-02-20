@@ -14,10 +14,18 @@ namespace GMTB
         #endregion
 
         #region Constructor
-        public Player(int pXpos, int pYpos, PlayerIndex pPlayerNum) : base(pXpos, pYpos)
+        public Player()
         {
             mSpeed = 5;
-            mPlayerNum = pPlayerNum;
+            
+        }
+        #endregion
+
+        #region Methods
+        public override void setVars(int uid, PlayerIndex pPlayer)
+        {
+            UID = uid;
+            mPlayerNum = pPlayer;
             if (mPlayerNum == PlayerIndex.One)
             {
                 mTexturename = "Player Images/JFW";
@@ -27,9 +35,6 @@ namespace GMTB
                 mTexturename = "Enemy/MFW";
             }
         }
-        #endregion
-
-        #region Methods
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);

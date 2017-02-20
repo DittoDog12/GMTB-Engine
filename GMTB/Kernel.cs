@@ -19,8 +19,12 @@ namespace GMTB
         public static int ScreenWidth;
         public static int ScreenHeight;
 
-        public IEntityManager EManager;
-        public ISceneManager SManager;
+        // Create Entity and Scene managers
+        public IEntityManager EM;
+        public ISceneManager SM;
+
+        // Create empty IEntity object to hold entities during creation
+        private IEntity createdEntity;
 
 
 
@@ -42,9 +46,9 @@ namespace GMTB
             ScreenHeight = GraphicsDevice.Viewport.Height;
             ScreenWidth = GraphicsDevice.Viewport.Width;
 
-            // Create Entity and Scene Managers
-            EManager = new EntityManager(Content);
-            SManager = new SceneManager(EManager);
+            // Initialize Entity and Scene Managers
+            EM = new EntityManager();
+            SM = new SceneManager(Content);
             base.Initialize();
         }
 
@@ -58,11 +62,12 @@ namespace GMTB
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            EManager.NewPlayer(ScreenWidth - 28, ScreenHeight / 2, PlayerIndex.One);
-            EManager.NewPlayer(0, ScreenHeight / 2, PlayerIndex.Two);
-            EManager.Ball(ScreenWidth / 2, ScreenHeight / 2);
-            //Entities.Add(new SquareObject(ScreenWidth/2, ScreenHeight / 2));
-
+            createdEntity = EM.newEntity<Player>(PlayerIndex.One);
+            SM.newEntity(createdEntity, 0, ScreenHeight / 2);
+            createdEntity = EM.newEntity<Player>(PlayerIndex.Two);
+            SM.newEntity(createdEntity, ScreenWidth - 28, ScreenHeight / 2);
+            createdEntity = EM.newEntity<Pong.Ball>();
+            SM.newEntity(createdEntity, ScreenWidth / 2, ScreenHeight / 2);
 
         }
 
@@ -86,7 +91,7 @@ namespace GMTB
                 Exit();
 
             // TODO: Add your update logic here
-            EManager.Update(gameTime);
+            SM.Update(gameTime);
             
             base.Update(gameTime);
         }
@@ -100,7 +105,7 @@ namespace GMTB
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            SManager.Draw(spriteBatch);
+            SM.Draw(spriteBatch);
 
             base.Draw(gameTime);
         }

@@ -9,6 +9,8 @@ namespace GMTB
 {
     public interface ISceneManager
     {
+        void newEntity(IEntity createdEntity, int x, int y);
         void Draw(SpriteBatch spriteBatch);
+        void Update(GameTime gameTime);
     }
 }

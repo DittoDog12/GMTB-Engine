@@ -8,14 +8,11 @@ namespace GMTB
 {
     public interface IEntityManager
     {
-        #region Accessors
-        List<IEntity> Entities { get; }
-        #endregion
 
         #region Methods
-        void Update(GameTime gameTime);
-        void NewPlayer(int pXpos, int pYpos, PlayerIndex pPlayerNum);
-        void Ball(int pXpos, int pYpos);
+        IEntity newEntity<T>() where T : IEntity, new();
+        IEntity newEntity<T>(PlayerIndex pPlayerNum) where T : IEntity, new();
+        void removeEntity(int uid);
     #endregion
     }
 }

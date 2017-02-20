@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GMTB
 {
-    public class Entity : IEntity
+    public abstract class Entity : IEntity
     {
         #region Data Members
         //--Key Variables
@@ -59,15 +59,27 @@ namespace GMTB
         #endregion
 
         #region Constructor
-        public Entity(int pXpos, int pYpos)
+        public Entity()
         {
-            mPosition.X = pXpos;
-            mPosition.Y = pYpos;
             mCollidable = false;
         }
         #endregion
 
         #region Methods
+        public virtual void setVars(int uid)
+        {
+            UID = uid;
+        }
+        public virtual void setVars(int uid, PlayerIndex pPlayer)
+        {
+        }
+
+        public void setPos(int x, int y)
+        {
+            mPosition.X = x;
+            mPosition.Y = y;
+        }
+
         public virtual void Update(GameTime gameTime)
         {
 
