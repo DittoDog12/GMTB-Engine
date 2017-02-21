@@ -63,36 +63,7 @@ namespace GMTB
                     mEntities[i] = null;
                 }
             }
-        }
-
-        public void CheckCollision()
-        {
-            // Main Collision Detection
-            // 1 - Run through each Object in the Master Entity List
-            for (int i = 0; i < mEntities.Count; i++)
-            {
-                // 2 - Continue only if Current Master List Entry is Collidable
-                if (mEntities[i].Collidable == true)
-                {
-                    // 3 - Call Player's Check Collision Method, pass Current Master List Entry
-                    //bool Collide = mPlayers[0].CheckCollision(mEntities[i]);
-                    //bool Collide1 = mPlayers[1].CheckCollision(mEntities[i]);
-                    bool Collide = mEntities[0].CheckCollision(mEntities[i]);
-                    bool Collide1 = mEntities[1].CheckCollision(mEntities[i]);
-
-
-
-                    // 4 - If Player confirms Collsion has occured, call Current Master List Entries Collision Method
-                    if (Collide == true || Collide1 == true)
-                    {
-                        mEntities[i].Collision();
-                    }
-                }
-                
-            }
-            
-        }
-  
+        } 
         #endregion
     }
 }

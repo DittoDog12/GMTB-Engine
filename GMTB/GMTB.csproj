@@ -38,8 +38,10 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CollisionManager.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityManager.cs" />
+    <Compile Include="ICollisionManager.cs" />
     <Compile Include="Kernel.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IEntityManager.cs" />

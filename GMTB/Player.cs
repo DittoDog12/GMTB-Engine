@@ -26,6 +26,7 @@ namespace GMTB
         {
             UID = uid;
             mPlayerNum = pPlayer;
+            mUName = "Player";
             if (mPlayerNum == PlayerIndex.One)
             {
                 mTexturename = "Player Images/JFW";

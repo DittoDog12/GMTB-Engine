@@ -14,6 +14,13 @@ namespace GMTB
         Microsoft.Xna.Framework.Content.ContentManager Content;
         #endregion
 
+        #region Accessors
+        public List<IEntity> Entities
+        {
+            get { return mEntities; }
+        }
+        #endregion
+
         #region Constructor
         public SceneManager(Microsoft.Xna.Framework.Content.ContentManager content)
         {
@@ -31,7 +38,7 @@ namespace GMTB
             // Apply the entities texture
             mEntities.ForEach(IEntity => IEntity.aTexture = Content.Load<Texture2D>(IEntity.aTexturename));
             // Set the entities initial position
-            mEntities.ForEach(IEntity => IEntity.setPos(x, y));
+            createdEntity.setPos(x, y);
 
         }
         public void Update(GameTime gameTime)

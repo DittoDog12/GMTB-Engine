@@ -19,9 +19,10 @@ namespace GMTB
         public static int ScreenWidth;
         public static int ScreenHeight;
 
-        // Create Entity and Scene managers
+        // Create Entity, Scene and Collision managers
         public IEntityManager EM;
         public ISceneManager SM;
+        public ICollisionManager CM;
 
         // Create empty IEntity object to hold entities during creation
         private IEntity createdEntity;
@@ -49,6 +50,7 @@ namespace GMTB
             // Initialize Entity and Scene Managers
             EM = new EntityManager();
             SM = new SceneManager(Content);
+            CM = new CollisionManager(SM.Entities);
             base.Initialize();
         }
 
@@ -68,6 +70,7 @@ namespace GMTB
             SM.newEntity(createdEntity, ScreenWidth - 28, ScreenHeight / 2);
             createdEntity = EM.newEntity<Pong.Ball>();
             SM.newEntity(createdEntity, ScreenWidth / 2, ScreenHeight / 2);
+            CM.IdentifyPlayers();
 
         }
 
@@ -92,7 +95,7 @@ namespace GMTB
 
             // TODO: Add your update logic here
             SM.Update(gameTime);
-            
+            CM.Update();
             base.Update(gameTime);
         }
 
@@ -109,5 +112,6 @@ namespace GMTB
 
             base.Draw(gameTime);
         }
+        
     }
 }
