@@ -23,7 +23,7 @@ namespace GMTB
         public IEntityManager EM;
         public ISceneManager SM;
         public ICollisionManager CM;
-
+        public IAiManager AiM;
         // Create empty IEntity object to hold entities during creation
         private IEntity createdEntity;
 
@@ -51,6 +51,7 @@ namespace GMTB
             EM = new EntityManager();
             SM = new SceneManager(Content);
             CM = new CollisionManager(SM.Entities);
+            AiM = new AiManager();
             base.Initialize();
         }
 

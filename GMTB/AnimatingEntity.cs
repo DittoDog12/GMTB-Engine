@@ -60,9 +60,6 @@ namespace GMTB
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
             Rectangle destinationRectangle = new Rectangle((int)mPosition.X, (int)mPosition.Y, width, height);
 
-            Console.WriteLine("Column");
-            Console.WriteLine(column);
-
             // Run spritebatch update with each frame of the animation
             spriteBatch.Begin();
             spriteBatch.Draw(mTexture, destinationRectangle, sourceRectangle, Color.AntiqueWhite);
