@@ -27,7 +27,8 @@ namespace GMTB
         // Create empty IEntity object to hold entities during creation
         private IEntity createdEntity;
 
-
+        // Create SpriteFont
+        private SpriteFont mFont;
 
         public Kernel()
         {
@@ -52,6 +53,8 @@ namespace GMTB
             SM = new SceneManager(Content);
             CM = new CollisionManager(SM.Entities);
             AiM = new AiManager();
+
+            
             base.Initialize();
         }
 
@@ -65,6 +68,8 @@ namespace GMTB
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            mFont = Content.Load<SpriteFont>("HudText");
+            
             createdEntity = EM.newEntity<Player>(PlayerIndex.One);
             SM.newEntity(createdEntity, 0, ScreenHeight / 2);
             createdEntity = EM.newEntity<Player>(PlayerIndex.Two);
@@ -110,7 +115,9 @@ namespace GMTB
 
             // TODO: Add your drawing code here
             SM.Draw(spriteBatch);
-
+            spriteBatch.Begin();
+            spriteBatch.DrawString(mFont, "test", new Vector2(ScreenHeight / 2, ScreenWidth / 2), Color.Black);
+            spriteBatch.End();
             base.Draw(gameTime);
         }
         
