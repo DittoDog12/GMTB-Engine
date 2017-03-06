@@ -24,6 +24,10 @@ namespace GMTB
         public ISceneManager SM;
         public ICollisionManager CM;
         public IAiManager AiM;
+
+        // Create Dialogue Manager, set to static so everything can access it at will
+        public static IDialogue DM;
+
         // Create empty IEntity object to hold entities during creation
         private IEntity createdEntity;
 
@@ -52,6 +56,9 @@ namespace GMTB
             SM = new SceneManager(Content);
             CM = new CollisionManager(SM.Entities);
             AiM = new AiManager();
+            DM = new DialogueBox(Content);
+
+            
             base.Initialize();
         }
 
@@ -64,7 +71,7 @@ namespace GMTB
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            // TODO: use this.Content to load your game content here     
             createdEntity = EM.newEntity<Player>(PlayerIndex.One);
             SM.newEntity(createdEntity, 0, ScreenHeight / 2);
             createdEntity = EM.newEntity<Player>(PlayerIndex.Two);
@@ -72,7 +79,7 @@ namespace GMTB
             createdEntity = EM.newEntity<Pong.Ball>();
             SM.newEntity(createdEntity, ScreenWidth / 2, ScreenHeight / 2);
             CM.IdentifyPlayers();
-
+            DM.Initialise(spriteBatch);
         }
 
         /// <summary>
@@ -110,7 +117,6 @@ namespace GMTB
 
             // TODO: Add your drawing code here
             SM.Draw(spriteBatch);
-
             base.Draw(gameTime);
         }
         
