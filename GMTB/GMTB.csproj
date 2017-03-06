@@ -47,10 +47,12 @@
     <Compile Include="AI\LowLevelAI.cs" />
     <Compile Include="AI\NeutralAI.cs" />
     <Compile Include="CollisionManager.cs" />
+    <Compile Include="DialogueBox.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityManager.cs" />
     <Compile Include="IAiManager.cs" />
     <Compile Include="ICollisionManager.cs" />
+    <Compile Include="IDialogue.cs" />
     <Compile Include="Kernel.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IEntityManager.cs" />
