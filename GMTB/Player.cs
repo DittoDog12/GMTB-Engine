@@ -11,13 +11,16 @@ namespace GMTB
     {
         #region Data Members
         private PlayerIndex mPlayerNum;
+        private Vector2 mVelocity;
+        private Input inputMan;
         #endregion
 
         #region Constructor
         public Player()
         {
             mSpeed = 5;
-            
+            inputMan = new Input(mSpeed);
+            inputMan.AddListener(this.OnNewInput);
         }
         #endregion
 
@@ -27,40 +30,32 @@ namespace GMTB
             UID = uid;
             mPlayerNum = pPlayer;
             mUName = "Player";
-            if (mPlayerNum == PlayerIndex.One)
-            {
-                mTexturename = "Player Images/JFW";
-            }
-            if (mPlayerNum == PlayerIndex.Two)
-            {
-                mTexturename = "Enemy/MFW";
-            }
+            mTexturename = "Player Images/JFW";
         }
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            if (mPlayerNum == PlayerIndex.One)
+            inputMan.UpdateInput();
+            // Movement controlled by timer
+            timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (timer > interval)
             {
-                mDirection = Input.GetInput(PlayerIndex.One);
+                mPosition += mVelocity;
                 switch (mDirection)
                 {
                     case "Up":
-                        mPosition.Y -= mSpeed;
                         mTexturename = "Player Images/JBW";
                         CurrentFrame++;
                         break;
                     case "Left":
-                        mPosition.X -= mSpeed;
                         mTexturename = "Player Images/JLW";
                         CurrentFrame++;
                         break;
                     case "Down":
-                        mPosition.Y += mSpeed;
                         mTexturename = "Player Images/JFW";
                         CurrentFrame++;
                         break;
                     case "Right":
-                        mPosition.X += mSpeed;
                         mTexturename = "Player Images/JRW";
                         CurrentFrame++;
                         break;
@@ -70,42 +65,15 @@ namespace GMTB
                     default:
                         break;
                 }
-            }
-            if (mPlayerNum == PlayerIndex.Two)
-            {
-                mDirection = Input.GetInput(PlayerIndex.Two);
-                switch (mDirection)
-                {
-                    case "Up":
-                        mPosition.Y -= mSpeed;
-                        mTexturename = "Enemy/MFW";
-                        CurrentFrame++;
-                        break;
-                    case "Left":
-                        mPosition.X -= mSpeed;
-                        mTexturename = "Enemy/MFW";
-                        CurrentFrame++;
-                        break;
-                    case "Down":
-                        mPosition.Y += mSpeed;
-                        mTexturename = "Enemy/MFW";
-                        CurrentFrame++;
-                        break;
-                    case "Right":
-                        mPosition.X += mSpeed;
-                        mTexturename = "Enemy/MFW";
-                        CurrentFrame++;
-                        break;
-                    case "stop":
-                        CurrentFrame = 0;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            
-
+                timer = 0f;
+            }      
         }
+        public void OnNewInput(object source, InputEvent args)
+        {
+            mVelocity = args.Velocity;
+            mDirection = args.Direction;
+        }
+
         public override bool CheckCollision(IEntity pObject)
         {
             bool rtnval = false;

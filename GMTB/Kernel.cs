@@ -74,10 +74,6 @@ namespace GMTB
             // TODO: use this.Content to load your game content here     
             createdEntity = EM.newEntity<Player>(PlayerIndex.One);
             SM.newEntity(createdEntity, 0, ScreenHeight / 2);
-            createdEntity = EM.newEntity<Player>(PlayerIndex.Two);
-            SM.newEntity(createdEntity, ScreenWidth - 28, ScreenHeight / 2);
-            createdEntity = EM.newEntity<Pong.Ball>();
-            SM.newEntity(createdEntity, ScreenWidth / 2, ScreenHeight / 2);
             CM.IdentifyPlayers();
             DM.Initialise(spriteBatch);
         }

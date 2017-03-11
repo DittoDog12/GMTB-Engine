@@ -53,6 +53,7 @@
     <Compile Include="IAiManager.cs" />
     <Compile Include="ICollisionManager.cs" />
     <Compile Include="IDialogue.cs" />
+    <Compile Include="InputEvent.cs" />
     <Compile Include="Kernel.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IEntityManager.cs" />

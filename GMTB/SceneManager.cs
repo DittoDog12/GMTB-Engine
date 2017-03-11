@@ -47,6 +47,8 @@ namespace GMTB
         }
         public void Draw(SpriteBatch spriteBatch)
         {
+            // Update Texture path for animating entity
+            mEntities.ForEach(IEntity => IEntity.aTexture = Content.Load<Texture2D>(IEntity.aTexturename));
             // Call draw method for each Entity
             mEntities.ForEach(IEntity => IEntity.Draw(spriteBatch));
         }

@@ -20,6 +20,9 @@ namespace GMTB
         private int column;
         private int row;
 
+        // Timers for frame transistions
+        protected float timer;
+        protected float interval;
         // New hitbox to override default one inherited from Entity, uses special sprite sheet details
         public new Rectangle HitBox
         {
@@ -35,6 +38,10 @@ namespace GMTB
             CurrentFrame = 0;
             Rows = 1;
             Columns = 4;
+
+            // Initialise timer
+            timer = 0;
+            interval = 100f;
         }
         #endregion
 
@@ -44,6 +51,8 @@ namespace GMTB
             // Used to reset the animation when it reaches the end of the spritesheet
             if (CurrentFrame == Frames)
                 CurrentFrame = 0;
+
+                
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
