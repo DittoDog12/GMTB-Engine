@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace GMTB
 {
@@ -19,8 +20,7 @@ namespace GMTB
 
         #region Constructors
         public DialogueBox(Microsoft.Xna.Framework.Content.ContentManager content)
-        {
-            
+        {  
             Content = content;
             mFont = Content.Load<SpriteFont>("HudText");
             mPosition.X = 50;
@@ -33,10 +33,14 @@ namespace GMTB
         {
             spriteBatch = pSpriteBatch;
         }
-        public void Draw(string mDisplay)
+        public void Display(string mDisplay)
         {
             spriteBatch.Begin();
             spriteBatch.DrawString(mFont, mDisplay, mPosition, Color.Black);
+            Debug.WriteLine(mPosition);
+            Debug.WriteLine(mDisplay);
+            Debug.WriteLine("height" + Kernel.ScreenHeight);
+            Debug.WriteLine("width" + Kernel.ScreenWidth);
             spriteBatch.End();
         }
 

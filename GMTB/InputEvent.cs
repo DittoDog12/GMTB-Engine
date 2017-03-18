@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace GMTB
 {
     public class InputEvent : EventArgs
     {
-        public Vector2 Velocity;
-        public string Direction;
+        public Keys currentKey;
 
-        public InputEvent(Vector2 newVelocity, string newDirection)
+        public InputEvent(Keys key)
         {
-            Velocity = newVelocity;
-            Direction = newDirection;
+            currentKey = key;
         }
     }
 }

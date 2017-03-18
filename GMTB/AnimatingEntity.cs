@@ -17,16 +17,16 @@ namespace GMTB
         protected int Columns;
 
         // Row and Column sizes for Hitbox
-        private int column;
-        private int row;
+        private int width;
+        private int height;
 
         // Timers for frame transistions
         protected float timer;
         protected float interval;
         // New hitbox to override default one inherited from Entity, uses special sprite sheet details
-        public new Rectangle HitBox
+        public override Rectangle HitBox
         {
-            get { return new Rectangle((int)mPosition.X, (int)mPosition.Y, column, row); }
+            get { return new Rectangle((int)mPosition.X, (int)mPosition.Y, width, height); }
         }
         #endregion
 
@@ -41,13 +41,13 @@ namespace GMTB
 
             // Initialise timer
             timer = 0;
-            interval = 100f;
         }
         #endregion
 
         #region Methods
         public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
             // Used to reset the animation when it reaches the end of the spritesheet
             if (CurrentFrame == Frames)
                 CurrentFrame = 0;
@@ -60,10 +60,10 @@ namespace GMTB
             // Override normal draw method with specialised animating one
 
             // Calculate size of each animation frame
-            int width = mTexture.Width / Columns;
-            int height = mTexture.Height / Rows;
-            row = (int)((float)CurrentFrame / (float)Columns);
-            column = CurrentFrame % Columns;
+            width = mTexture.Width / Columns;
+            height = mTexture.Height / Rows;
+            int row = (int)((float)CurrentFrame / (float)Columns);
+            int column = CurrentFrame % Columns;
 
             // Position selection around frame of spritesheet
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);

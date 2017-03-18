@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using GMTB.AI;
 
 namespace GMTB
 {
@@ -13,6 +14,7 @@ namespace GMTB
     /// </summary>
     public class Kernel : Game
     {
+        
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -24,10 +26,10 @@ namespace GMTB
         public ISceneManager SM;
         public ICollisionManager CM;
         public IAiManager AiM;
-
+        public static IInput IM;
         // Create Dialogue Manager, set to static so everything can access it at will
         public static IDialogue DM;
-
+        public static IScript ScM;
         // Create empty IEntity object to hold entities during creation
         private IEntity createdEntity;
 
@@ -57,6 +59,8 @@ namespace GMTB
             CM = new CollisionManager(SM.Entities);
             AiM = new AiManager();
             DM = new DialogueBox(Content);
+            IM = new Input();
+            ScM = new Script();
 
             
             base.Initialize();
@@ -74,6 +78,8 @@ namespace GMTB
             // TODO: use this.Content to load your game content here     
             createdEntity = EM.newEntity<Player>(PlayerIndex.One);
             SM.newEntity(createdEntity, 0, ScreenHeight / 2);
+            createdEntity = EM.newEntity<FriendlyAI>();
+            SM.newEntity(createdEntity, ScreenWidth / 2, ScreenHeight / 2);
             CM.IdentifyPlayers();
             DM.Initialise(spriteBatch);
         }
@@ -100,6 +106,7 @@ namespace GMTB
             // TODO: Add your update logic here
             SM.Update(gameTime);
             CM.Update();
+            IM.Update();
             base.Update(gameTime);
         }
 

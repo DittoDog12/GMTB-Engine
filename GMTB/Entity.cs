@@ -14,17 +14,19 @@ namespace GMTB
         protected int mUID;
         protected string mUName;
         //--Movement
-        protected int mSpeed;
+        protected float mSpeed;
         protected Vector2 mPosition;
         protected bool mCollidable;
         protected string mDirection;
+        protected Vector2 mVelocity;
+        protected Vector2 mPrevPos;
 
         //--Texture
         protected Texture2D mTexture;
         protected string mTexturename;
 
         //--Hitbox for Collision Detection
-        public Rectangle HitBox
+        public virtual Rectangle HitBox
         {
             get { return new Rectangle((int)mPosition.X, (int)mPosition.Y, mTexture.Width, mTexture.Height); }
         }
@@ -82,7 +84,7 @@ namespace GMTB
 
         public virtual void Update(GameTime gameTime)
         {
-
+            mPrevPos = mPosition;
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -93,7 +95,9 @@ namespace GMTB
         }
         public virtual void Collision()
         {
-            
+            mVelocity.X = 0;
+            mVelocity.Y = 0;
+            mPosition = mPrevPos;
         }
 
         public virtual bool CheckCollision(IEntity pObject)

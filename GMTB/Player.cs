@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace GMTB
 {
@@ -11,16 +13,15 @@ namespace GMTB
     {
         #region Data Members
         private PlayerIndex mPlayerNum;
-        private Vector2 mVelocity;
-        private Input inputMan;
         #endregion
 
         #region Constructor
         public Player()
         {
-            mSpeed = 5;
-            inputMan = new Input(mSpeed);
-            inputMan.AddListener(this.OnNewInput);
+            mSpeed = 5f;
+            Kernel.IM.SubscribeMove(this.OnNewInput);
+            // Set movement update interval, sets the walk speed
+            interval = 80f;
         }
         #endregion
 
@@ -35,11 +36,11 @@ namespace GMTB
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            inputMan.UpdateInput();
             // Movement controlled by timer
             timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (timer > interval)
             {
+
                 mPosition += mVelocity;
                 switch (mDirection)
                 {
@@ -66,12 +67,36 @@ namespace GMTB
                         break;
                 }
                 timer = 0f;
+                mVelocity.X = 0;
+                mVelocity.Y = 0;
+                mDirection = "stop";
             }      
         }
         public void OnNewInput(object source, InputEvent args)
         {
-            mVelocity = args.Velocity;
-            mDirection = args.Direction;
+            switch (args.currentKey)
+            {
+                case Keys.W:
+                    mVelocity.Y = mSpeed * -1;
+                    mDirection = "Up";
+                    break;
+                case Keys.A:
+                    mVelocity.X = mSpeed * -1;
+                    mDirection = "Left";
+                    break;
+                case Keys.S:
+                    mVelocity.Y = mSpeed;
+                    mDirection = "Down";
+                    break;
+                case Keys.D:
+                    mVelocity.X = mSpeed;
+                    mDirection = "Right";
+                    break;
+                default:
+                    mVelocity.X = 0;
+                    mVelocity.Y = 0;
+                    break;
+            }
         }
 
         public override bool CheckCollision(IEntity pObject)
@@ -83,6 +108,7 @@ namespace GMTB
             }
             return rtnval;
         }
+
         #endregion
 
     }

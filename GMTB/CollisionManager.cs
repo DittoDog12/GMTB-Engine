@@ -51,6 +51,7 @@ namespace GMTB
                         if (Collide == true)
                         {
                             mEntities[i].Collision();
+                            mPlayers[p].Collision();
                         }
                     } 
                 }

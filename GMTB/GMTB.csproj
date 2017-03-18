@@ -53,7 +53,9 @@
     <Compile Include="IAiManager.cs" />
     <Compile Include="ICollisionManager.cs" />
     <Compile Include="IDialogue.cs" />
+    <Compile Include="IInput.cs" />
     <Compile Include="InputEvent.cs" />
+    <Compile Include="IScript.cs" />
     <Compile Include="Kernel.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IEntityManager.cs" />
@@ -65,6 +67,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SceneManager.cs" />
+    <Compile Include="Script.cs" />
     <Compile Include="SoundIndicator.cs" />
     <Compile Include="SquareObject.cs" />
   </ItemGroup>
@@ -76,10 +79,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Backgrounds\PrototypeBackgroundMarthasRoom.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Backgrounds\SpawnRoomBackground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\BlueDoll.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Dialogue\A.I.AfterMartha.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Dialogue\A.I.AndSerena.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Dialogue\A.I.AndSerenaAfterOldMan.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Dialogue\FirstEncounter.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Dialogue\OldManAndSerena.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Enemy\MFW.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\NPC\TaskGiverFront.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Player Images\JBW.png">

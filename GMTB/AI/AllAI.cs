@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace GMTB.AI
 {
-    public class AllAI : IAI
+    public class AllAI : Entity, IAI
     {
         #region Data Members
         private bool mReact;
@@ -48,7 +48,7 @@ namespace GMTB.AI
             return rtnVal;
         }
 
-        public virtual void Collision()
+        public override void Collision()
         {
 
         }
