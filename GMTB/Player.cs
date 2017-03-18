@@ -9,6 +9,9 @@ using System.Diagnostics;
 
 namespace GMTB
 {
+    /// <summary>
+    /// Main Player class, contains all input interpretation for movement
+    /// </summary>
     class Player : AnimatingEntity
     {
         #region Data Members
@@ -19,7 +22,7 @@ namespace GMTB
         public Player()
         {
             mSpeed = 5f;
-            Kernel.IM.SubscribeMove(this.OnNewInput);
+            Kernel.IM.SubscribeMove(OnNewInput);
             // Set movement update interval, sets the walk speed
             interval = 80f;
         }

@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GMTB
 {
+    /// <summary>
+    /// Main Entity class, everything that has a physical presence in the world inherits from this class 
+    /// </summary>
     public abstract class Entity : IEntity
     {
         #region Data Members

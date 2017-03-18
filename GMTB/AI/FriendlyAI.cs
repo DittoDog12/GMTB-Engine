@@ -6,6 +6,10 @@ using System.IO;
 
 namespace GMTB.AI
 {
+    /// <summary>
+    /// Friendly AI controller, will trigger a conversation on first collision
+    /// and a single line of dialogue on subsequent collisions
+    /// </summary>
     class FriendlyAI : AllAI
     {
         #region Data Members

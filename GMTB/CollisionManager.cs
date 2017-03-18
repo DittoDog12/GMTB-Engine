@@ -5,6 +5,9 @@ using System.Text;
 
 namespace GMTB
 {
+    /// <summary>
+    /// Main Collision detection manager, calls the Entities Collision Method in the event of a collision
+    /// </summary>
     public class CollisionManager : ICollisionManager
     {
         #region Data Members
@@ -26,6 +29,7 @@ namespace GMTB
         #region Methods
         public void IdentifyPlayers()
         {
+            // Store the players in a second list
             for (int i= 0; i < mEntities.Count; i++)
             {
                 if (mEntities[i].UName == "Player")

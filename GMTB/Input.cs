@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GMTB
 {
+    /// <summary>
+    /// Main input detection system
+    /// </summary>
     public class Input : IInput
     {
         #region Data Members
@@ -24,6 +27,7 @@ namespace GMTB
         #endregion
 
         #region Methods
+        // Input triggers
         protected virtual void OnNewInput(Keys key)
         {
             InputEvent args = new InputEvent(key);
@@ -39,7 +43,7 @@ namespace GMTB
 
         }
 
-
+        // Sub/Unsubscribers
         public void SubscribeMove(EventHandler<InputEvent> handler)
         {
             // Add event handler
@@ -66,6 +70,7 @@ namespace GMTB
 
         public void Update()
         {
+            // Halt input detection if the global trigger is set, usually if Dialogue is running
             if (!Global.PauseInput)
             {
                 KeyboardState newState = Keyboard.GetState();

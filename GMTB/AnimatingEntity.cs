@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GMTB
 {
+    /// <summary>
+    /// Holds special animation methods for moving entites, overrides the normal static texture system
+    /// </summary>
     abstract class AnimatingEntity : Entity
     {
         #region Data Members

@@ -9,6 +9,9 @@ namespace GMTB
 {
     public class SceneManager : ISceneManager
     {
+        /// <summary>
+        /// Main Scene Manager, places everything on the screen and calls Draw methods
+        /// </summary>
         #region Data Members
         private List<IEntity> mEntities;
         Microsoft.Xna.Framework.Content.ContentManager Content;

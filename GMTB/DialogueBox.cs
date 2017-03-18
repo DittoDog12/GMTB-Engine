@@ -8,6 +8,9 @@ using System.Diagnostics;
 
 namespace GMTB
 {
+    /// <summary>
+    /// Method for drawing text on screen, holds the position and SpriteFont to use
+    /// </summary>
     public class DialogueBox : IDialogue
     {
         #region Data Members

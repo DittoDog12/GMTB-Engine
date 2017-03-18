@@ -7,10 +7,10 @@ using GMTB.AI;
 
 
 namespace GMTB
-{
-    // Declare Generic class for entity types
-    
-
+{   
+    /// <summary>
+    /// Main Entity creation manager, Sets all global variables for each entity on creation, eg the UID
+    /// </summary>
     public class EntityManager : IEntityManager 
     {
         #region Data Members
