@@ -1,8 +1,8 @@
 ﻿Old Man: Hello little one.
 Serena: Hi.
 Old Man: You look a little lost?
-Serena: You aren’t going to attack me or try chase me?
-Old Man: *Laughs* Oh no, dear. I’ll be your friend, just like I was the other one. 
+Serena: You aren't going to attack me or try chase me?
+Old Man: *Laughs* Oh no, dear. I'll be your friend, just like I was the other one. 
 Serena: The other one?
 Old Man: Now now. Here take this. It will help you.
 You have acquired a new item. 

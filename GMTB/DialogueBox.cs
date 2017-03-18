@@ -14,8 +14,9 @@ namespace GMTB
         Microsoft.Xna.Framework.Content.ContentManager Content;
         // Create SpriteFont
         private SpriteFont mFont;
-        private SpriteBatch spriteBatch;
         private Vector2 mPosition;
+        private string mDisplay;
+        private bool mActive;
         #endregion
 
         #region Constructors
@@ -29,19 +30,21 @@ namespace GMTB
         #endregion
 
         #region Methods
-        public void Initialise(SpriteBatch pSpriteBatch)
+
+        public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch = pSpriteBatch;
+            if(mActive)
+            {
+                spriteBatch.DrawString(mFont, mDisplay, mPosition, Color.White);
+               // Debug.WriteLine("Dialogue: " + mDisplay);
+                mActive = false;
+            }
+            
         }
-        public void Display(string mDisplay)
+        public void Display(string Display)
         {
-            spriteBatch.Begin();
-            spriteBatch.DrawString(mFont, mDisplay, mPosition, Color.Black);
-            Debug.WriteLine(mPosition);
-            Debug.WriteLine(mDisplay);
-            Debug.WriteLine("height" + Kernel.ScreenHeight);
-            Debug.WriteLine("width" + Kernel.ScreenWidth);
-            spriteBatch.End();
+            mDisplay = Display;
+            mActive = true;
         }
 
         #endregion

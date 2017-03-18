@@ -10,10 +10,6 @@ namespace GMTB
     public class Input : IInput
     {
         #region Data Members
-        public static string mDirection;
-        public float mSpeed;
-
-        private Vector2 newVelocity;
         KeyboardState oldState;
         public event EventHandler<InputEvent> NewInput;
         public event EventHandler<InputEvent> ExitInput;
@@ -33,6 +29,17 @@ namespace GMTB
             InputEvent args = new InputEvent(key);
             NewInput(this, args);
         }
+        protected virtual void OnSpaceInput(Keys key)
+        {
+            if (SpaceInput != null)
+            {
+                InputEvent args = new InputEvent(key);
+                SpaceInput(this, args);
+            }
+
+        }
+
+
         public void SubscribeMove(EventHandler<InputEvent> handler)
         {
             // Add event handler
@@ -54,35 +61,38 @@ namespace GMTB
         }
         public void UnSubscribeSpace(EventHandler<InputEvent> handler)
         {
-            SpaceInput += handler;
+            SpaceInput -= handler;
         }
 
         public void Update()
         {
-            KeyboardState newState = Keyboard.GetState();
+            if (!Global.PauseInput)
+            {
+                KeyboardState newState = Keyboard.GetState();
 
-            if (newState.IsKeyDown(Keys.W) == true || GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed)
-            {
-                OnNewInput(Keys.W);
-            }
-            else if (newState.IsKeyDown(Keys.A) == true || GamePad.GetState(PlayerIndex.One).DPad.Left == ButtonState.Pressed)
-            {
-                OnNewInput(Keys.A);
-            }
-            else if (newState.IsKeyDown(Keys.S) == true || GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed)
-            {
-                OnNewInput(Keys.S);
-            }
-            else if (newState.IsKeyDown(Keys.D) == true || GamePad.GetState(PlayerIndex.One).DPad.Right == ButtonState.Pressed)
-            {
-                OnNewInput(Keys.D);
-            }
-            else if (newState.IsKeyDown(Keys.Space))
-            {
-                OnNewInput(Keys.Space);
-            }
+                if (newState.IsKeyDown(Keys.W) == true || GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed)
+                {
+                    OnNewInput(Keys.W);
+                }
+                else if (newState.IsKeyDown(Keys.A) == true || GamePad.GetState(PlayerIndex.One).DPad.Left == ButtonState.Pressed)
+                {
+                    OnNewInput(Keys.A);
+                }
+                else if (newState.IsKeyDown(Keys.S) == true || GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed)
+                {
+                    OnNewInput(Keys.S);
+                }
+                else if (newState.IsKeyDown(Keys.D) == true || GamePad.GetState(PlayerIndex.One).DPad.Right == ButtonState.Pressed)
+                {
+                    OnNewInput(Keys.D);
+                }
+                else if (newState.IsKeyDown(Keys.Space))
+                {
+                    OnSpaceInput(Keys.Space);
+                }
 
-            oldState = newState;
+                oldState = newState;
+            }
         }
         #endregion
     }

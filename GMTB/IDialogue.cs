@@ -8,7 +8,7 @@ namespace GMTB
 {
     public interface IDialogue
     {
-        void Initialise(SpriteBatch spriteBatch);
-        void Display(string mDisplay);
+        void Display(string Display);
+        void Draw(SpriteBatch spritebatch);
     }
 }

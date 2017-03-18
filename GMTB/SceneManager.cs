@@ -12,6 +12,9 @@ namespace GMTB
         #region Data Members
         private List<IEntity> mEntities;
         Microsoft.Xna.Framework.Content.ContentManager Content;
+        public static IDialogue DM;
+
+        private Texture2D Background;
         #endregion
 
         #region Accessors
@@ -27,6 +30,9 @@ namespace GMTB
             // Initialise Entity List
             mEntities = new List<IEntity>();
             Content = content;
+            DM = new DialogueBox(Content);
+            Global.DM = DM;
+            Background = Content.Load<Texture2D>("Backgrounds/SpawnRoomBackground");
         }
         #endregion
 
@@ -47,10 +53,15 @@ namespace GMTB
         }
         public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin();
+            spriteBatch.Draw(Background, new Rectangle(0, 0, 800, 480), Color.White);
             // Update Texture path for animating entity
             mEntities.ForEach(IEntity => IEntity.aTexture = Content.Load<Texture2D>(IEntity.aTexturename));
             // Call draw method for each Entity
             mEntities.ForEach(IEntity => IEntity.Draw(spriteBatch));
+            if(Global.PauseInput)
+                DM.Draw(spriteBatch);
+            spriteBatch.End();
         }
         #endregion
     }

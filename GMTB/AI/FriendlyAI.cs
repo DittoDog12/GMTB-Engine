@@ -10,11 +10,15 @@ namespace GMTB.AI
     {
         #region Data Members
         string[] lines;
+        bool SecondEncounter;
+        string RepeatedText;
         #endregion
 
         #region Constructor
         public FriendlyAI()
         {
+            SecondEncounter = false;
+            RepeatedText = "*The Old Man doesn't turn around*";
             mCollidable = true;
             lines = File.ReadAllLines(Environment.CurrentDirectory + "/Content/Dialogue/OldManAndSerena.txt");
         }
@@ -29,7 +33,13 @@ namespace GMTB.AI
 
         public override void Collision()
         {
-           Kernel.ScM.BeginDialogue(lines);
+            if (!SecondEncounter)
+            {
+                Kernel.ScM.BeginDialogue(lines);
+                SecondEncounter = true;
+            }
+            else
+                Kernel.ScM.SingleDialogue(RepeatedText);
         }
         #endregion
     }

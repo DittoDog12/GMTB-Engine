@@ -70,11 +70,7 @@ namespace GMTB
             Rectangle destinationRectangle = new Rectangle((int)mPosition.X, (int)mPosition.Y, width, height);
 
             // Run spritebatch update with each frame of the animation
-            spriteBatch.Begin();
-            spriteBatch.Draw(mTexture, destinationRectangle, sourceRectangle, Color.AntiqueWhite);
-            spriteBatch.End();
-
-            
+            spriteBatch.Draw(mTexture, destinationRectangle, sourceRectangle, Color.AntiqueWhite);            
         }
         #endregion
 

@@ -50,6 +50,7 @@
     <Compile Include="DialogueBox.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityManager.cs" />
+    <Compile Include="Global.cs" />
     <Compile Include="IAiManager.cs" />
     <Compile Include="ICollisionManager.cs" />
     <Compile Include="IDialogue.cs" />

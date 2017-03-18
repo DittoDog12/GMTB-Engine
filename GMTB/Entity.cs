@@ -89,9 +89,7 @@ namespace GMTB
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
             spriteBatch.Draw(mTexture, mPosition, Color.AntiqueWhite);
-            spriteBatch.End();
         }
         public virtual void Collision()
         {

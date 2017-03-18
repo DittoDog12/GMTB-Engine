@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Reflection;
+using Microsoft.Xna.Framework;
 
 namespace GMTB
 {
@@ -11,41 +12,69 @@ namespace GMTB
     {
         #region Data Members
         string[] lines;
+        string Line;
         IDialogue DM;
         int mLine;
         bool mNextLine;
         bool DialogueRunning;
+        bool newLine;
+        float timer;
+        float interval;
+        GameTime gameTimer;
+        bool SingleDialogueRun;
         #endregion
 
         #region Constructor
         public Script()
         {
             mNextLine = false;
-            DM = Kernel.DM;
+            DM = Global.DM;
             lines = File.ReadAllLines(Environment.CurrentDirectory + "/Content/Dialogue/FirstEncounter.txt");
 
             mLine = 0;
+
+            interval = 3000f;
+            timer = 0f;
+
         }
         #endregion
 
         #region Methods
-        public void RunDialogue()
+        public void Update(GameTime gameTime)
         {
-            DM.Display(lines[mLine]);
-            while (DialogueRunning)
+            gameTimer = gameTime;
+            if (DialogueRunning)
             {
-                if (mNextLine)
+                timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                DM.Display(lines[mLine]);
+                if (timer > interval) //(mNextLine) for Space control
                 {
-                    mNextLine = false;
+                    //mNextLine = false;
                     mLine++;
-                    DM.Display(lines[mLine]);
+                    newLine = true;
+                    timer = 0f;
                 }
                 if (mLine == lines.Length)
                 {
+                    DM.Display(" ");
                     DialogueRunning = false;
-                    Kernel.IM.UnSubscribeSpace(this.OnSpace);
+                    Global.PauseInput = false;
+                    //Kernel.IM.UnSubscribeSpace(this.OnSpace);
                 }
             }   
+            if (SingleDialogueRun)
+            {
+                timer += (float)gameTimer.ElapsedGameTime.TotalMilliseconds;
+                // Kernel.IM.SubscribeSpace(OnSpace);
+                DM.Display(Line);
+                if (timer > interval)
+                {
+                    DM.Display(" ");
+                    Global.PauseInput = false;
+                    SingleDialogueRun = false;
+                }
+            }
+
         }
         public void OnSpace(object source, InputEvent args)
         {
@@ -54,10 +83,17 @@ namespace GMTB
 
         public void BeginDialogue(string[] Lines)
         {
-            Kernel.IM.SubscribeSpace(this.OnSpace);
+            //Kernel.IM.SubscribeSpace(OnSpace);
             lines = Lines;
             DialogueRunning = true;
-            RunDialogue();
+            Global.PauseInput = true;
+            newLine = true;
+        }
+        public void SingleDialogue(string line)
+        {
+            Line = line;
+            SingleDialogueRun = true;
+            Global.PauseInput = true;  
         }
         #endregion
 

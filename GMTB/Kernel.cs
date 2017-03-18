@@ -28,7 +28,6 @@ namespace GMTB
         public IAiManager AiM;
         public static IInput IM;
         // Create Dialogue Manager, set to static so everything can access it at will
-        public static IDialogue DM;
         public static IScript ScM;
         // Create empty IEntity object to hold entities during creation
         private IEntity createdEntity;
@@ -58,7 +57,7 @@ namespace GMTB
             SM = new SceneManager(Content);
             CM = new CollisionManager(SM.Entities);
             AiM = new AiManager();
-            DM = new DialogueBox(Content);
+
             IM = new Input();
             ScM = new Script();
 
@@ -77,11 +76,10 @@ namespace GMTB
 
             // TODO: use this.Content to load your game content here     
             createdEntity = EM.newEntity<Player>(PlayerIndex.One);
-            SM.newEntity(createdEntity, 0, ScreenHeight / 2);
+            SM.newEntity(createdEntity, 160, ScreenHeight / 2);
             createdEntity = EM.newEntity<FriendlyAI>();
             SM.newEntity(createdEntity, ScreenWidth / 2, ScreenHeight / 2);
             CM.IdentifyPlayers();
-            DM.Initialise(spriteBatch);
         }
 
         /// <summary>
@@ -107,6 +105,7 @@ namespace GMTB
             SM.Update(gameTime);
             CM.Update();
             IM.Update();
+            ScM.Update(gameTime);
             base.Update(gameTime);
         }
 
