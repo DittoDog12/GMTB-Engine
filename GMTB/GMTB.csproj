@@ -46,9 +46,11 @@
     <Compile Include="AI\IAI.cs" />
     <Compile Include="AI\LowLevelAI.cs" />
     <Compile Include="AI\NeutralAI.cs" />
+    <Compile Include="Collidable.cs" />
     <Compile Include="CollisionManager.cs" />
     <Compile Include="CoreManager.cs" />
     <Compile Include="DialogueBox.cs" />
+    <Compile Include="Door.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityManager.cs" />
     <Compile Include="Global.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="IEntity.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="AnimatingEntity.cs" />
+    <Compile Include="LevelManager.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Pong\Ball.cs" />
     <Compile Include="Program.cs" />

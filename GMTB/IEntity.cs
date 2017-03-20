@@ -16,17 +16,15 @@ namespace GMTB
         String aTexturename { get; }
         Vector2 Position { get; }
         bool Collidable { get; }
-        Rectangle HitBox { get; }
         #endregion
 
         #region Methods
         void setVars(int uid);
         void setVars(int uid, PlayerIndex pPlayer);
+        void setVars(string tRoom, Vector2 playerStart);
         void setPos(int x, int y);
         void Update(GameTime gameTime);
         void Draw(SpriteBatch spriteBatch);
-        void Collision();
-        bool CheckCollision(IEntity pObject);
         #endregion
     }
 }

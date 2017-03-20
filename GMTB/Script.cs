@@ -31,7 +31,7 @@ namespace GMTB
         #region Constructor
         private Script()
         {
-            //mNextLine = false; // Used for spacebar control of text if implemented
+            mNextLine = false; // Used for spacebar control of text if implemented
             lines = File.ReadAllLines(Environment.CurrentDirectory + "/Content/Dialogue/FirstEncounter.txt"); // Initial conversation loaded to list
 
             mLine = 0;
@@ -60,9 +60,9 @@ namespace GMTB
                 timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 DialogueBox.getInstance.Display(lines[mLine]); // Display current line of loaded list
                 // Load next line at interval
-                if (timer > interval) //(mNextLine) for Space control 
+                if (timer > interval || mNextLine)
                 {
-                    //mNextLine = false;
+                    mNextLine = false;
                     mLine++; // increment current line
                     timer = 0f;
                 }
@@ -71,17 +71,18 @@ namespace GMTB
                     DialogueBox.getInstance.Display(" ");
                     DialogueRunning = false;
                     Global.PauseInput = false;
-                    //Kernel.IM.UnSubscribeSpace(this.OnSpace);
+                    Input.getInstance.UnSubscribeSpace(this.OnSpace);
                 }
             }
             // Display a single line of dialogue   
             if (SingleDialogueRun)
             {
                 timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                // Kernel.IM.SubscribeSpace(OnSpace);
+                Input.getInstance.SubscribeSpace(OnSpace);
                 DialogueBox.getInstance.Display(Line);
-                if (timer > interval)
+                if (timer > interval || mNextLine)
                 {
+                    mNextLine = false;
                     DialogueBox.getInstance.Display(" ");
                     Global.PauseInput = false;
                     SingleDialogueRun = false;
@@ -103,6 +104,7 @@ namespace GMTB
             lines = Lines;
             DialogueRunning = true;
             Global.PauseInput = true;
+            Input.getInstance.SubscribeSpace(this.OnSpace);
         }
 
         // Called by Collision triggers to display one line of dialogue

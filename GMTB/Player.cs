@@ -17,12 +17,15 @@ namespace GMTB
         #region Data Members
         private PlayerIndex mPlayerNum;
         #endregion
+
         #region Accessors
         public new Vector2 Position
         {
             get { return mPosition; }
+            set { mPosition = value; }
         }
         #endregion
+
         #region Constructor
         public Player()
         {
@@ -106,17 +109,6 @@ namespace GMTB
                     break;
             }
         }
-
-        public override bool CheckCollision(IEntity pObject)
-        {
-            bool rtnval = false;
-            if (HitBox.Intersects(pObject.HitBox))
-            {
-                rtnval = true;
-            }
-            return rtnval;
-        }
-
         #endregion
 
     }

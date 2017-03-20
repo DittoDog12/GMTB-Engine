@@ -6,10 +6,9 @@ using Microsoft.Xna.Framework;
 
 namespace GMTB
 {
-    interface IPlayer
+    interface Collidable
     {
         Rectangle HitBox { get; }
-        Vector2 Position { get; set; }
         void Collision();
     }
 }

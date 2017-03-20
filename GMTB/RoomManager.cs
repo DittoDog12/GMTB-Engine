@@ -14,6 +14,7 @@ namespace GMTB
         private string mRoom;
         private Texture2D Background;
         Microsoft.Xna.Framework.Content.ContentManager Content;
+        private IPlayer mPlayerPos;
         #endregion
 
         #region Accessors
@@ -22,6 +23,10 @@ namespace GMTB
             get { return mRoom; }
             set { mRoom = value; }
         }
+        public IPlayer PlayerPos
+        {
+            get { return mPlayerPos; }
+        }
         #endregion
 
         #region Constructor
@@ -29,6 +34,14 @@ namespace GMTB
         {
             Content = Global.Content;
             mRoom = "Backgrounds/SpawnRoomBackground";
+            for (int i = 0; i < EntityManager.getInstance.Entities.Count; i++)
+            {
+                var asInterface = EntityManager.getInstance.Entities[i] as IPlayer;
+                if (asInterface != null)
+                {
+                    mPlayerPos = EntityManager.getInstance.Entities[i] as IPlayer;
+                }
+            }
         }
         public static RoomManager getInstance
         {

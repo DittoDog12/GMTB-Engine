@@ -13,18 +13,18 @@ namespace GMTB
         #region Data Members
         private static CollisionManager Instance = null;
         // Create a Reference for all onscreen entities
-        private List<IEntity> mEntities;
-        private List<IEntity> mPlayers;
+        private IPlayer mPlayer;
+        private List<Collidable> AllCollidables;
         #endregion
 
         #region Constructor
         private CollisionManager()
         {
-            // Initialize Reference to existing list
-            mEntities = EntityManager.getInstance.Entities;
+            // Initialize AllCollidables list
+            AllCollidables = new List<Collidable>();
             // Initialize Player list
-            mPlayers = new List<IEntity>();
             IdentifyPlayers();
+            IdentifyCollidable();
         }
         public static CollisionManager getInstance
         {
@@ -40,35 +40,38 @@ namespace GMTB
         #region Methods
         public void IdentifyPlayers()
         {
+            List<IEntity> mEntities = EntityManager.getInstance.Entities;
             // Store the players in a second list
             for (int i= 0; i < mEntities.Count; i++)
             {
-                if (mEntities[i].UName == "Player")
-                {
-                    mPlayers.Add(mEntities[i]);
-                }
+                var asInterface = mEntities[i] as IPlayer;
+                if (asInterface != null)
+                    mPlayer = asInterface;
+
+            }
+        }
+
+        public void IdentifyCollidable()
+        {
+            List<IEntity> mEntities = EntityManager.getInstance.Entities;
+            for (int i = 0; i < mEntities.Count; i++)
+            {
+                var asInterface = mEntities[i] as Collidable;
+                if (asInterface != null)
+                    AllCollidables.Add(asInterface);
             }
         }
         public void Update()
         {
-            // Main Collision Detection
-            // 1 - Run through each Object in the Master Entity List
-            for (int i = 0; i < mEntities.Count; i++)
+            // Load each Collidable Object
+            for (int i = 0; i < AllCollidables.Count; i++)
             {
-                // 2 - Continue only if Current Master List Entry is Collidable
-                if (mEntities[i].Collidable == true)
+                // Compare Loaded object with Player
+                if (mPlayer.HitBox.Intersects(AllCollidables[i].HitBox))
                 {
-                    for (int p = 0; p < mPlayers.Count; p++)
-                    {
-                        // 3 - Call Player's Check Collision Method, pass Current Master List Entry
-                        bool Collide = mPlayers[p].CheckCollision(mEntities[i]);
-                        // 4 - If Player confirms Collsion has occured, call Current Master List Entries Collision Method
-                        if (Collide == true)
-                        {
-                            mEntities[i].Collision();
-                            mPlayers[p].Collision();
-                        }
-                    } 
+                    // Trigger Collision methods
+                    AllCollidables[i].Collision();
+                    mPlayer.Collision(); 
                 }
             }
         }

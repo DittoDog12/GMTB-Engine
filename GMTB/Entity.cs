@@ -75,10 +75,8 @@ namespace GMTB
         {
             UID = uid;
         }
-        public virtual void setVars(int uid, PlayerIndex pPlayer)
-        {
-        }
-
+        public virtual void setVars(int uid, PlayerIndex pPlayer){}
+        public virtual void setVars(string tRoom, Vector2 playerStart){}
         public void setPos(int x, int y)
         {
             mPosition.X = x;
@@ -101,11 +99,7 @@ namespace GMTB
             mPosition = mPrevPos;
         }
 
-        public virtual bool CheckCollision(IEntity pObject)
-        {
-            bool rtnval = false;
-            return rtnval;
-        }
+        
         #endregion
     }
 }

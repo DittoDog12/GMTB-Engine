@@ -80,10 +80,11 @@ namespace GMTB
 
         public void Update()
         {
+            KeyboardState newState = Keyboard.GetState();
             // Halt input detection if the global trigger is set, usually if Dialogue is running
             if (!Global.PauseInput)
             {
-                KeyboardState newState = Keyboard.GetState();
+                
 
                 if (newState.IsKeyDown(Keys.W) == true || GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed)
                 {
@@ -101,14 +102,14 @@ namespace GMTB
                 {
                     OnNewInput(Keys.D);
                 }
-                else if (newState.IsKeyDown(Keys.Space))
-                {
-                    if (newState.IsKeyUp(Keys.Space))
-                        OnSpaceInput(Keys.Space);
-                }
-
-                oldState = newState;
             }
+            if (newState.IsKeyDown(Keys.Space))
+            {
+                if (newState.IsKeyUp(Keys.Space))
+                    OnSpaceInput(Keys.Space);
+            }
+
+            oldState = newState;
         }
         #endregion
     }
