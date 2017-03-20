@@ -12,17 +12,22 @@ namespace GMTB
     /// <summary>
     /// Main Player class, contains all input interpretation for movement
     /// </summary>
-    class Player : AnimatingEntity
+    class Player : AnimatingEntity, IPlayer
     {
         #region Data Members
         private PlayerIndex mPlayerNum;
         #endregion
-
+        #region Accessors
+        public new Vector2 Position
+        {
+            get { return mPosition; }
+        }
+        #endregion
         #region Constructor
         public Player()
         {
             mSpeed = 5f;
-            Kernel.IM.SubscribeMove(OnNewInput);
+            Input.getInstance.SubscribeMove(OnNewInput);
             // Set movement update interval, sets the walk speed
             interval = 80f;
         }

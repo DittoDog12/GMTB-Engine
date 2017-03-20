@@ -16,9 +16,14 @@ namespace GMTB
         static bool _PauseInput;
 
         /// <summary>
-        /// Static refernce to the Dialogue Box
+        /// Static reference to trigger game over state
         /// </summary>
-        static IDialogue _DM;
+        static bool _GameOver = false;
+
+        /// <summary>
+        /// Static reference to the Content Manager
+        /// </summary>
+        static Microsoft.Xna.Framework.Content.ContentManager _Content;
 
         /// <summary>
         /// Accessor for _PauseInput
@@ -30,12 +35,21 @@ namespace GMTB
         }
 
         /// <summary>
-        /// Accessor for _DM
+        /// Accessor for _GameOver
         /// </summary>
-        public static IDialogue DM
+        public static bool GameOver
         {
-            get { return _DM; }
-            set { _DM = value; }
+            get { return _GameOver; }
+            set { _GameOver = value; }
+        }
+
+        /// <summary>
+        /// Accessor for _Content
+        /// </summary>
+        public static Microsoft.Xna.Framework.Content.ContentManager Content
+        {
+            get { return _Content; }
+            set { _Content = value; }
         }
     }
 }

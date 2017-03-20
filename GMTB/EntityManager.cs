@@ -11,22 +11,40 @@ namespace GMTB
     /// <summary>
     /// Main Entity creation manager, Sets all global variables for each entity on creation, eg the UID
     /// </summary>
-    public class EntityManager : IEntityManager 
+    public class EntityManager
     {
         #region Data Members
+        private static EntityManager Instance = null;
+
+
         // Create Master List for all entities
-        public List<IEntity> mEntities;
+        private List<IEntity> mEntities;
         // Create UID 
         private int UID;
         #endregion
 
+        #region Accessors
+        public List<IEntity> Entities
+        {
+            get { return mEntities; }
+        }
+        #endregion
         #region Constructor
-        public EntityManager()
+        private EntityManager()
         {
             // Initialise Lists and Content Manager Reference
             mEntities = new List<IEntity>();
             // Set UID counter to 0 for first object
             UID = 0;
+        }
+        public static EntityManager getInstance
+        {
+            get
+            {
+                if (Instance == null)
+                    Instance = new EntityManager();
+                return Instance;
+            }
         }
         #endregion
 

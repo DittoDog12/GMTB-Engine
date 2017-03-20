@@ -11,9 +11,11 @@ namespace GMTB
     /// <summary>
     /// Method for drawing text on screen, holds the position and SpriteFont to use
     /// </summary>
-    public class DialogueBox : IDialogue
+    public class DialogueBox
     {
         #region Data Members
+        private static DialogueBox Instance = null; 
+
         Microsoft.Xna.Framework.Content.ContentManager Content;
         // Create SpriteFont
         private SpriteFont mFont;
@@ -23,12 +25,24 @@ namespace GMTB
         #endregion
 
         #region Constructors
-        public DialogueBox(Microsoft.Xna.Framework.Content.ContentManager content)
+        private DialogueBox()
         {  
-            Content = content;
+            Content = Global.Content;
             mFont = Content.Load<SpriteFont>("HudText");
             mPosition.X = 50;
             mPosition.Y = Kernel.ScreenHeight - 50;
+        }
+        #endregion
+
+        #region Singleton Instantisiator
+        public static DialogueBox getInstance
+        {
+            get 
+            {
+                if (Instance == null)
+                    Instance = new DialogueBox();
+                return Instance;
+            }
         }
         #endregion
 

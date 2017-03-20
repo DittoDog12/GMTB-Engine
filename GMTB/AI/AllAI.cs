@@ -6,11 +6,11 @@ using Microsoft.Xna.Framework;
 
 namespace GMTB.AI
 {
-    public class AllAI : Entity, IAI
+    public class AllAI : AnimatingEntity, IAI
     {
         #region Data Members
         private bool mReact;
-        private Vector2 mPlayerPos;
+        protected Vector2 mPlayerPos;
 
         #endregion
 
@@ -33,8 +33,9 @@ namespace GMTB.AI
         #endregion
 
         #region Methods
-        public virtual void Update()
+        public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
             if (mReact)
             {
                 // Look at player

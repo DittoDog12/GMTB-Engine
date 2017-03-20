@@ -10,7 +10,7 @@ namespace GMTB
     /// <summary>
     /// Holds special animation methods for moving entites, overrides the normal static texture system
     /// </summary>
-    abstract class AnimatingEntity : Entity
+    public abstract class AnimatingEntity : Entity
     {
         #region Data Members
         // Sets frame information for the Draw Method to read the spritesheets
@@ -53,9 +53,7 @@ namespace GMTB
             base.Update(gameTime);
             // Used to reset the animation when it reaches the end of the spritesheet
             if (CurrentFrame == Frames)
-                CurrentFrame = 0;
-
-                
+                CurrentFrame = 0;    
         }
         public override void Draw(SpriteBatch spriteBatch)
         {

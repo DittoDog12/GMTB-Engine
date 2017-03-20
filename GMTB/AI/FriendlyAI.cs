@@ -10,12 +10,12 @@ namespace GMTB.AI
     /// Friendly AI controller, will trigger a conversation on first collision
     /// and a single line of dialogue on subsequent collisions
     /// </summary>
-    class FriendlyAI : AllAI
+    class FriendlyAI : Entity
     {
         #region Data Members
-        string[] lines;
-        bool SecondEncounter;
-        string RepeatedText;
+        private string[] lines;
+        private bool SecondEncounter;
+        private string RepeatedText;
         #endregion
 
         #region Constructor
@@ -39,11 +39,11 @@ namespace GMTB.AI
         {
             if (!SecondEncounter)
             {
-                Kernel.ScM.BeginDialogue(lines);
+                Script.getInstance.BeginDialogue(lines);
                 SecondEncounter = true;
             }
             else
-                Kernel.ScM.SingleDialogue(RepeatedText);
+                Script.getInstance.SingleDialogue(RepeatedText);
         }
         #endregion
     }

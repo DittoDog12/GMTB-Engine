@@ -8,21 +8,32 @@ namespace GMTB
     /// <summary>
     /// Main Collision detection manager, calls the Entities Collision Method in the event of a collision
     /// </summary>
-    public class CollisionManager : ICollisionManager
+    public class CollisionManager
     {
         #region Data Members
+        private static CollisionManager Instance = null;
         // Create a Reference for all onscreen entities
         private List<IEntity> mEntities;
         private List<IEntity> mPlayers;
         #endregion
 
         #region Constructor
-        public CollisionManager(List<IEntity> pEntities)
+        private CollisionManager()
         {
             // Initialize Reference to existing list
-            mEntities = pEntities;
+            mEntities = EntityManager.getInstance.Entities;
             // Initialize Player list
             mPlayers = new List<IEntity>();
+            IdentifyPlayers();
+        }
+        public static CollisionManager getInstance
+        {
+            get
+            {
+                if (Instance == null)
+                    Instance = new CollisionManager();
+                return Instance;
+            }
         }
         #endregion
 

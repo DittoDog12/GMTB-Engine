@@ -47,26 +47,23 @@
     <Compile Include="AI\LowLevelAI.cs" />
     <Compile Include="AI\NeutralAI.cs" />
     <Compile Include="CollisionManager.cs" />
+    <Compile Include="CoreManager.cs" />
     <Compile Include="DialogueBox.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityManager.cs" />
     <Compile Include="Global.cs" />
-    <Compile Include="IAiManager.cs" />
-    <Compile Include="ICollisionManager.cs" />
-    <Compile Include="IDialogue.cs" />
-    <Compile Include="IInput.cs" />
     <Compile Include="InputEvent.cs" />
+    <Compile Include="IPlayer.cs" />
     <Compile Include="IScript.cs" />
     <Compile Include="Kernel.cs" />
     <Compile Include="IEntity.cs" />
-    <Compile Include="IEntityManager.cs" />
     <Compile Include="Input.cs" />
-    <Compile Include="ISceneManager.cs" />
     <Compile Include="AnimatingEntity.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Pong\Ball.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoomManager.cs" />
     <Compile Include="SceneManager.cs" />
     <Compile Include="Script.cs" />
     <Compile Include="SoundIndicator.cs" />
@@ -80,6 +77,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Backgrounds\GameOver.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Backgrounds\PrototypeBackgroundMarthasRoom.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -104,7 +104,40 @@
     <Content Include="Content\Dialogue\OldManAndSerena.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Enemy\MFW.png">
+    <Content Include="Content\Enemy\Matron\MBW.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Enemy\Matron\MFW.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Enemy\Matron\MLW.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Enemy\Matron\MRW.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Enemy\NurseA\NAMB.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Enemy\NurseA\NAMF.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Enemy\NurseA\NAML.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Enemy\NurseA\NAMR.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Enemy\NurseB\NBMF.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Enemy\NurseB\NBML.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Enemy\NurseB\NBMR.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Enemy\NurseB\NBWB.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\NPC\TaskGiverFront.png">

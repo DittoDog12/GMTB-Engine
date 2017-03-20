@@ -21,14 +21,7 @@ namespace GMTB
         public static int ScreenWidth;
         public static int ScreenHeight;
 
-        // Create Entity, Scene and Collision managers
-        public IEntityManager EM;
-        public ISceneManager SM;
-        public ICollisionManager CM;
-        public IAiManager AiM;
-        public static IInput IM;
-        // Create Dialogue Manager, set to static so everything can access it at will
-        public static IScript ScM;
+
         // Create empty IEntity object to hold entities during creation
         private IEntity createdEntity;
 
@@ -38,6 +31,7 @@ namespace GMTB
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            Global.Content = Content;
         }
 
         /// <summary>
@@ -52,16 +46,7 @@ namespace GMTB
             ScreenHeight = GraphicsDevice.Viewport.Height;
             ScreenWidth = GraphicsDevice.Viewport.Width;
 
-            // Initialize Entity and Scene Managers
-            EM = new EntityManager();
-            SM = new SceneManager(Content);
-            CM = new CollisionManager(SM.Entities);
-            AiM = new AiManager();
-
-            IM = new Input();
-            ScM = new Script();
-
-            
+            // Initialize Entity and Scene Managers          
             base.Initialize();
         }
 
@@ -75,11 +60,12 @@ namespace GMTB
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here     
-            createdEntity = EM.newEntity<Player>(PlayerIndex.One);
-            SM.newEntity(createdEntity, 160, ScreenHeight / 2);
-            createdEntity = EM.newEntity<FriendlyAI>();
-            SM.newEntity(createdEntity, ScreenWidth / 2, ScreenHeight / 2);
-            CM.IdentifyPlayers();
+            createdEntity = EntityManager.getInstance.newEntity<Player>(PlayerIndex.One);
+            SceneManager.getInstance.newEntity(createdEntity, 160, ScreenHeight / 2);
+            createdEntity = EntityManager.getInstance.newEntity<FriendlyAI>();
+            SceneManager.getInstance.newEntity(createdEntity, ScreenWidth / 2, ScreenHeight / 2);
+            createdEntity = EntityManager.getInstance.newEntity<HighLevelAI>();
+            SceneManager.getInstance.newEntity(createdEntity, 640, ScreenHeight / 2);
         }
 
         /// <summary>
@@ -102,10 +88,7 @@ namespace GMTB
                 Exit();
 
             // TODO: Add your update logic here
-            SM.Update(gameTime);
-            CM.Update();
-            IM.Update();
-            ScM.Update(gameTime);
+            CoreManager.getInstance.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -118,7 +101,7 @@ namespace GMTB
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            SM.Draw(spriteBatch);
+            CoreManager.getInstance.Draw(spriteBatch);
             base.Draw(gameTime);
         }
         

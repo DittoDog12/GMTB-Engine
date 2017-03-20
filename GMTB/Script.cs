@@ -8,31 +8,30 @@ using Microsoft.Xna.Framework;
 
 namespace GMTB
 {
-    public class Script : IScript
+    public class Script
     {
         /// <summary>
         /// Dialogue Script control, sends the Dialogue Box the individual lines and controls the line display delay
         /// </summary>
         #region Data Members
-        string[] lines; // List holding the current conversation
-        string Line; // String to hold a single line of dialogue
-        IDialogue DM; // Reference to the Dialogue Box
-        int mLine; // Currently displayed line
-        bool mNextLine; // Used for spacebar control of text if implemented
-        bool DialogueRunning; // Internal boolean to control if a conversation is running
-        bool SingleDialogueRun; // Internal boolean to control a single line of dialogue
+        private static Script Instance = null;
+        private string[] lines; // List holding the current conversation
+        private string Line; // String to hold a single line of dialogue
+        private int mLine; // Currently displayed line
+        private bool mNextLine; // Used for spacebar control of text if implemented
+        private bool DialogueRunning; // Internal boolean to control if a conversation is running
+        private bool SingleDialogueRun; // Internal boolean to control a single line of dialogue
 
         // Line by line delay controls
-        float timer;
-        float interval;
+        private float timer;
+        private float interval;
 
         #endregion
 
         #region Constructor
-        public Script()
+        private Script()
         {
             //mNextLine = false; // Used for spacebar control of text if implemented
-            DM = Global.DM; // Initialise reference to the Dialogue Box
             lines = File.ReadAllLines(Environment.CurrentDirectory + "/Content/Dialogue/FirstEncounter.txt"); // Initial conversation loaded to list
 
             mLine = 0;
@@ -40,6 +39,15 @@ namespace GMTB
             // Set Line by line delay to 3 seconds.
             interval = 3000f;
             timer = 0f;
+        }
+        public static Script getInstance
+        {
+            get
+            {
+                if (Instance == null)
+                    Instance = new Script();
+                return Instance;
+            }
         }
         #endregion
 
@@ -50,7 +58,7 @@ namespace GMTB
             if (DialogueRunning)
             {
                 timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                DM.Display(lines[mLine]); // Display current line of loaded list
+                DialogueBox.getInstance.Display(lines[mLine]); // Display current line of loaded list
                 // Load next line at interval
                 if (timer > interval) //(mNextLine) for Space control 
                 {
@@ -60,7 +68,7 @@ namespace GMTB
                 }
                 if (mLine == lines.Length)
                 {
-                    DM.Display(" ");
+                    DialogueBox.getInstance.Display(" ");
                     DialogueRunning = false;
                     Global.PauseInput = false;
                     //Kernel.IM.UnSubscribeSpace(this.OnSpace);
@@ -71,12 +79,13 @@ namespace GMTB
             {
                 timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 // Kernel.IM.SubscribeSpace(OnSpace);
-                DM.Display(Line);
+                DialogueBox.getInstance.Display(Line);
                 if (timer > interval)
                 {
-                    DM.Display(" ");
+                    DialogueBox.getInstance.Display(" ");
                     Global.PauseInput = false;
                     SingleDialogueRun = false;
+                    timer = 0f;
                 }
             }
 

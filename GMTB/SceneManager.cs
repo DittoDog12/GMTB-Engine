@@ -7,17 +7,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GMTB
 {
-    public class SceneManager : ISceneManager
+    public class SceneManager
     {
         /// <summary>
         /// Main Scene Manager, places everything on the screen and calls Draw methods
         /// </summary>
         #region Data Members
+        private static SceneManager Instance = null;
+
         private List<IEntity> mEntities;
         Microsoft.Xna.Framework.Content.ContentManager Content;
-        public static IDialogue DM;
-
-        private Texture2D Background;
         #endregion
 
         #region Accessors
@@ -28,14 +27,20 @@ namespace GMTB
         #endregion
 
         #region Constructor
-        public SceneManager(Microsoft.Xna.Framework.Content.ContentManager content)
+        private SceneManager()
         {
             // Initialise Entity List
             mEntities = new List<IEntity>();
-            Content = content;
-            DM = new DialogueBox(Content);
-            Global.DM = DM;
-            Background = Content.Load<Texture2D>("Backgrounds/SpawnRoomBackground");
+            Content = Global.Content;
+        }
+        public static SceneManager getInstance
+        {
+            get
+            {
+                if (Instance == null)
+                    Instance = new SceneManager();
+                return Instance;
+            }
         }
         #endregion
 
@@ -52,18 +57,23 @@ namespace GMTB
         }
         public void Update(GameTime gameTime)
         {
-            mEntities.ForEach(IEntity => IEntity.Update(gameTime));
+             mEntities.ForEach(IEntity => IEntity.Update(gameTime));
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(Background, new Rectangle(0, 0, 800, 480), Color.White);
-            // Update Texture path for animating entity
-            mEntities.ForEach(IEntity => IEntity.aTexture = Content.Load<Texture2D>(IEntity.aTexturename));
-            // Call draw method for each Entity
-            mEntities.ForEach(IEntity => IEntity.Draw(spriteBatch));
-            if(Global.PauseInput)
-                DM.Draw(spriteBatch);
+            RoomManager.getInstance.Draw(spriteBatch);
+
+            if (!Global.GameOver)
+            {
+                // Update Texture path for animating entity
+                mEntities.ForEach(IEntity => IEntity.aTexture = Content.Load<Texture2D>(IEntity.aTexturename));
+                // Call draw method for each Entity
+                mEntities.ForEach(IEntity => IEntity.Draw(spriteBatch));
+                if (Global.PauseInput)
+                    DialogueBox.getInstance.Draw(spriteBatch);
+            }
+
             spriteBatch.End();
         }
         #endregion

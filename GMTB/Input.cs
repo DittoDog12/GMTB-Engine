@@ -10,19 +10,29 @@ namespace GMTB
     /// <summary>
     /// Main input detection system
     /// </summary>
-    public class Input : IInput
+    public class Input
     {
         #region Data Members
-        KeyboardState oldState;
+        private static Input Instance = null;
+        private KeyboardState oldState;
         public event EventHandler<InputEvent> NewInput;
         public event EventHandler<InputEvent> ExitInput;
         public event EventHandler<InputEvent> SpaceInput;
         #endregion
 
         #region Constructor
-        public Input()
+        private Input()
         {
             oldState = Keyboard.GetState();
+        }
+        public static Input getInstance
+        {
+            get
+            {
+                if (Instance == null)
+                    Instance = new Input();
+                return Instance;
+            }
         }
         #endregion
 
@@ -93,7 +103,8 @@ namespace GMTB
                 }
                 else if (newState.IsKeyDown(Keys.Space))
                 {
-                    OnSpaceInput(Keys.Space);
+                    if (newState.IsKeyUp(Keys.Space))
+                        OnSpaceInput(Keys.Space);
                 }
 
                 oldState = newState;
