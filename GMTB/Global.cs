@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace GMTB
 {
@@ -24,6 +25,11 @@ namespace GMTB
         /// Static reference to the Content Manager
         /// </summary>
         static Microsoft.Xna.Framework.Content.ContentManager _Content;
+
+        /// <summary>
+        /// Static referecne to the players position
+        /// </summary>
+        static Vector2 _PlayerPos;
 
         /// <summary>
         /// Accessor for _PauseInput
@@ -50,6 +56,14 @@ namespace GMTB
         {
             get { return _Content; }
             set { _Content = value; }
+        }
+        /// <summary>
+        /// Accessor for _PlayerPos
+        /// </summary>
+        public static Vector2 PlayerPos
+        {
+            get { return _PlayerPos; }
+            set { _PlayerPos = value; }
         }
     }
 }

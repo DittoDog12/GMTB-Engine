@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using System.Xml;
+using System.Xml.XPath;
 using System.IO;
 
 namespace GMTB
@@ -14,20 +15,23 @@ namespace GMTB
         private static LevelManager Instance = null;
 
         // Level Data
-        private string LevelID;
         private string LevelBG;
         private Vector2 DoorPos;
         private string targetLevel;
         private Vector2 PlayerPos;
 
         // XML Parser
-        XmlTextReader XmlRdr;
+        private string fileName;
+        private XPathDocument doc;
+        private XPathNavigator nav;
         #endregion
 
         #region Constructor
         private LevelManager()
         {
-            XmlRdr = new XmlTextReader("Levels");
+            fileName = Environment.CurrentDirectory + "/Content/Levels.xml";
+            doc = new XPathDocument(fileName);
+            nav = doc.CreateNavigator();
         }
         public static LevelManager getInstance
         {
@@ -47,24 +51,39 @@ namespace GMTB
             // Remove Entities
 
             // Parse XML
-            while (XmlRdr.Read())
-            {
-                if (XmlRdr.NodeType == XmlNodeType.Element && XmlRdr.Name == LevelID)
-                {
-                    if (XmlRdr.NodeType == XmlNodeType.Element && XmlRdr.Name == "LevelTex")
-                        LevelBG = XmlRdr.ReadElementContentAsString();
-                    if (XmlRdr.NodeType == XmlNodeType.Element && XmlRdr.Name == "DoorX")
-                        DoorPos.X = XmlRdr.ReadElementContentAsFloat();
-                    if (XmlRdr.NodeType == XmlNodeType.Element && XmlRdr.Name == "DoorY")
-                        DoorPos.Y = XmlRdr.ReadElementContentAsFloat();
-                    if (XmlRdr.NodeType == XmlNodeType.Element && XmlRdr.Name == "PlayerX")
-                        PlayerPos.X = XmlRdr.ReadElementContentAsFloat();
-                    if (XmlRdr.NodeType == XmlNodeType.Element && XmlRdr.Name == "PlayerY")
-                        PlayerPos.Y = XmlRdr.ReadElementContentAsFloat();
-                    if (XmlRdr.NodeType == XmlNodeType.Element && XmlRdr.Name == "TargetLevel")
-                        targetLevel = XmlRdr.ReadElementContentAsString();
-                }
-            }
+            // Load Background
+            // Set search expression, Root + LevelID + Texture
+            XPathExpression expr = nav.Compile("//" + LevelID + "/LevelTex");
+            // Search using Expression
+            XPathNodeIterator iterator = nav.Select(expr);
+            while (iterator.MoveNext())
+                LevelBG = iterator.Current.Value;
+            // Load Door data
+            // Load Door Position
+            expr = nav.Compile("//" + LevelID + "//DoorX");
+            iterator = nav.Select(expr);
+            while (iterator.MoveNext())
+                DoorPos.X = float.Parse(iterator.Current.Value);
+            expr = nav.Compile("//" + LevelID + "//DoorY");
+            iterator = nav.Select(expr);
+            while (iterator.MoveNext())
+                DoorPos.Y = float.Parse(iterator.Current.Value);
+            // Load Player target position
+            expr = nav.Compile("//" + LevelID + "//PlayerX");
+            iterator = nav.Select(expr);
+            while (iterator.MoveNext())
+                PlayerPos.X = float.Parse(iterator.Current.Value);
+            expr = nav.Compile("//" + LevelID + "//PlayerY");
+            iterator = nav.Select(expr);
+            while (iterator.MoveNext())
+                PlayerPos.Y = float.Parse(iterator.Current.Value);
+            // Load Target Level
+            expr = nav.Compile("//" + LevelID + "//TargetLevel");
+            iterator = nav.Select(expr);
+            while (iterator.MoveNext())
+                targetLevel = iterator.Current.Value;
+
+
             // New Level
             LoadBackground();
             PlaceDoor();

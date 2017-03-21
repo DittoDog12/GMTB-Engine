@@ -12,12 +12,14 @@ namespace GMTB
         private string ToRoom;
         private Vector2 PlayerStart;
         #endregion
+
         #region Constructor
         public Door()
         {
-            mTexturename = "square";
+            mTexturename = "BlueDoll";
         }
         #endregion
+
         #region Methods
         public override void setVars(string tRoom, Vector2 playerStart)
         {
@@ -28,7 +30,7 @@ namespace GMTB
         {
             // Trigger Room change
             LevelManager.getInstance.NewLevel(ToRoom);
-            RoomManager.getInstance.PlayerPos.Position = PlayerStart;
+            Global.PlayerPos= PlayerStart;
         }
         #endregion
     }

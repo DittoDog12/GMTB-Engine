@@ -60,7 +60,7 @@ namespace GMTB
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            //LevelManager.getInstance.NewLevel("L1");     
+            LevelManager.getInstance.NewLevel("L1");     
 
             createdEntity = EntityManager.getInstance.newEntity<Player>(PlayerIndex.One);
             SceneManager.getInstance.newEntity(createdEntity, 160, ScreenHeight / 2);
@@ -70,9 +70,6 @@ namespace GMTB
             SceneManager.getInstance.newEntity(createdEntity, 640, ScreenHeight / 2);
             createdEntity = EntityManager.getInstance.newEntity<HidingPlace>();
             SceneManager.getInstance.newEntity(createdEntity, 160, 150);
-
-            //createdEntity = EntityManager.getInstance.newEntity<Door>();
-
         }
 
         /// <summary>
