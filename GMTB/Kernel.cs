@@ -69,7 +69,10 @@ namespace GMTB
             createdEntity = EntityManager.getInstance.newEntity<HighLevelAI>();
             SceneManager.getInstance.newEntity(createdEntity, 640, ScreenHeight / 2);
             createdEntity = EntityManager.getInstance.newEntity<HidingPlace>();
-            SceneManager.getInstance.newEntity(createdEntity, 160, 670);
+            SceneManager.getInstance.newEntity(createdEntity, 160, 150);
+
+            //createdEntity = EntityManager.getInstance.newEntity<Door>();
+
         }
 
         /// <summary>

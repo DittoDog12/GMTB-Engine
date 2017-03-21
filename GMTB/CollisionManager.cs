@@ -77,13 +77,13 @@ namespace GMTB
                 if (mPlayer.HitBox.Intersects(AllCollidables[i].HitBox))
                 {
                     // Trigger Collision methods, only trigger Collidable object if its a hiding place, else trigger object and player
-                    if (AllCollidables[i].UName == "HidingPlace")
-                        AllCollidables[i].Collision();
-                    else
-                    {
+                    //if (AllCollidables[i].UName == "HidingPlace")
+                       // AllCollidables[i].Collision();
+                    //else
+                    //{
                         AllCollidables[i].Collision();
                         mPlayer.Collision();
-                    }
+                   // }
                     
                     
                 }

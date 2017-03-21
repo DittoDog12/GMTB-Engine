@@ -27,7 +27,7 @@ namespace GMTB
         #region Constructor
         private LevelManager()
         {
-            XmlRdr = new System.Xml.XmlTextReader("Levels");
+            XmlRdr = new XmlTextReader("Levels");
         }
         public static LevelManager getInstance
         {

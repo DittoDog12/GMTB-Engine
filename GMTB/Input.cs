@@ -18,6 +18,7 @@ namespace GMTB
         public event EventHandler<InputEvent> NewInput;
         public event EventHandler<InputEvent> ExitInput;
         public event EventHandler<InputEvent> SpaceInput;
+        public event EventHandler<InputEvent> UseInput;
         #endregion
 
         #region Constructor
@@ -50,9 +51,15 @@ namespace GMTB
                 InputEvent args = new InputEvent(key);
                 SpaceInput(this, args);
             }
-
         }
-
+        protected virtual void OnUse(Keys key)
+        {
+            if (UseInput != null)
+            {
+                InputEvent args = new InputEvent(key);
+                UseInput(this, args);
+            }
+        }
         // Sub/Unsubscribers
         public void SubscribeMove(EventHandler<InputEvent> handler)
         {
@@ -76,6 +83,14 @@ namespace GMTB
         public void UnSubscribeSpace(EventHandler<InputEvent> handler)
         {
             SpaceInput -= handler;
+        }
+        public void SubscribeUse(EventHandler<InputEvent> handler)
+        {
+            UseInput += handler;
+        }
+        public void UnSubscribeUse(EventHandler<InputEvent> handler)
+        {
+            UseInput -= handler;
         }
 
         public void Update()
@@ -102,6 +117,9 @@ namespace GMTB
                 {
                     OnNewInput(Keys.D);
                 }
+
+                if (newState.IsKeyDown(Keys.E))
+                    OnUse(Keys.E);
             }
             if (newState.IsKeyDown(Keys.Space))
             {
