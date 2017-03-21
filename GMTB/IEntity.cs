@@ -16,6 +16,7 @@ namespace GMTB
         String aTexturename { get; }
         Vector2 Position { get; }
         bool Collidable { get; }
+        bool Visible { get; }
         #endregion
 
         #region Methods

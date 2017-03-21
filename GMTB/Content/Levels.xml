@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Levels>
+	<L1>
+		<LevelNum>1</LevelNum>
+		<LevelTex>"Backgrounds/SpawnRoomBackground"</LevelTex>
+		<Doors>
+			<Door>
+				<DoorX>285</DoorX>
+				<DoorY>550</DoorY>
+				<PlayerX>350</PlayerX>
+				<PlayerY>240</PlayerY>
+				<TargetLevel>L2</TargetLevel>
+			</Door>
+		</Doors>
+	</L1>
+	<L2>
+		<LevelNum>2</LevelNum>
+		<LevelTex>"Backgrounds/PrototypeBackgroundMarthasRoom"</LevelTex>
+		<Doors>
+			<Door>
+				<DoorX>450</DoorX>
+				<DoorY>240</DoorY>
+				<PlayerX>160</PlayerX>
+				<PlayerY>240</PlayerY>
+				<TargetLevel>L1</TargetLevel>
+			</Door>
+		</Doors>
+	</L2>
+</Levels>

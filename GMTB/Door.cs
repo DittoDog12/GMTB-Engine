@@ -27,7 +27,8 @@ namespace GMTB
         public override void Collision()
         {
             // Trigger Room change
-            LevelManager.getInstance.NewLevel(0);
+            LevelManager.getInstance.NewLevel(ToRoom);
+            RoomManager.getInstance.PlayerPos.Position = PlayerStart;
         }
         #endregion
     }

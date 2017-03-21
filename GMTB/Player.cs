@@ -85,6 +85,13 @@ namespace GMTB
         }
         public void OnNewInput(object source, InputEvent args)
         {
+            if (!mVisible)
+            {
+                mPosition = mPrevPos;
+                mVisible = true;
+            }
+
+
             switch (args.currentKey)
             {
                 case Keys.W:
@@ -108,6 +115,11 @@ namespace GMTB
                     mVelocity.Y = 0;
                     break;
             }
+        }
+
+        public void CollisionHide()
+        {
+            mVisible = false;
         }
         #endregion
 

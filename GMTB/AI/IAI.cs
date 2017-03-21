@@ -9,6 +9,7 @@ namespace GMTB.AI
     public interface IAI
     {
         Vector2 PlayerPos { set; }
+        bool PlayerVisible { set; }
         void Update(GameTime gameTime);
 
         bool CollisionChecker();

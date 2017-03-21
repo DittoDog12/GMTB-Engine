@@ -9,6 +9,7 @@ namespace GMTB
     interface Collidable
     {
         Rectangle HitBox { get; }
+        string UName { get; }
         void Collision();
     }
 }

@@ -17,6 +17,13 @@ namespace GMTB
         private List<Collidable> AllCollidables;
         #endregion
 
+        #region Accessors
+        public IPlayer currPlayer
+        {
+            get { return mPlayer; }
+        }
+        #endregion
+
         #region Constructor
         private CollisionManager()
         {
@@ -69,9 +76,16 @@ namespace GMTB
                 // Compare Loaded object with Player
                 if (mPlayer.HitBox.Intersects(AllCollidables[i].HitBox))
                 {
-                    // Trigger Collision methods
-                    AllCollidables[i].Collision();
-                    mPlayer.Collision(); 
+                    // Trigger Collision methods, only trigger Collidable object if its a hiding place, else trigger object and player
+                    if (AllCollidables[i].UName == "HidingPlace")
+                        AllCollidables[i].Collision();
+                    else
+                    {
+                        AllCollidables[i].Collision();
+                        mPlayer.Collision();
+                    }
+                    
+                    
                 }
             }
         }

@@ -59,13 +59,17 @@ namespace GMTB
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here     
+            // TODO: use this.Content to load your game content here
+            //LevelManager.getInstance.NewLevel("L1");     
+
             createdEntity = EntityManager.getInstance.newEntity<Player>(PlayerIndex.One);
             SceneManager.getInstance.newEntity(createdEntity, 160, ScreenHeight / 2);
             createdEntity = EntityManager.getInstance.newEntity<FriendlyAI>();
             SceneManager.getInstance.newEntity(createdEntity, ScreenWidth / 2, ScreenHeight / 2);
             createdEntity = EntityManager.getInstance.newEntity<HighLevelAI>();
             SceneManager.getInstance.newEntity(createdEntity, 640, ScreenHeight / 2);
+            createdEntity = EntityManager.getInstance.newEntity<HidingPlace>();
+            SceneManager.getInstance.newEntity(createdEntity, 160, 670);
         }
 
         /// <summary>

@@ -87,7 +87,7 @@ namespace GMTB.AI
 
             mVelocity = mDistanceToDest * mSpeed;
 
-            if (ActivityTimer >= ChaseTime)
+            if (ActivityTimer >= ChaseTime || !mPlayerVisible)
             {
                 mState = "Search";
                 ActivityTimer = (float)gameTime.ElapsedGameTime.TotalMilliseconds;

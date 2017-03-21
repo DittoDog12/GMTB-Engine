@@ -16,6 +16,7 @@ namespace GMTB
         //--Key Variables
         protected int mUID;
         protected string mUName;
+        protected bool mVisible;
         //--Movement
         protected float mSpeed;
         protected Vector2 mPosition;
@@ -61,12 +62,19 @@ namespace GMTB
         {
             get { return mCollidable; }
         }
+
+        public bool Visible
+        {
+            get { return mVisible; }
+            set { mVisible = value; }
+        }
         #endregion
 
         #region Constructor
         public Entity()
         {
             mCollidable = false;
+            mVisible = true;
         }
         #endregion
 

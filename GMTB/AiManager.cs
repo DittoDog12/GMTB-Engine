@@ -54,6 +54,7 @@ namespace GMTB
             for (int i = 0; i < AllAIs.Count; i++)
             {
                 AllAIs[i].PlayerPos = Player.Position;
+                AllAIs[i].PlayerVisible = Player.Visible;
             }
         }
         #endregion

@@ -11,6 +11,7 @@ namespace GMTB.AI
         #region Data Members
         private bool mReact;
         protected Vector2 mPlayerPos;
+        protected bool mPlayerVisible;
 
         #endregion
 
@@ -23,12 +24,17 @@ namespace GMTB.AI
         {
             set { mPlayerPos = value; }
         }
+        public bool PlayerVisible
+        {
+            set { mPlayerVisible = value; }
+        }
         #endregion
 
         #region Constructor
         public AllAI()
         {
             mReact = false;
+            mPlayerVisible = true;
         }
         #endregion
 
