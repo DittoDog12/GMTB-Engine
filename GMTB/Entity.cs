@@ -100,11 +100,16 @@ namespace GMTB
         {
             spriteBatch.Draw(mTexture, mPosition, Color.AntiqueWhite);
         }
-        public virtual void Collision()
+        public virtual void Collision(object source, CollisionEvent args)
         {
             mVelocity.X = 0;
             mVelocity.Y = 0;
             mPosition = mPrevPos;
+        }
+        public virtual void Destroy()
+        {
+            mPosition.X = 1000;
+            mPosition.Y = 1000;
         }
 
         

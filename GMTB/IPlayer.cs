@@ -11,7 +11,7 @@ namespace GMTB
         Rectangle HitBox { get; }
         Vector2 Position { get; set; }
         bool Visible { get; set; }
-        void Collision();
+        void Collision(object source, CollisionEvent args);
         void CollisionHide();
     }
 }

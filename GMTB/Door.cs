@@ -17,6 +17,7 @@ namespace GMTB
         public Door()
         {
             mTexturename = "BlueDoll";
+            CollisionManager.getInstance.Subscribe(Collision, this);
         }
         #endregion
 
@@ -26,11 +27,19 @@ namespace GMTB
             ToRoom = tRoom;
             PlayerStart = playerStart;
         }
-        public override void Collision()
+        public override void Collision(object source, CollisionEvent args)
         {
-            // Trigger Room change
-            LevelManager.getInstance.NewLevel(ToRoom);
-            Global.PlayerPos= PlayerStart;
+            if (args.Entity == this)
+            {
+                // Trigger Room change
+                LevelManager.getInstance.NewLevel(ToRoom);
+                Global.PlayerPos = PlayerStart;
+            }
+        }
+        public override void Destroy()
+        {
+            base.Destroy();
+            CollisionManager.getInstance.unSubscribe(Collision, this);
         }
         #endregion
     }

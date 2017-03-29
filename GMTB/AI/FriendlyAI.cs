@@ -25,6 +25,7 @@ namespace GMTB.AI
             RepeatedText = "*The Old Man doesn't turn around*";
             mCollidable = true;
             lines = File.ReadAllLines(Environment.CurrentDirectory + "/Content/Dialogue/OldManAndSerena.txt");
+            CollisionManager.getInstance.Subscribe(Collision, this);
         }
         #endregion
 
@@ -35,15 +36,23 @@ namespace GMTB.AI
             mTexturename = "NPC/TaskGiverFront";
         }
 
-        public override void Collision()
+        public override void Collision(object source, CollisionEvent args)
         {
-            if (!SecondEncounter)
+            if (args.Entity == this)
             {
-                Script.getInstance.BeginDialogue(lines);
-                SecondEncounter = true;
+                if (!SecondEncounter)
+                {
+                    Script.getInstance.BeginDialogue(lines);
+                    SecondEncounter = true;
+                }
+                else
+                    Script.getInstance.SingleDialogue(RepeatedText);
             }
-            else
-                Script.getInstance.SingleDialogue(RepeatedText);
+        }
+        public override void Destroy()
+        {
+            base.Destroy();
+            CollisionManager.getInstance.unSubscribe(Collision, this);
         }
         #endregion
     }

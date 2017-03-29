@@ -35,10 +35,11 @@ namespace GMTB
             if (!Global.GameOver)
             {
                 SceneManager.getInstance.Update(gameTime);
-                CollisionManager.getInstance.Update();
                 Input.getInstance.Update();
                 Script.getInstance.Update(gameTime);
                 AiManager.getInstance.Update();
+                if(!Global.PauseInput)
+                    CollisionManager.getInstance.Update();
             }
             
         }

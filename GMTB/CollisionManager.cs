@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace GMTB
 {
@@ -12,6 +13,9 @@ namespace GMTB
     {
         #region Data Members
         private static CollisionManager Instance = null;
+
+        public event EventHandler<CollisionEvent> Colliders;
+        public event EventHandler<CollisionEvent> PlayerE;
         // Create a Reference for all onscreen entities
         private IPlayer mPlayer;
         private List<Collidable> AllCollidables;
@@ -30,8 +34,8 @@ namespace GMTB
             // Initialize AllCollidables list
             AllCollidables = new List<Collidable>();
             // Initialize Player list
-            IdentifyPlayers();
-            IdentifyCollidable();
+            //IdentifyPlayers();
+            //IdentifyCollidable();
         }
         public static CollisionManager getInstance
         {
@@ -45,49 +49,83 @@ namespace GMTB
         #endregion
 
         #region Methods
-        public void IdentifyPlayers()
-        {
-            List<IEntity> mEntities = EntityManager.getInstance.Entities;
-            // Store the players in a second list
-            for (int i= 0; i < mEntities.Count; i++)
-            {
-                var asInterface = mEntities[i] as IPlayer;
-                if (asInterface != null)
-                    mPlayer = asInterface;
+        //public void IdentifyPlayers()
+        //{
+        //    List<IEntity> mEntities = EntityManager.getInstance.Entities;
+        //    // Store the players in a second list
+        //    for (int i = 0; i < mEntities.Count; i++)
+        //    {
+        //        var asInterface = mEntities[i] as IPlayer;
+        //        if (asInterface != null)
+        //            mPlayer = asInterface;
+        //    }
+        //}
 
-            }
+        //public void IdentifyCollidable()
+        //{
+        //    List<IEntity> mEntities = EntityManager.getInstance.Entities;
+        //    for (int i = 0; i < mEntities.Count; i++)
+        //    {
+        //        var asInterface = mEntities[i] as Collidable;
+        //        if (asInterface != null)
+        //            AllCollidables.Add(asInterface);
+        //    }
+        //}
+
+        public void PlayerSubscribe(EventHandler<CollisionEvent> handler, IPlayer player)
+        {
+            PlayerE += handler;
+            mPlayer = player;
+        }
+        public void Subscribe(EventHandler<CollisionEvent> handler, Collidable entity)
+        {
+            Colliders += handler;
+            AllCollidables.Add(entity);
+        }
+        public void unSubscribe(EventHandler<CollisionEvent> handler, Collidable entity)
+        {
+            Colliders -= handler;
+            AllCollidables.Remove(entity);
+        }
+        public virtual void onCollide(Collidable entity)
+        {
+            CollisionEvent args = new CollisionEvent(entity);
+            Colliders(this, args);
+        }
+        public virtual void PlayerCollide(IPlayer entity)
+        {
+            CollisionEvent args = new CollisionEvent();
+            PlayerE(this, args);
         }
 
-        public void IdentifyCollidable()
-        {
-            List<IEntity> mEntities = EntityManager.getInstance.Entities;
-            for (int i = 0; i < mEntities.Count; i++)
-            {
-                var asInterface = mEntities[i] as Collidable;
-                if (asInterface != null)
-                    AllCollidables.Add(asInterface);
-            }
-        }
         public void Update()
         {
-            // Load each Collidable Object
+            //foreach (Collidable entity in AllCollidables)
             for (int i = 0; i < AllCollidables.Count; i++)
-            {
-                // Compare Loaded object with Player
                 if (mPlayer.HitBox.Intersects(AllCollidables[i].HitBox))
                 {
-                    // Trigger Collision methods, only trigger Collidable object if its a hiding place, else trigger object and player
-                    //if (AllCollidables[i].UName == "HidingPlace")
-                       // AllCollidables[i].Collision();
-                    //else
-                    //{
-                        AllCollidables[i].Collision();
-                        mPlayer.Collision();
-                   // }
-                    
-                    
+                    onCollide(AllCollidables[i]);
+                    PlayerCollide(mPlayer);
                 }
-            }
+
+            // Load each Collidable Object
+            //for (int i = 0; i < AllCollidables.Count; i++)
+            //{
+            //    // Compare Loaded object with Player
+            //    if (mPlayer.HitBox.Intersects(AllCollidables[i].HitBox))
+            //    {
+            //        // Trigger Collision methods, only trigger Collidable object if its a hiding place, else trigger object and player
+            //        //if (AllCollidables[i].UName == "HidingPlace")
+            //           // AllCollidables[i].Collision();
+            //        //else
+            //        //{
+            //            AllCollidables[i].Collision();
+            //            mPlayer.Collision();
+            //       // }
+
+
+            //    }
+            //}
         }
         #endregion
 

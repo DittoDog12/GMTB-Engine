@@ -31,6 +31,7 @@ namespace GMTB
         {
             mSpeed = 5f;
             Input.getInstance.SubscribeMove(OnNewInput);
+            CollisionManager.getInstance.PlayerSubscribe(Collision, this);
             // Set movement update interval, sets the walk speed
             interval = 80f;
         }

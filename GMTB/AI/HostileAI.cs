@@ -30,6 +30,7 @@ namespace GMTB.AI
             mStartPos = mPosition;
             mUName = "AI";
             mCollidable = true;
+            CollisionManager.getInstance.Subscribe(Collision, this);
         }
         #endregion
 
@@ -118,10 +119,13 @@ namespace GMTB.AI
                 
 
         }
-        public override void Collision()
+        public override void Collision(object source, CollisionEvent args)
         {
-            RoomManager.getInstance.Room = "Backgrounds/GameOver";
-            Global.GameOver = true;
+            if (args.Entity == this)
+            {
+                RoomManager.getInstance.Room = "Backgrounds/GameOver";
+                Global.GameOver = true;
+            }
         }
         public void checkPlayerProx(GameTime gameTime)
         {
@@ -143,6 +147,12 @@ namespace GMTB.AI
                 mVelocity.X = 0;
                 mVelocity.Y = mSpeed;
             }
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+            CollisionManager.getInstance.unSubscribe(Collision, this);
         }
         #endregion
     }

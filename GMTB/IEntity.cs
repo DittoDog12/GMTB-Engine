@@ -26,6 +26,7 @@ namespace GMTB
         void setPos(int x, int y);
         void Update(GameTime gameTime);
         void Draw(SpriteBatch spriteBatch);
+        void Destroy();
         #endregion
     }
 }

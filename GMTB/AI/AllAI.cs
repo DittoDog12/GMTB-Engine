@@ -55,7 +55,7 @@ namespace GMTB.AI
             return rtnVal;
         }
 
-        public override void Collision()
+        public override void Collision(object source, CollisionEvent args)
         {
 
         }

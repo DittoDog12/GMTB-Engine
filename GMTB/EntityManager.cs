@@ -7,7 +7,7 @@ using GMTB.AI;
 
 
 namespace GMTB
-{   
+{
     /// <summary>
     /// Main Entity creation manager, Sets all global variables for each entity on creation, eg the UID
     /// </summary>
@@ -35,7 +35,7 @@ namespace GMTB
             // Initialise Lists and Content Manager Reference
             mEntities = new List<IEntity>();
             // Set UID counter to 0 for first object
-            UID = 0;
+            UID = 1;
         }
         public static EntityManager getInstance
         {
@@ -74,15 +74,18 @@ namespace GMTB
 
         public void removeEntity(int uid)
         {
-            for (int i = 0; i <mEntities.Count; i++)
+            for (int i = 0; i < mEntities.Count; i++)
             {
-                if(mEntities[i].UID == uid)
-                {
-                    mEntities.RemoveAt(i);
-                    mEntities[i] = null;
-                }
+                if (mEntities[i] != null)
+                    if (mEntities[i].UID == uid)
+                    {
+                        mEntities[i].Destroy();
+                        mEntities[i] = null;
+                        mEntities.RemoveAt(i);   
+                    }
             }
-        } 
+            GC.Collect();
+        }
         #endregion
     }
 }

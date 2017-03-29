@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace GMTB
 {
@@ -16,7 +18,10 @@ namespace GMTB
         private static SceneManager Instance = null;
 
         private List<IEntity> mEntities;
+        private List<IEntity> mSceneGraph;
         Microsoft.Xna.Framework.Content.ContentManager Content;
+
+        private bool runonce = true;
         #endregion
 
         #region Accessors
@@ -24,13 +29,19 @@ namespace GMTB
         {
             get { return mEntities; }
         }
+
+        public List<IEntity> SceneGraph
+        {
+            get { return mSceneGraph; }
+        }
         #endregion
 
         #region Constructor
         private SceneManager()
         {
             // Initialise Entity List
-            mEntities = new List<IEntity>();
+            mEntities = EntityManager.getInstance.Entities;
+            mSceneGraph = new List<IEntity>();
             Content = Global.Content;
         }
         public static SceneManager getInstance
@@ -48,7 +59,9 @@ namespace GMTB
         public void newEntity(IEntity createdEntity, int x, int y)
         {
             // Add the new entity to the SceneManagers entity list
-            mEntities.Add(createdEntity);
+            //mEntities.Add(createdEntity);
+
+            mSceneGraph.Add(createdEntity);
             // Apply the entities texture
             mEntities.ForEach(IEntity => IEntity.aTexture = Content.Load<Texture2D>(IEntity.aTexturename));
             // Set the entities initial position
@@ -57,7 +70,23 @@ namespace GMTB
         }
         public void Update(GameTime gameTime)
         {
-             mEntities.ForEach(IEntity => IEntity.Update(gameTime));
+            //if(runonce)
+            //{
+            //    var xmlSettings = new XmlWriterSettings
+            //    {
+            //        Indent = true,
+            //        IndentChars = "\t",
+            //        NewLineChars = "\n"
+            //    };
+
+            //    var destinationFileName = "L1";
+            //    using (var outputfile = XmlWriter.Create(destinationFileName, xmlSettings))
+            //    {
+            //        IntermediateSerializer
+            //    }
+            //        runonce = false;
+            //}
+            mEntities.ForEach(IEntity => IEntity.Update(gameTime));
         }
         public void Draw(SpriteBatch spriteBatch)
         {

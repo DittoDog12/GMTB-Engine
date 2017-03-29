@@ -6,10 +6,10 @@ using Microsoft.Xna.Framework;
 
 namespace GMTB
 {
-    interface Collidable
+    public interface Collidable
     {
         Rectangle HitBox { get; }
         string UName { get; }
-        void Collision();
+        void Collision(object source, CollisionEvent args);
     }
 }
