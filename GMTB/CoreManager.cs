@@ -38,7 +38,8 @@ namespace GMTB
                 Input.getInstance.Update();
                 Script.getInstance.Update(gameTime);
                 AiManager.getInstance.Update();
-                if(!Global.PauseInput)
+                ProximityManager.getInstance.Update();
+                if (!Global.PauseInput)
                     CollisionManager.getInstance.Update();
             }
             

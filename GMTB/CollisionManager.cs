@@ -19,6 +19,7 @@ namespace GMTB
         // Create a Reference for all onscreen entities
         private IPlayer mPlayer;
         private List<Collidable> AllCollidables;
+
         #endregion
 
         #region Accessors
@@ -87,6 +88,7 @@ namespace GMTB
             Colliders -= handler;
             AllCollidables.Remove(entity);
         }
+
         public virtual void onCollide(Collidable entity)
         {
             CollisionEvent args = new CollisionEvent(entity);
@@ -97,6 +99,7 @@ namespace GMTB
             CollisionEvent args = new CollisionEvent();
             PlayerE(this, args);
         }
+
 
         public void Update()
         {

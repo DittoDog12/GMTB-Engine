@@ -47,7 +47,10 @@
     <Compile Include="AI\LowLevelAI.cs" />
     <Compile Include="AI\NeutralAI.cs" />
     <Compile Include="Collidable.cs" />
+    <Compile Include="ProximityEvent.cs" />
     <Compile Include="CollisionEvent.cs" />
+    <Compile Include="hasProximity.cs" />
+    <Compile Include="ProximityManager.cs" />
     <Compile Include="CollisionManager.cs" />
     <Compile Include="CoreManager.cs" />
     <Compile Include="DialogueBox.cs" />
