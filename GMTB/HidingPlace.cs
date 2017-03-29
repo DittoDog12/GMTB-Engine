@@ -12,11 +12,11 @@ namespace GMTB
         private bool Hide;
 
         // Second Hitbox for proximity detection
-        // Make the box twice as big as the texture and off set it by minus half the texture size
+        // Make the box twice as big as the texture and off set it by minus half the texture size only on X axis
         public virtual Rectangle ProximityBox
         {
-            get { return new Rectangle((int)mPosition.X - mTexture.Width / 2, (int)mPosition.Y - mTexture.Height / 2, 
-                mTexture.Width *2, mTexture.Height *2); }
+            get { return new Rectangle((int)mPosition.X - mTexture.Width / 2, (int)mPosition.Y, 
+                mTexture.Width *2, mTexture.Height); }
         }
         #endregion
 
