@@ -23,9 +23,10 @@ namespace GMTB.Content.Levels
             createdEntity = EntityManager.getInstance.newEntity<Door>();
             SceneManager.getInstance.newEntity(createdEntity, 260, 285);
             createdEntity.setVars("L1", new Vector2(160, 240));
+            Removables.Add(createdEntity);
         }
 
-        public override List<int> Exit()
+        public override List<IEntity> Exit()
         {
             base.Exit();
             return Removables;

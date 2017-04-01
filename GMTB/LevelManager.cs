@@ -11,13 +11,16 @@ namespace GMTB
         #region Data Members
         private static LevelManager Instance = null;
         private Level currLevel;
-        private List<int> Removables;
+        private List<IEntity> Removables;
+        private List<Level> AllLoadedLevels;
+        private bool firstRun = true;
         #endregion
 
         #region Constructor
         private LevelManager()
         {
-            Removables = new List<int>();
+            Removables = new List<IEntity>();
+            AllLoadedLevels = new List<Level>();
         }
         public static LevelManager getInstance
         {
@@ -39,14 +42,38 @@ namespace GMTB
             if (currLevel != null)
             {
                 Removables = currLevel.Exit();
-                foreach (int i in Removables)
-                    EntityManager.getInstance.removeEntity(SceneManager.getInstance.SceneGraph[i].UID);
+                foreach (IEntity e in Removables)
+                    EntityManager.getInstance.removeEntity(e.UID);
             }
-            string openLevel = "GMTB.Content.Levels." + LevelID;
-            currLevel = System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(openLevel) as Level;
+            if (firstRun == true)
+            {
+                string openLevel = "GMTB.Content.Levels." + LevelID;
+                currLevel = System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(openLevel) as Level;
+                AllLoadedLevels.Add(currLevel);
+                firstRun = false;
+            }
+            else
+            {
+                bool newLevel = true;
+                for (int i = 0; i < AllLoadedLevels.Count; i++)
+                {
+                    if (AllLoadedLevels[i].LvlID == LevelID)
+                    {
+                        currLevel = AllLoadedLevels[i];
+                        newLevel = false;
+                    }
+                }
+
+                if (newLevel == true)
+                {
+                    string openLevel = "GMTB.Content.Levels." + LevelID;
+                    currLevel = System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(openLevel) as Level;
+                    AllLoadedLevels.Add(currLevel);
+                }
+            }
             currLevel.Initialise();
             LoadBackground(currLevel.Background);
-           
+
         }
 
         private void LoadBackground(string LevelBG)

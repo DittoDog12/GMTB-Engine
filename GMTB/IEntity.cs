@@ -17,6 +17,7 @@ namespace GMTB
         Vector2 Position { get; }
         bool Collidable { get; }
         bool Visible { get; }
+        Vector2 DefaultPos { get; set; }
         #endregion
 
         #region Methods
@@ -27,6 +28,7 @@ namespace GMTB
         void Update(GameTime gameTime);
         void Draw(SpriteBatch spriteBatch);
         void Destroy();
+        void sub();
         #endregion
     }
 }

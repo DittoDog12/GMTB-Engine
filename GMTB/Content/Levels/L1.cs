@@ -26,42 +26,60 @@ namespace GMTB.Content.Levels
         public L1() : base()
         {
             bg = "Backgrounds\\SpawnRoomBackground";
+            
         }
         #endregion
 
         #region Methods
         public override void Initialise()
         {
-            // Old Man
-            createdEntity = EntityManager.getInstance.newEntity<FriendlyAI>();
-            SceneManager.getInstance.newEntity(createdEntity, ScreenWidth / 2, ScreenHeight / 2);
-            Removables.Add(createdEntity.UID);
-  
-            //Martha
-            createdEntity = EntityManager.getInstance.newEntity<HighLevelAI>();   
-            SceneManager.getInstance.newEntity(createdEntity, 640, ScreenHeight / 2);
-            Removables.Add(createdEntity.UID);
-            MarthaID = createdEntity.UID;
+            if (firstRun == true)
+            {
+                // Old Man
+                createdEntity = EntityManager.getInstance.newEntity<FriendlyAI>();
+                SceneManager.getInstance.newEntity(createdEntity, ScreenWidth / 2, ScreenHeight / 2);
+                Removables.Add(createdEntity);
 
-            // Hiding Place
-            createdEntity = EntityManager.getInstance.newEntity<HidingPlace>();
-            SceneManager.getInstance.newEntity(createdEntity, 160, 150);
-            Removables.Add(createdEntity.UID);
+                //Martha
+                createdEntity = EntityManager.getInstance.newEntity<HighLevelAI>();
+                SceneManager.getInstance.newEntity(createdEntity, 640, ScreenHeight / 2);
+                Removables.Add(createdEntity);
+                MarthaID = createdEntity.UID;
 
-            // Door
-            createdEntity = EntityManager.getInstance.newEntity<Door>();
-            SceneManager.getInstance.newEntity(createdEntity, 450, 285);
-            createdEntity.setVars("L2", new Vector2(240, 350));
+                // Hiding Place
+                createdEntity = EntityManager.getInstance.newEntity<HidingPlace>();
+                SceneManager.getInstance.newEntity(createdEntity, 160, 150);
+                Removables.Add(createdEntity);
+
+                // Door
+                createdEntity = EntityManager.getInstance.newEntity<Door>();
+                SceneManager.getInstance.newEntity(createdEntity, 450, 285);
+                createdEntity.setVars("L2", new Vector2(240, 350));
+                Removables.Add(createdEntity);
+
+                firstRun = false;
+            }else
+            {
+                foreach (IEntity e in EntityManager.getInstance.Entities)
+                    foreach (IEntity r in Removables)
+                    if (e.UID == r.UID)
+                        {
+                            SceneManager.getInstance.newEntity(r, (int)r.DefaultPos.X, (int)r.DefaultPos.Y);
+                            r.sub();
+                        }
+                            
+            }
+            
         }
 
-        public override List<int> Exit()
+        public override List<IEntity> Exit()
         {
             base.Exit();
             if (MarthaStatus == "Follow")
             {
-                foreach (int i in Removables)
-                    if (i == MarthaID)
-                        Removables.Remove(i);
+                foreach (IEntity e in Removables)
+                    if (e.UID == MarthaID)
+                        Removables.Remove(e);
             }
             return Removables;
         }

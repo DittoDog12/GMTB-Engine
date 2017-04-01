@@ -80,8 +80,8 @@ namespace GMTB
                     if (mEntities[i].UID == uid)
                     {
                         mEntities[i].Destroy();
-                        mEntities[i] = null;
-                        mEntities.RemoveAt(i);   
+                        //mEntities[i] = null;
+                        //mEntities.RemoveAt(i);   
                     }
             }
             GC.Collect();

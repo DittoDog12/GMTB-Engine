@@ -56,6 +56,11 @@ namespace GMTB
             ProximityManager.getInstance.unSubscribe(inProximity, this);
 
         }
+        public override void sub()
+        {
+            CollisionManager.getInstance.Subscribe(Collision, this);
+            ProximityManager.getInstance.Subscribe(inProximity, this);
+        }
         #endregion
     }
 }

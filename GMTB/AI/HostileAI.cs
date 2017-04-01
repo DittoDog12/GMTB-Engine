@@ -154,6 +154,10 @@ namespace GMTB.AI
             base.Destroy();
             CollisionManager.getInstance.unSubscribe(Collision, this);
         }
+        public override void sub()
+        {
+            CollisionManager.getInstance.Subscribe(Collision, this);
+        }
         #endregion
     }
 }

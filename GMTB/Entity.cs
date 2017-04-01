@@ -17,6 +17,7 @@ namespace GMTB
         protected int mUID;
         protected string mUName;
         protected bool mVisible;
+        protected Vector2 mDefaultPos;
         //--Movement
         protected float mSpeed;
         protected Vector2 mPosition;
@@ -68,6 +69,12 @@ namespace GMTB
             get { return mVisible; }
             set { mVisible = value; }
         }
+
+        public Vector2 DefaultPos
+        {
+            get { return mDefaultPos; }
+            set { mDefaultPos = value; }
+        }
         #endregion
 
         #region Constructor
@@ -110,6 +117,11 @@ namespace GMTB
         {
             mPosition.X = 1000;
             mPosition.Y = 1000;
+        }
+
+        public virtual void sub()
+        {
+
         }
 
         

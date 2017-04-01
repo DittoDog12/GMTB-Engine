@@ -118,6 +118,7 @@ namespace GMTB
             mEntities.ForEach(IEntity => IEntity.aTexture = Content.Load<Texture2D>(IEntity.aTexturename));
             // Set the entities initial position
             createdEntity.setPos(x, y);
+            createdEntity.DefaultPos = new Vector2(x, y);
 
         }
         public void Update(GameTime gameTime)
