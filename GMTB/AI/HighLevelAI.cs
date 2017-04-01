@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace GMTB.AI
 {
-    class HighLevelAI : HostileAI
+    public class HighLevelAI : HostileAI
     {
         #region Constructor
         public HighLevelAI()

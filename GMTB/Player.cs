@@ -12,7 +12,7 @@ namespace GMTB
     /// <summary>
     /// Main Player class, contains all input interpretation for movement
     /// </summary>
-    class Player : AnimatingEntity, IPlayer
+    public class Player : AnimatingEntity, IPlayer
     {
         #region Data Members
         private PlayerIndex mPlayerNum;

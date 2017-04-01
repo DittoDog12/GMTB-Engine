@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Graphics;
 using System.Xml;
+using System.IO;
 using System.Xml.Serialization;
+using GMTB.AI;
 
 namespace GMTB
 {
@@ -56,6 +59,55 @@ namespace GMTB
         #endregion
 
         #region Methods
+        public void Serialize()
+        {
+            if (runonce)
+            {
+                LevelData data = new LevelData();
+                data.doorPos = new List<Vector2>();
+                data.doorTarget = new List<string>();
+                data.playerTarget = new List<Vector2>();
+                data.entities = new List<Entity>();
+                data.entityPos = new List<Vector2>();
+                data.bg = RoomManager.getInstance.Room;
+                foreach (IEntity e in mEntities)
+                {
+                    if (e.UName != "Player")
+                    {
+                        var entity = e as Door;
+                        if (entity != null)
+                        {
+                            data.doorPos.Add(entity.Position);
+                            data.doorTarget.Add(entity.ToRoom);
+                            data.playerTarget.Add(entity.PlayerStart);
+                        }
+                        else
+                        {
+                            var currentEntity = e as Entity;
+                            data.entities.Add(currentEntity);
+                            data.entityPos.Add(currentEntity.Position);
+                        }
+                    }
+
+                }
+
+                var xmlSettings = new XmlWriterSettings
+                {
+                    Indent = true,
+                    IndentChars = "\t",
+                    NewLineChars = "\n"
+                };
+
+                string filename = Environment.CurrentDirectory + "\\Content\\Levels\\" + "L1.lvl";
+                FileStream stream = File.Open(filename, FileMode.OpenOrCreate);
+
+                XmlSerializer serializer = new XmlSerializer(typeof(LevelData));
+                serializer.Serialize(stream, data);
+                stream.Close();
+                runonce = false;
+            }
+        }
+
         public void newEntity(IEntity createdEntity, int x, int y)
         {
             // Add the new entity to the SceneManagers entity list
@@ -70,22 +122,6 @@ namespace GMTB
         }
         public void Update(GameTime gameTime)
         {
-            //if(runonce)
-            //{
-            //    var xmlSettings = new XmlWriterSettings
-            //    {
-            //        Indent = true,
-            //        IndentChars = "\t",
-            //        NewLineChars = "\n"
-            //    };
-
-            //    var destinationFileName = "L1";
-            //    using (var outputfile = XmlWriter.Create(destinationFileName, xmlSettings))
-            //    {
-            //        IntermediateSerializer
-            //    }
-            //        runonce = false;
-            //}
             mEntities.ForEach(IEntity => IEntity.Update(gameTime));
         }
         public void Draw(SpriteBatch spriteBatch)

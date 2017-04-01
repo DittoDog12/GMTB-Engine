@@ -5,7 +5,6 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using GMTB.AI;
 
 namespace GMTB
 {
@@ -60,16 +59,9 @@ namespace GMTB
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            LevelManager.getInstance.NewLevel("L1");     
-
             createdEntity = EntityManager.getInstance.newEntity<Player>(PlayerIndex.One);
             SceneManager.getInstance.newEntity(createdEntity, 160, ScreenHeight / 2);
-            createdEntity = EntityManager.getInstance.newEntity<FriendlyAI>();
-            SceneManager.getInstance.newEntity(createdEntity, ScreenWidth / 2, ScreenHeight / 2);
-            createdEntity = EntityManager.getInstance.newEntity<HighLevelAI>();
-            SceneManager.getInstance.newEntity(createdEntity, 640, ScreenHeight / 2);
-            createdEntity = EntityManager.getInstance.newEntity<HidingPlace>();
-            SceneManager.getInstance.newEntity(createdEntity, 160, 150);
+            LevelManager.getInstance.NewLevel("L1");
         }
 
         /// <summary>
@@ -92,8 +84,10 @@ namespace GMTB
                 Exit();
 
             // TODO: Add your update logic here
+
             CoreManager.getInstance.Update(gameTime);
             base.Update(gameTime);
+           // SceneManager.getInstance.Serialize();
         }
 
         /// <summary>

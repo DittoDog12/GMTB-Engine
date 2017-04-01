@@ -10,7 +10,7 @@ namespace GMTB.AI
     /// Friendly AI controller, will trigger a conversation on first collision
     /// and a single line of dialogue on subsequent collisions
     /// </summary>
-    class FriendlyAI : Entity, Collidable
+    public class FriendlyAI : Entity, Collidable
     {
         #region Data Members
         private string[] lines;

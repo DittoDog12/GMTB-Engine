@@ -9,8 +9,8 @@ namespace GMTB
     class Door : Entity, Collidable
     {
         #region Data Members
-        private string ToRoom;
-        private Vector2 PlayerStart;
+        public string ToRoom;
+        public Vector2 PlayerStart;
         #endregion
 
         #region Constructor

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace GMTB.AI
 {
-    class HostileAI : AllAI, Collidable
+    public class HostileAI : AllAI, Collidable
     {
         #region Data Members
         private string mState;
