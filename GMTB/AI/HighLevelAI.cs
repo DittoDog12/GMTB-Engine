@@ -11,18 +11,21 @@ namespace GMTB.AI
         #region Constructor
         public HighLevelAI()
         {
+            mProximityBoxSize = new Vector2(250, 250);
             ChaseTime = 2000f;
             SearchTime = 2000f;
             mCollidable = true;
-            CollisionManager.getInstance.Subscribe(Collision, this);
+            mSpeed = 3f;
+            interval = 100f;
         }
         #endregion
 
         #region Methods
-        public override void setVars(int uid)
+        public override void setVars(int uid, string path)
         {
             base.setVars(uid);
-            mTexturename = "Enemy/Matron/MFW";
+            mTexturePath = path;
+            mTexturename = mTexturePath + "Front";
         }
 
         public override void Update(GameTime gameTime)
@@ -34,19 +37,19 @@ namespace GMTB.AI
                 switch (mDirection)
                 {
                     case "Up":
-                        mTexturename = "Enemy/Matron/MBW";
+                        mTexturename = mTexturePath + "Back";
                         CurrentFrame++;
                         break;
                     case "Left":
-                        mTexturename = "Enemy/Matron/MLW";
+                        mTexturename = mTexturePath + "Left";
                         CurrentFrame++;
                         break;
                     case "Down":
-                        mTexturename = "Enemy/Matron/MFW";
+                        mTexturename = mTexturePath + "Front";
                         CurrentFrame++;
                         break;
                     case "Right":
-                        mTexturename = "Enemy/Matron/MRW";
+                        mTexturename = mTexturePath + "Right";
                         CurrentFrame++;
                         break;
                     case "stop":

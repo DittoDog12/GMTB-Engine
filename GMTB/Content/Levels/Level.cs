@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using GMTB.AI;
 
 namespace GMTB.Content.Levels
 {
@@ -36,10 +37,7 @@ namespace GMTB.Content.Levels
         }
         #endregion
         #region Methods
-        public virtual void Initialise()
-        {
-
-        }
+        public abstract void Initialise();
         public virtual List<IEntity> Exit()
         {
             return Removables;

@@ -62,6 +62,19 @@ namespace GMTB
             // Return the new entity to the kernel
             return createdEntity;
         }
+        public IEntity newEntity<T>(string path) where T : IEntity, new()
+        {
+            // Create an entity of the type specifed by the Kernel
+            IEntity createdEntity = new T();
+            // Store in the list
+            mEntities.Add(createdEntity);
+            // Set the entities UID
+            createdEntity.setVars(UID, path);
+            // Increment the UID counter
+            UID++;
+            // Return the new entity to the kernel
+            return createdEntity;
+        }
         public IEntity newEntity<T>(PlayerIndex pPlayerNum) where T : IEntity, new()
         {
             // Same as above but allow for the Player ID for controls

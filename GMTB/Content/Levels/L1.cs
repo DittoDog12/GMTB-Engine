@@ -34,12 +34,12 @@ namespace GMTB.Content.Levels
             if (firstRun == true)
             {
                 // Old Man
-                createdEntity = EntityManager.getInstance.newEntity<FriendlyAI>();
+                createdEntity = EntityManager.getInstance.newEntity<FriendlyAI>("NPC/OldMan/");
                 SceneManager.getInstance.newEntity(createdEntity, 290, 150);
                 Removables.Add(createdEntity);
 
                 //Martha
-                createdEntity = EntityManager.getInstance.newEntity<HighLevelAI>();
+                createdEntity = EntityManager.getInstance.newEntity<HighLevelAI>("Enemy/Martha/");
                 SceneManager.getInstance.newEntity(createdEntity, 640, ScreenHeight / 2);
                 Removables.Add(createdEntity);
                 MarthaID = createdEntity.UID;

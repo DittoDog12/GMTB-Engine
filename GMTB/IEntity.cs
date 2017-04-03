@@ -22,6 +22,7 @@ namespace GMTB
 
         #region Methods
         void setVars(int uid);
+        void setVars(int uid, string path);
         void setVars(int uid, PlayerIndex pPlayer);
         void setVars(string tRoom, Vector2 playerStart);
         void setPos(int x, int y);

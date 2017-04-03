@@ -17,6 +17,7 @@ namespace GMTB.AI
         private string[] lines;
         private bool SecondEncounter;
         private string RepeatedText;
+        private string mTexturePath;
         #endregion
 
         #region Constructor
@@ -27,14 +28,16 @@ namespace GMTB.AI
             mCollidable = true;
             lines = File.ReadAllLines(Environment.CurrentDirectory + "/Content/Dialogue/OldManAndSerena.txt");
             CollisionManager.getInstance.Subscribe(Collision, this);
+            
         }
         #endregion
 
         #region Methods
-        public override void setVars(int uid)
+        public override void setVars(int uid, string path)
         {
             UID = uid;
-            mTexturename = "NPC/TaskGiverFront";
+            mTexturePath = path;
+            mTexturename = mTexturePath + "Front"; 
         }
 
         public override void Collision(object source, CollisionEvent args)
@@ -54,7 +57,7 @@ namespace GMTB.AI
         {
             base.Update(gameTime);
             if (SecondEncounter == true && !Global.PauseInput)
-                mTexturename = "NPC/TaskGiverBack";
+                mTexturename = mTexturePath + "Back";
         }
         public override void Destroy()
         {

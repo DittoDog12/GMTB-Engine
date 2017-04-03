@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace GMTB.AI
 {
-    public class HostileAI : AllAI, Collidable
+    public class HostileAI : AllAI, Collidable, hasProximity
     {
         #region Data Members
         protected Vector2 mStartPos;
@@ -15,17 +15,30 @@ namespace GMTB.AI
         protected float SearchTime;
         protected float ActivityTimer;
         protected float SearchTimer;
+        private bool beginFollow;
+
+        // Second Hitbox for proximity detection
+        // Box Size set by Specific AI
+        protected Vector2 mProximityBoxSize;
+        public virtual Rectangle ProximityBox
+        {
+            get
+            {
+                return new Rectangle((int)mPosition.X - (int)mProximityBoxSize.X / 2, (int)mPosition.Y - (int)mProximityBoxSize.Y / 2,
+              (int)mProximityBoxSize.X, (int)mProximityBoxSize.Y);
+            }
+        }
         #endregion
 
         #region Constructor
         public HostileAI()
         {
             mState = "Idle";
-            mSpeed = 3f;
             mVelocity.Y = mSpeed;
-            interval = 100f;
+            
             mStartPos = mPosition;
             mUName = "AI";
+            sub();
         }
         #endregion
 
@@ -37,33 +50,33 @@ namespace GMTB.AI
             mPosition += mVelocity;
 
             if (mVelocity.X > 0)
-                    mDirection = "Right";
-                else if (mVelocity.X < 0)
-                    mDirection = "Left";
+                mDirection = "Right";
+            else if (mVelocity.X < 0)
+                mDirection = "Left";
 
             if (mVelocity.Y > 0)
-                    mDirection = "Down";
-                else if (mVelocity.Y < 0)
-                    mDirection = "Up";
+                mDirection = "Down";
+            else if (mVelocity.Y < 0)
+                mDirection = "Up";
 
-                // State controller
-                switch (mState)
-                {
-                    case "Idle":
-                        Idle();
-                        break;
-                    case "Follow":
-                        FollowPlayer(gameTime);
-                        break;
-                    case "Search":
-                        Search(gameTime);
-                        break;
-                    case "Reset":
+            // State controller
+            switch (mState)
+            {
+                case "Idle":
+                    Idle();
+                    break;
+                case "Follow":
+                    FollowPlayer(gameTime);
+                    break;
+                case "Search":
+                    Search(gameTime);
+                    break;
+                case "Reset":
                     Reset();
                     break;
-                    default:
-                        break;
-                }
+                default:
+                    break;
+            }
 
         }
         public override void Idle()
@@ -101,16 +114,16 @@ namespace GMTB.AI
                 mDirection = "Up";
             if (SearchTimer >= (SearchTime / 2 - 10) && SearchTimer <= (SearchTime / 2 + 10))
                 mDirection = "Right";
-            if (SearchTimer >= (SearchTime - ((SearchTime / 4) - 10)) && 
+            if (SearchTimer >= (SearchTime - ((SearchTime / 4) - 10)) &&
                 SearchTimer <= (SearchTime - ((SearchTime / 4) + 10)))
                 mDirection = "Down";
 
             if (ActivityTimer >= SearchTime)
             {
-                
+
                 mState = "Reset";
             }
-                
+
 
         }
         public override void Collision(object source, CollisionEvent args)
@@ -121,16 +134,33 @@ namespace GMTB.AI
                 Global.GameOver = true;
             }
         }
-        public void checkPlayerProx(GameTime gameTime)
+        public void inProximity(object source, ProximityEvent args)
         {
-            if(mState == "Idle")
+            if (args.Entity == this)
             {
-                if (mPlayerPos.X >= Kernel.ScreenWidth / 2)
+                if (mState == "Idle")
                 {
-                    mState = "Follow";
-                    ActivityTimer = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                    beginFollow = true;
                 }
             }
+
+        }
+        public void checkPlayerProx(GameTime gameTime)
+        {
+            if (beginFollow == true)
+            {
+                mState = "Follow";
+                ActivityTimer = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                beginFollow = false;
+            }
+            //if (mState == "Idle")
+            //{
+            //    if (mPlayerPos.X >= Kernel.ScreenWidth / 2)
+            //    {
+            //        mState = "Follow";
+            //        ActivityTimer = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            //    }
+            //}
         }
         public void Reset()
         {
@@ -149,10 +179,12 @@ namespace GMTB.AI
         {
             base.Destroy();
             CollisionManager.getInstance.unSubscribe(Collision, this);
+            ProximityManager.getInstance.unSubscribe(inProximity, this);
         }
         public override void sub()
         {
             CollisionManager.getInstance.Subscribe(Collision, this);
+            ProximityManager.getInstance.Subscribe(inProximity, this);
         }
         #endregion
     }

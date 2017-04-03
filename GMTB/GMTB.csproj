@@ -48,6 +48,7 @@
     <Compile Include="AI\HighLevelAI.cs" />
     <Compile Include="AI\HostileAI.cs" />
     <Compile Include="AI\IAI.cs" />
+    <Compile Include="AI\JumpScare.cs" />
     <Compile Include="AI\LowLevelAI.cs" />
     <Compile Include="AI\NeutralAI.cs" />
     <Compile Include="Collidable.cs" />
@@ -123,28 +124,28 @@
     <Content Include="Content\Dialogue\OldManAndSerena.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Enemy\Matron\MBW.png">
+    <Content Include="Content\Enemy\Martha\Back.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Enemy\Matron\MFW.png">
+    <Content Include="Content\Enemy\Martha\Front.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Enemy\Matron\MLW.png">
+    <Content Include="Content\Enemy\Martha\Left.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Enemy\Matron\MRW.png">
+    <Content Include="Content\Enemy\Martha\Right.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Enemy\NurseA\NAMB.png">
+    <Content Include="Content\Enemy\NurseA\Back.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Enemy\NurseA\NAMF.png">
+    <Content Include="Content\Enemy\NurseA\Front.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Enemy\NurseA\NAML.png">
+    <Content Include="Content\Enemy\NurseA\Left.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Enemy\NurseA\NAMR.png">
+    <Content Include="Content\Enemy\NurseA\Right.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Enemy\NurseB\NBMF.png">
@@ -165,19 +166,19 @@
     <Content Include="Content\Levels\L2.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\NPC\PatientZeldaForward.png">
+    <Content Include="Content\NPC\PatientZelda\Front.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\NPC\PatientZeldaLeft.png">
+    <Content Include="Content\NPC\PatientZelda\Left.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\NPC\PatientZeldaRight.png">
+    <Content Include="Content\NPC\PatientZelda\Right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\NPC\TaskGiverBack.png">
+    <Content Include="Content\NPC\OldMan\Back.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\NPC\TaskGiverFront.png">
+    <Content Include="Content\NPC\OldMan\Front.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Player Images\JBW.png">
@@ -206,6 +207,7 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

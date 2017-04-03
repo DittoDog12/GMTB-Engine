@@ -13,6 +13,7 @@ namespace GMTB.AI
         protected Vector2 mPlayerPos;
         protected bool mPlayerVisible;
         protected string mState;
+        protected string mTexturePath;
         #endregion
 
         #region Accessors
@@ -39,6 +40,7 @@ namespace GMTB.AI
         {
             mReact = false;
             mPlayerVisible = true;
+            
         }
         #endregion
 
