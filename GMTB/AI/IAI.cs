@@ -10,6 +10,7 @@ namespace GMTB.AI
     {
         Vector2 PlayerPos { set; }
         bool PlayerVisible { set; }
+        string State { get; }
         void Update(GameTime gameTime);
 
         bool CollisionChecker();

@@ -13,20 +13,18 @@ namespace GMTB.Content.Levels
         #region Data Members
         private string MarthaStatus;
         private int MarthaID;
-        #endregion
-
-        #region Accessor
-        public string MarthaStat
-        {
-            set { MarthaStatus = value; }
-        }
+        private int[] BedPositions;
         #endregion
 
         #region Constructor
         public L1() : base()
         {
             bg = "Backgrounds\\SpawnRoomBackground";
-            
+            BedPositions = new int[3];
+            BedPositions[0] = 160;
+            BedPositions[1] = 255;
+            BedPositions[2] = ScreenWidth / 2;
+
         }
         #endregion
 
@@ -37,7 +35,7 @@ namespace GMTB.Content.Levels
             {
                 // Old Man
                 createdEntity = EntityManager.getInstance.newEntity<FriendlyAI>();
-                SceneManager.getInstance.newEntity(createdEntity, ScreenWidth / 2, ScreenHeight / 2);
+                SceneManager.getInstance.newEntity(createdEntity, 290, 150);
                 Removables.Add(createdEntity);
 
                 //Martha
@@ -47,9 +45,13 @@ namespace GMTB.Content.Levels
                 MarthaID = createdEntity.UID;
 
                 // Hiding Place
-                createdEntity = EntityManager.getInstance.newEntity<HidingPlace>();
-                SceneManager.getInstance.newEntity(createdEntity, 160, 150);
-                Removables.Add(createdEntity);
+                for (int i = 0; i < BedPositions.Length; i++)
+                {
+                    createdEntity = EntityManager.getInstance.newEntity<HidingPlace>();
+                    SceneManager.getInstance.newEntity(createdEntity, BedPositions[i], 150);
+                    Removables.Add(createdEntity);
+                }
+
 
                 // Door
                 createdEntity = EntityManager.getInstance.newEntity<Door>();
@@ -58,28 +60,35 @@ namespace GMTB.Content.Levels
                 Removables.Add(createdEntity);
 
                 firstRun = false;
-            }else
+            }
+            else
             {
                 foreach (IEntity e in EntityManager.getInstance.Entities)
                     foreach (IEntity r in Removables)
-                    if (e.UID == r.UID)
+                        if (e.UID == r.UID)
                         {
                             SceneManager.getInstance.newEntity(r, (int)r.DefaultPos.X, (int)r.DefaultPos.Y);
                             r.sub();
                         }
-                            
+
             }
-            
+
         }
 
         public override List<IEntity> Exit()
         {
             base.Exit();
+            foreach (IEntity m in Removables)
+                if (m.UID == MarthaID)
+                {
+                    IAI Martha = m as IAI;
+                    MarthaStatus = Martha.State;
+                }
             if (MarthaStatus == "Follow")
             {
-                foreach (IEntity e in Removables)
-                    if (e.UID == MarthaID)
-                        Removables.Remove(e);
+                for (int i = 0; i < Removables.Count; i++)
+                    if (Removables[i].UID == MarthaID)
+                        Removables.Remove(Removables[i]);
             }
             return Removables;
         }

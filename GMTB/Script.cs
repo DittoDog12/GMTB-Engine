@@ -60,7 +60,7 @@ namespace GMTB
                 timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 DialogueBox.getInstance.Display(lines[mLine]); // Display current line of loaded list
                 // Load next line at interval
-                if (timer > interval || mNextLine)
+                if (timer > interval || mNextLine == true)
                 {
                     mNextLine = false;
                     mLine++; // increment current line
@@ -80,7 +80,7 @@ namespace GMTB
                 timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 Input.getInstance.SubscribeSpace(OnSpace);
                 DialogueBox.getInstance.Display(Line);
-                if (timer > interval || mNextLine)
+                if (timer > interval || mNextLine == true)
                 {
                     mNextLine = false;
                     DialogueBox.getInstance.Display(" ");

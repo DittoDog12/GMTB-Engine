@@ -11,7 +11,10 @@ namespace GMTB.AI
         #region Constructor
         public HighLevelAI()
         {
-
+            ChaseTime = 2000f;
+            SearchTime = 2000f;
+            mCollidable = true;
+            CollisionManager.getInstance.Subscribe(Collision, this);
         }
         #endregion
 

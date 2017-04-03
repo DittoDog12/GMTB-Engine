@@ -12,7 +12,7 @@ namespace GMTB.AI
         private bool mReact;
         protected Vector2 mPlayerPos;
         protected bool mPlayerVisible;
-
+        protected string mState;
         #endregion
 
         #region Accessors
@@ -27,6 +27,10 @@ namespace GMTB.AI
         public bool PlayerVisible
         {
             set { mPlayerVisible = value; }
+        }
+        public string State
+        {
+            get { return mState; }
         }
         #endregion
 

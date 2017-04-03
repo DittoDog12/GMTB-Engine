@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using Microsoft.Xna.Framework;
 
 namespace GMTB.AI
 {
@@ -48,6 +49,12 @@ namespace GMTB.AI
                 else
                     Script.getInstance.SingleDialogue(RepeatedText);
             }
+        }
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            if (SecondEncounter == true && !Global.PauseInput)
+                mTexturename = "NPC/TaskGiverBack";
         }
         public override void Destroy()
         {

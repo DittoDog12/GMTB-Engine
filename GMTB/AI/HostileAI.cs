@@ -9,13 +9,12 @@ namespace GMTB.AI
     public class HostileAI : AllAI, Collidable
     {
         #region Data Members
-        private string mState;
-        private Vector2 mStartPos;
-        private Vector2 mDistanceToDest;
-        private float ChaseTime;
-        private float SearchTime;
-        private float ActivityTimer;
-        private float SearchTimer;
+        protected Vector2 mStartPos;
+        protected Vector2 mDistanceToDest;
+        protected float ChaseTime;
+        protected float SearchTime;
+        protected float ActivityTimer;
+        protected float SearchTimer;
         #endregion
 
         #region Constructor
@@ -25,12 +24,8 @@ namespace GMTB.AI
             mSpeed = 3f;
             mVelocity.Y = mSpeed;
             interval = 100f;
-            ChaseTime = 2000f;
-            SearchTime = 2000f;
             mStartPos = mPosition;
             mUName = "AI";
-            mCollidable = true;
-            CollisionManager.getInstance.Subscribe(Collision, this);
         }
         #endregion
 
@@ -80,7 +75,7 @@ namespace GMTB.AI
             if (mPosition.Y <= 150 || mPosition.Y >= 285)
                 mVelocity.Y *= -1;
         }
-        public void FollowPlayer(GameTime gameTime)
+        public virtual void FollowPlayer(GameTime gameTime)
         {
             ActivityTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             mDistanceToDest = mPlayerPos - mPosition;
@@ -97,23 +92,22 @@ namespace GMTB.AI
                 mVelocity.Y = 0;
                 mVelocity.X = 0;
             }
-
         }
         public void Search(GameTime gameTime)
         {
             SearchTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             ActivityTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (SearchTimer >= 490f && SearchTimer <= 510f)
+            if (SearchTimer >= (SearchTime / 4 - 10) && SearchTimer <= (SearchTime / 4 + 10))
                 mDirection = "Up";
-            if (SearchTimer >= 990f && SearchTimer <= 1010f)
+            if (SearchTimer >= (SearchTime / 2 - 10) && SearchTimer <= (SearchTime / 2 + 10))
                 mDirection = "Right";
-            if (SearchTimer >= 1490f && SearchTimer <= 1510f)
+            if (SearchTimer >= (SearchTime - ((SearchTime / 4) - 10)) && 
+                SearchTimer <= (SearchTime - ((SearchTime / 4) + 10)))
                 mDirection = "Down";
 
             if (ActivityTimer >= SearchTime)
             {
-                mDistanceToDest = mStartPos - mPosition;
-                mDistanceToDest.Normalize();
+                
                 mState = "Reset";
             }
                 
@@ -140,7 +134,9 @@ namespace GMTB.AI
         }
         public void Reset()
         {
-            mVelocity = mDistanceToDest;
+            mDistanceToDest = mStartPos - mPosition;
+            mDistanceToDest.Normalize();
+            mVelocity = mDistanceToDest * mSpeed;
             if (mPosition == mStartPos)
             {
                 mState = "Idle";

@@ -69,7 +69,7 @@ namespace GMTB
         public void Unsubscribe(EventHandler<InputEvent> handler)
         {
             // Remove event handler
-            //NewInput -= handler;
+            NewInput -= handler;
         }
         public void SubscribeExit(EventHandler<InputEvent> handler)
         {
