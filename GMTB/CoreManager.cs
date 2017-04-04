@@ -26,23 +26,21 @@ namespace GMTB
                 return Instance;
             }
         }
-        
+
         #endregion
 
         #region Methods
         public void Update(GameTime gameTime)
         {
-            if (!Global.GameOver)
-            {
-                SceneManager.getInstance.Update(gameTime);
-                Input.getInstance.Update();
+            SceneManager.getInstance.Update(gameTime);
+            if (Kernel._gameState == Kernel.GameStates.Playing || Kernel._gameState == Kernel.GameStates.Dialogue)
+            {      
                 Script.getInstance.Update(gameTime);
                 AiManager.getInstance.Update();
                 ProximityManager.getInstance.Update();
-                if (!Global.PauseInput)
-                    CollisionManager.getInstance.Update();
+                CollisionManager.getInstance.Update();
             }
-            
+            Input.getInstance.Update();
         }
         public void Draw(SpriteBatch spriteBatch)
         {

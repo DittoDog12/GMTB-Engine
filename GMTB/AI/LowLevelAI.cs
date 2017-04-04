@@ -11,7 +11,7 @@ namespace GMTB.AI
         #region Constructor
         public LowLevelAI()
         {
-            mProximityBoxSize = new Vector2(50, 50);
+            mProximityBoxSize = new Vector2(150, 150);
 
             ChaseTime = 1000f;
             SearchTime = 1000f;

@@ -34,8 +34,7 @@ namespace GMTB.AI
         public HostileAI()
         {
             mState = "Idle";
-            mVelocity.Y = mSpeed;
-            
+            mVelocity.Y = mSpeed;            
             mStartPos = mPosition;
             mUName = "AI";
             sub();
@@ -54,10 +53,14 @@ namespace GMTB.AI
             else if (mVelocity.X < 0)
                 mDirection = "Left";
 
-            if (mVelocity.Y > 0)
-                mDirection = "Down";
-            else if (mVelocity.Y < 0)
-                mDirection = "Up";
+            if (mVelocity.X == 0)
+            {
+                if (mVelocity.Y > 0)
+                    mDirection = "Down";
+                else if (mVelocity.Y < 0)
+                    mDirection = "Up";
+            }
+            
 
             // State controller
             switch (mState)
@@ -82,7 +85,6 @@ namespace GMTB.AI
         public override void Idle()
         {
             // Idle walk
-
             if (mPosition.X <= 160 || mPosition.X >= 670)
                 mVelocity.X *= -1;
             if (mPosition.Y <= 150 || mPosition.Y >= 285)
@@ -131,7 +133,7 @@ namespace GMTB.AI
             if (args.Entity == this)
             {
                 RoomManager.getInstance.Room = "Backgrounds/GameOver";
-                Global.GameOver = true;
+                Kernel._gameState = Kernel.GameStates.GameOver;
             }
         }
         public void inProximity(object source, ProximityEvent args)

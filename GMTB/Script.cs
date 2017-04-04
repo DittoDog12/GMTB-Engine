@@ -70,7 +70,7 @@ namespace GMTB
                 {
                     DialogueBox.getInstance.Display(" ");
                     DialogueRunning = false;
-                    Global.PauseInput = false;
+                    Kernel._gameState = Kernel.GameStates.Playing;
                     Input.getInstance.UnSubscribeSpace(this.OnSpace);
                 }
             }
@@ -84,7 +84,7 @@ namespace GMTB
                 {
                     mNextLine = false;
                     DialogueBox.getInstance.Display(" ");
-                    Global.PauseInput = false;
+                    Kernel._gameState = Kernel.GameStates.Playing;
                     SingleDialogueRun = false;
                     timer = 0f;
                 }
@@ -103,7 +103,7 @@ namespace GMTB
             //Kernel.IM.SubscribeSpace(OnSpace);
             lines = Lines;
             DialogueRunning = true;
-            Global.PauseInput = true;
+            Kernel._gameState = Kernel.GameStates.Dialogue;
             Input.getInstance.SubscribeSpace(this.OnSpace);
         }
 
@@ -112,7 +112,7 @@ namespace GMTB
         {
             Line = line;
             SingleDialogueRun = true;
-            Global.PauseInput = true;  
+            Kernel._gameState = Kernel.GameStates.Dialogue;
         }
         #endregion
 

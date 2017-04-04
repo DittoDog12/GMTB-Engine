@@ -56,6 +56,8 @@
     <Compile Include="Content\Levels\L2.cs" />
     <Compile Include="Content\Levels\Level.cs" />
     <Compile Include="LevelData.cs" />
+    <Compile Include="MainMenu.cs" />
+    <Compile Include="PauseMenu.cs" />
     <Compile Include="ProximityEvent.cs" />
     <Compile Include="CollisionEvent.cs" />
     <Compile Include="hasProximity.cs" />
@@ -124,6 +126,9 @@
     <Content Include="Content\Dialogue\OldManAndSerena.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Enemy\JumpScareDude.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Enemy\Martha\Back.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -158,6 +163,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Enemy\NurseB\NBWB.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\exit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Levels\L1.xml">
@@ -197,6 +205,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\square2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\start.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />

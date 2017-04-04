@@ -19,7 +19,7 @@ namespace GMTB
         /// <summary>
         /// Static reference to trigger game over state
         /// </summary>
-        static bool _GameOver = false;
+        //static bool _GameOver = false;
 
         /// <summary>
         /// Static reference to the Content Manager
@@ -43,11 +43,11 @@ namespace GMTB
         /// <summary>
         /// Accessor for _GameOver
         /// </summary>
-        public static bool GameOver
-        {
-            get { return _GameOver; }
-            set { _GameOver = value; }
-        }
+        //public static bool GameOver
+        //{
+        //    get { return _GameOver; }
+        //    set { _GameOver = value; }
+        //}
 
         /// <summary>
         /// Accessor for _Content

@@ -9,7 +9,7 @@ namespace GMTB.AI
     public class HighLevelAI : HostileAI
     {
         #region Constructor
-        public HighLevelAI()
+        public HighLevelAI() : base()
         {
             mProximityBoxSize = new Vector2(250, 250);
             ChaseTime = 2000f;
@@ -17,6 +17,7 @@ namespace GMTB.AI
             mCollidable = true;
             mSpeed = 3f;
             interval = 100f;
+            Reset();
         }
         #endregion
 

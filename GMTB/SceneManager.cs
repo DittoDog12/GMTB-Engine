@@ -123,14 +123,17 @@ namespace GMTB
         }
         public void Update(GameTime gameTime)
         {
-            mEntities.ForEach(IEntity => IEntity.Update(gameTime));
+            if (Kernel._gameState == Kernel.GameStates.Playing)
+                mEntities.ForEach(IEntity => IEntity.Update(gameTime));
+            if (Kernel._gameState == Kernel.GameStates.Paused)
+                Kernel.menu2.Update(gameTime);
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
             RoomManager.getInstance.Draw(spriteBatch);
 
-            if (!Global.GameOver)
+            if (Kernel._gameState != Kernel.GameStates.GameOver)
             {
                 // Update Texture path for animating entity
                 mEntities.ForEach(IEntity => IEntity.aTexture = Content.Load<Texture2D>(IEntity.aTexturename));
@@ -139,8 +142,12 @@ namespace GMTB
                 for (int i = 0; i < mEntities.Count; i++)
                     if (mEntities[i].Visible)
                         mEntities[i].Draw(spriteBatch);
-                if (Global.PauseInput)
+                if (Kernel._gameState == Kernel.GameStates.Dialogue)
                     DialogueBox.getInstance.Draw(spriteBatch);
+                if (Kernel._gameState == Kernel.GameStates.Paused)
+                    if (Kernel.menu2 != null)
+                        Kernel.menu2.Draw(spriteBatch);
+
             }
 
             spriteBatch.End();

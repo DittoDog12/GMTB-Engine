@@ -9,6 +9,7 @@ namespace GMTB.AI
 {
     class JumpScare : AllAI , Collidable
     {
+        public bool Scare;
         public JumpScare()
         {
             mSpeed = 5f;
@@ -22,13 +23,22 @@ namespace GMTB.AI
         }
         public override void Update(GameTime gameTime)
         {
-            timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (timer > interval)
+            if (Scare == true)
             {
-                base.Update(gameTime);
-                mPosition.Y -= mSpeed;
+                timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (timer > interval)
+                {
+                    base.Update(gameTime);
+                    mPosition.Y -= mSpeed;
+                }
+                timer = 0f;
+            }else
+            {
+                mSpeed = 0f;
+                mPosition = new Vector2(100, 100);
             }
-            timer = 0f;
+
+            
         }
     }
 }

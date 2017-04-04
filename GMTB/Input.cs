@@ -60,6 +60,14 @@ namespace GMTB
                 UseInput(this, args);
             }
         }
+        protected virtual void onEsc(Keys key)
+        {
+            if (ExitInput != null)
+            {
+                InputEvent args = new InputEvent(key);
+                ExitInput(this, args);
+            }
+        }
         // Sub/Unsubscribers
         public void SubscribeMove(EventHandler<InputEvent> handler)
         {
@@ -75,6 +83,11 @@ namespace GMTB
         {
             // Add event handler
             ExitInput += handler;
+        }
+        public void unSubscribeExit(EventHandler<InputEvent> handler)
+        {
+            // Add event handler
+            ExitInput -= handler;
         }
         public void SubscribeSpace(EventHandler<InputEvent> handler)
         {
@@ -97,9 +110,9 @@ namespace GMTB
         {
             KeyboardState newState = Keyboard.GetState();
             // Halt input detection if the global trigger is set, usually if Dialogue is running
-            if (!Global.PauseInput)
+            if (Kernel._gameState == Kernel.GameStates.Playing)
             {
-                
+
 
                 if (newState.IsKeyDown(Keys.W) == true || GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed)
                 {
@@ -121,11 +134,10 @@ namespace GMTB
                 if (newState.IsKeyDown(Keys.E))
                     OnUse(Keys.E);
             }
-            if (newState.IsKeyDown(Keys.Space))
-            {
-                if (newState.IsKeyUp(Keys.Space))
-                    OnSpaceInput(Keys.Space);
-            }
+            if (oldState.IsKeyUp(Keys.Space) && newState.IsKeyDown(Keys.Space))
+                OnSpaceInput(Keys.Space);
+            if (oldState.IsKeyUp(Keys.Escape) && newState.IsKeyDown(Keys.Escape))
+                onEsc(Keys.Escape);
 
             oldState = newState;
         }

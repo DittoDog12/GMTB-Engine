@@ -13,7 +13,18 @@ namespace GMTB
     /// </summary>
     public class Kernel : Game
     {
-        
+        public enum GameStates
+        {
+            Menu,
+            Playing,
+            GameOver,
+            Dialogue,
+            Loading,
+            Exiting,
+            Paused
+        }
+        public static GameStates _gameState;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -22,9 +33,11 @@ namespace GMTB
 
 
         // Create empty IEntity object to hold entities during creation
-        private IEntity createdEntity;
+        //private IEntity createdEntity;
 
-
+        // Create a Menu Objects
+        public static MainMenu menu1;
+        public static PauseMenu menu2;
 
         public Kernel()
         {
@@ -45,6 +58,9 @@ namespace GMTB
             ScreenHeight = GraphicsDevice.Viewport.Height;
             ScreenWidth = GraphicsDevice.Viewport.Width;
 
+            _gameState = GameStates.Menu;
+            IsMouseVisible = true;
+            menu1 = new MainMenu();
             // Initialize Entity and Scene Managers          
             base.Initialize();
         }
@@ -58,10 +74,8 @@ namespace GMTB
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
-            createdEntity = EntityManager.getInstance.newEntity<Player>(PlayerIndex.One);
-            SceneManager.getInstance.newEntity(createdEntity, 160, ScreenHeight / 2);
-            LevelManager.getInstance.NewLevel("L1");
+            // TODO: use this.Content to load your game content here           
+            menu1.Initialize(spriteBatch);
         }
 
         /// <summary>
@@ -73,6 +87,12 @@ namespace GMTB
             // TODO: Unload any non ContentManager content here
         }
 
+        private void onEsc(object source, InputEvent args)
+        {
+            _gameState = GameStates.Paused;
+            Input.getInstance.unSubscribeExit(onEsc);
+
+        }
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -80,14 +100,38 @@ namespace GMTB
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                
+
+            if (_gameState == GameStates.Exiting)
                 Exit();
 
             // TODO: Add your update logic here
 
+            if (_gameState == GameStates.Menu)
+                menu1.Update(gameTime);
+            else if (_gameState == GameStates.Loading)
+            {
+                IsMouseVisible = false;
+                _gameState = GameStates.Playing;
+                Input.getInstance.SubscribeExit(onEsc);
+                if (menu2 != null)
+                    menu2.unSub();
+            }
+            else if (_gameState == GameStates.Paused)
+            {
+                IsMouseVisible = true;
+                if (menu2 == null)
+                {
+                    menu2 = new PauseMenu();
+                    menu2.Initialize(spriteBatch);
+                }
+                if (!menu2.isSubbed)
+                    menu2.Sub();
+            }
             CoreManager.getInstance.Update(gameTime);
             base.Update(gameTime);
-           // SceneManager.getInstance.Serialize();
+            // SceneManager.getInstance.Serialize();
         }
 
         /// <summary>
@@ -99,9 +143,12 @@ namespace GMTB
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            CoreManager.getInstance.Draw(spriteBatch);
+            if (_gameState == GameStates.Menu)
+                menu1.Draw(spriteBatch);
+            else
+                CoreManager.getInstance.Draw(spriteBatch);
             base.Draw(gameTime);
         }
-        
+
     }
 }
