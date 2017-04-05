@@ -23,8 +23,6 @@ namespace GMTB
         private List<IEntity> mEntities;
         private List<IEntity> mSceneGraph;
         Microsoft.Xna.Framework.Content.ContentManager Content;
-
-        private bool runonce = true;
         #endregion
 
         #region Accessors
@@ -59,54 +57,20 @@ namespace GMTB
         #endregion
 
         #region Methods
-        public void Serialize()
-        {
-            if (runonce)
-            {
-                LevelData data = new LevelData();
-                data.doorPos = new List<Vector2>();
-                data.doorTarget = new List<string>();
-                data.playerTarget = new List<Vector2>();
-                data.entities = new List<Entity>();
-                data.entityPos = new List<Vector2>();
-                data.bg = RoomManager.getInstance.Room;
-                foreach (IEntity e in mEntities)
-                {
-                    if (e.UName != "Player")
-                    {
-                        var entity = e as Door;
-                        if (entity != null)
-                        {
-                            data.doorPos.Add(entity.Position);
-                            data.doorTarget.Add(entity.ToRoom);
-                            data.playerTarget.Add(entity.PlayerStart);
-                        }
-                        else
-                        {
-                            var currentEntity = e as Entity;
-                            data.entities.Add(currentEntity);
-                            data.entityPos.Add(currentEntity.Position);
-                        }
-                    }
+        //public void load()
+        //{
 
-                }
 
-                var xmlSettings = new XmlWriterSettings
-                {
-                    Indent = true,
-                    IndentChars = "\t",
-                    NewLineChars = "\n"
-                };
+        //    Kernel._gameState = Kernel.GameStates.Loading;
+        //}
+        //public void Save()
+        //{
+        //    // Open Storage Container
+        //    IAsyncResult result = device.BeginOpenContainer("StorageDevice", null, null);
+        //    result.AsyncWaitHandle.WaitOne();
 
-                string filename = Environment.CurrentDirectory + "\\Content\\Levels\\" + "L1.lvl";
-                FileStream stream = File.Open(filename, FileMode.OpenOrCreate);
-
-                XmlSerializer serializer = new XmlSerializer(typeof(LevelData));
-                serializer.Serialize(stream, data);
-                stream.Close();
-                runonce = false;
-            }
-        }
+            
+        //}
 
         public void newEntity(IEntity createdEntity, int x, int y)
         {
@@ -133,15 +97,16 @@ namespace GMTB
             spriteBatch.Begin();
             RoomManager.getInstance.Draw(spriteBatch);
 
+            // Only run draw if not in Game Over state
             if (Kernel._gameState != Kernel.GameStates.GameOver)
             {
                 // Update Texture path for animating entity
                 mEntities.ForEach(IEntity => IEntity.aTexture = Content.Load<Texture2D>(IEntity.aTexturename));
-                // Call draw method for each Entity
-                //mEntities.ForEach(IEntity => IEntity.Draw(spriteBatch));
+                // Call draw method for each Entity if entity is visible
                 for (int i = 0; i < mEntities.Count; i++)
                     if (mEntities[i].Visible)
                         mEntities[i].Draw(spriteBatch);
+                // Run Dialogue display if game in Dialogue State
                 if (Kernel._gameState == Kernel.GameStates.Dialogue)
                     DialogueBox.getInstance.Draw(spriteBatch);
                 if (Kernel._gameState == Kernel.GameStates.Paused)

@@ -51,6 +51,7 @@
     <Compile Include="AI\JumpScare.cs" />
     <Compile Include="AI\LowLevelAI.cs" />
     <Compile Include="AI\NeutralAI.cs" />
+    <Compile Include="SaveData.cs" />
     <Compile Include="Collidable.cs" />
     <Compile Include="Content\Levels\L1.cs" />
     <Compile Include="Content\Levels\L2.cs" />
@@ -174,6 +175,9 @@
     <Content Include="Content\Levels\L2.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\load.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\NPC\PatientZelda\Front.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -202,6 +206,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Player Images\JRW.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\resume.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\save.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\square2.png">

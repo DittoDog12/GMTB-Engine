@@ -16,8 +16,8 @@ namespace GMTB
 
         public bool isSubbed = false;
 
-        private Texture2D startButton;
-        private Vector2 startPosition;
+        private Texture2D saveButton;
+        private Vector2 savePosition;
 
         private Texture2D exitButton;
         private Vector2 exitPosition;
@@ -43,18 +43,24 @@ namespace GMTB
         public void Initialize(SpriteBatch spriteBatch)
         {
             // create Start button, position a quarter the distance across the screen from the left, near the bottom
-            startPosition = new Vector2(Kernel.ScreenWidth / 4, Kernel.ScreenHeight - 50);
-            startButton = Content.Load<Texture2D>("start");
+            resumePosition = new Vector2(Kernel.ScreenWidth / 4, Kernel.ScreenHeight - 50);
+            resumeButton = Content.Load<Texture2D>("resume");
 
             // create Exit button, position a quarter the distance across the screen from the right, near the bottom
             exitPosition = new Vector2(Kernel.ScreenWidth - (Kernel.ScreenWidth / 4), Kernel.ScreenHeight - 50);
             exitButton = Content.Load<Texture2D>("Exit");
+
+            // create save button, position it center, offset by texture width
+            //saveButton = Content.Load<Texture2D>("save");
+            //savePosition = new Vector2(Kernel.ScreenWidth - ((Kernel.ScreenWidth / 2)-(saveButton.Width / 2)), Kernel.ScreenHeight - 50);
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(startButton, startPosition, Color.White);
+            spriteBatch.Draw(resumeButton, resumePosition, Color.White);
             spriteBatch.Draw(exitButton, exitPosition, Color.White);
+            //spriteBatch.Draw(saveButton, savePosition, Color.White);
         }
         public void Update(GameTime gameTime)
         {
@@ -70,15 +76,18 @@ namespace GMTB
             // Create a Rectangle around the mouse click position
             Rectangle mouseClickedRect = new Rectangle(x, y, 10, 10);
 
-            Rectangle startRect = new Rectangle((int)startPosition.X, (int)startPosition.Y, startButton.Width, startButton.Height);
+            //Rectangle saveRect = new Rectangle((int)savePosition.X, (int)savePosition.Y, saveButton.Width, saveButton.Height);
             Rectangle exitRect = new Rectangle((int)exitPosition.X, (int)exitPosition.Y, exitButton.Width, exitButton.Height);
+            Rectangle resumeRect = new Rectangle((int)resumePosition.X, (int)resumePosition.Y, resumeButton.Width, resumeButton.Height);
 
-            if (mouseClickedRect.Intersects(startRect))
+            if (mouseClickedRect.Intersects(resumeRect))
             {
                 Kernel._gameState = Kernel.GameStates.Loading;
             }
             else if (mouseClickedRect.Intersects(exitRect))
                 Kernel._gameState = Kernel.GameStates.Exiting;
+            //else if (mouseClickedRect.Intersects(saveRect))
+            //    SceneManager.getInstance.Save();
         }
         public void Sub()
         {

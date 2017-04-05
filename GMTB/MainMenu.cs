@@ -20,6 +20,9 @@ namespace GMTB
         private Texture2D exitButton;
         private Vector2 exitPosition;
 
+        private Texture2D loadButton;
+        private Vector2 loadPosition;
+
         private string Background;
 
         MouseState mouseState;
@@ -48,6 +51,10 @@ namespace GMTB
             // create Exit button, position a quarter the distance across the screen from the right, near the bottom
             exitPosition = new Vector2(Kernel.ScreenWidth - (Kernel.ScreenWidth / 4), Kernel.ScreenHeight - 50);
             exitButton = Content.Load<Texture2D>("Exit");
+
+            // create load button, position it center, offset by texture width
+            //loadButton = Content.Load<Texture2D>("load");
+            //loadPosition = new Vector2(Kernel.ScreenWidth - ((Kernel.ScreenWidth / 2) - (loadButton.Width / 2)), Kernel.ScreenHeight - 50);
         }
         public void LoadGame()
         {
@@ -62,6 +69,7 @@ namespace GMTB
             RoomManager.getInstance.Draw(spriteBatch);
             spriteBatch.Draw(startButton, startPosition, Color.White);
             spriteBatch.Draw(exitButton, exitPosition, Color.White);
+            //spriteBatch.Draw(loadButton, loadPosition, Color.White);
             spriteBatch.End();
         }
         public void Update(GameTime gameTime)
@@ -79,6 +87,7 @@ namespace GMTB
 
             Rectangle startRect = new Rectangle((int)startPosition.X, (int)startPosition.Y, startButton.Width, startButton.Height);
             Rectangle exitRect = new Rectangle((int)exitPosition.X, (int)exitPosition.Y, exitButton.Width, exitButton.Height);
+            //Rectangle loadRect = new Rectangle((int)loadPosition.X, (int)loadPosition.Y, loadButton.Width, loadButton.Height);
 
             if (mouseClickedRect.Intersects(startRect))
             {
@@ -87,6 +96,8 @@ namespace GMTB
             }
             else if (mouseClickedRect.Intersects(exitRect))
                 Kernel._gameState = Kernel.GameStates.Exiting;
+            //else if (mouseClickedRect.Intersects(loadRect))
+            //    SceneManager.getInstance.load();
         }
         #endregion
     }
