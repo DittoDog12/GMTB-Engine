@@ -51,11 +51,12 @@
     <Compile Include="AI\JumpScare.cs" />
     <Compile Include="AI\LowLevelAI.cs" />
     <Compile Include="AI\NeutralAI.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="SaveData.cs" />
     <Compile Include="Collidable.cs" />
     <Compile Include="Content\Levels\L1.cs" />
     <Compile Include="Content\Levels\L2.cs" />
-    <Compile Include="Content\Levels\Level.cs" />
+    <Compile Include="Level.cs" />
     <Compile Include="LevelData.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="PauseMenu.cs" />

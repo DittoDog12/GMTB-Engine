@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Graphics;
-using System.Xml;
-using System.IO;
-using System.Xml.Serialization;
-using GMTB.AI;
 
 namespace GMTB
 {

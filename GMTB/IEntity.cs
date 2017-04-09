@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -13,7 +10,7 @@ namespace GMTB
         int UID { get; set; }
         string UName { get; }
         Texture2D aTexture { set; }
-        String aTexturename { get; }
+        string aTexturename { get; }
         Vector2 Position { get; }
         bool Collidable { get; }
         bool Visible { get; }

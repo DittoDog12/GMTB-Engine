@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace GMTB
 {
@@ -91,7 +86,6 @@ namespace GMTB
         {
             _gameState = GameStates.Paused;
             Input.getInstance.unSubscribeExit(onEsc);
-
         }
         /// <summary>
         /// Allows the game to run logic such as updating the world,
