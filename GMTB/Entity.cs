@@ -88,6 +88,7 @@ namespace GMTB
         }
         public virtual void setVars(int uid, string path)
         {
+            mTexturename = path;
             UID = uid;
         }
         public virtual void setVars(int uid, PlayerIndex pPlayer){}

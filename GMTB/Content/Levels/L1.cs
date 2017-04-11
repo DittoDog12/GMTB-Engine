@@ -7,8 +7,7 @@ namespace GMTB.Content.Levels
     class L1 : Level
     {
         #region Data Members
-        private string MarthaStatus;
-        private int MarthaID;
+
         private int[] BedPositions;
         #endregion
 
@@ -16,10 +15,11 @@ namespace GMTB.Content.Levels
         public L1() : base()
         {
             bg = "Backgrounds\\SpawnRoomBackground";
-            BedPositions = new int[3];
+            BedPositions = new int[4];
             BedPositions[0] = 160;
             BedPositions[1] = 255;
             BedPositions[2] = ScreenWidth / 2;
+            BedPositions[3] = (ScreenWidth / 2) + 95;
 
         }
         #endregion
@@ -31,30 +31,44 @@ namespace GMTB.Content.Levels
             {
                 // Old Man
                 createdEntity = EntityManager.getInstance.newEntity<FriendlyAI>("NPC/OldMan/");
-                SceneManager.getInstance.newEntity(createdEntity, 290, 150);
+                SceneManager.getInstance.newEntity(createdEntity, (ScreenWidth / 2) + 145, 150);
                 Removables.Add(createdEntity);
-
-                //Martha
-                createdEntity = EntityManager.getInstance.newEntity<HighLevelAI>("Enemy/Martha/");
-                SceneManager.getInstance.newEntity(createdEntity, 640, ScreenHeight / 2);
-                Removables.Add(createdEntity);
-                MarthaID = createdEntity.UID;
 
                 // Hiding Place
                 for (int i = 0; i < BedPositions.Length; i++)
                 {
-                    createdEntity = EntityManager.getInstance.newEntity<HidingPlace>();
+                    createdEntity = EntityManager.getInstance.newEntity<HidingPlace>("AdultsBedLong");
                     SceneManager.getInstance.newEntity(createdEntity, BedPositions[i], 150);
                     Removables.Add(createdEntity);
                 }
-
-
+                // Jumpscare dude
+                //createdEntity = EntityManager.getInstance.newEntity<JumpScare>("Enemy/JumpScare/");
+                //SceneManager.getInstance.newEntity(createdEntity, 160, 150);
+                //Removables.Add(createdEntity);
                 // Door
                 createdEntity = EntityManager.getInstance.newEntity<Door>();
                 SceneManager.getInstance.newEntity(createdEntity, 450, 285);
-                createdEntity.setVars("L2", new Vector2(240, 350));
+                createdEntity.setVars("L2", new Vector2((ScreenWidth/2)-18, 110));
                 Removables.Add(createdEntity);
 
+
+                // Walls
+                //Left
+                wall = new InvisibleWall();
+                wall.setVars(new Vector2(150, 150), new Vector2(10, 520));
+                Walls.Add(wall);
+                //right
+                wall = new InvisibleWall();
+                wall.setVars(new Vector2(670, 150), new Vector2(10, 520));
+                Walls.Add(wall);
+                //top
+                wall = new InvisibleWall();
+                wall.setVars(new Vector2(150, 150), new Vector2(510, 10));
+                Walls.Add(wall);
+                //bottom
+                wall = new InvisibleWall();
+                wall.setVars(new Vector2(150, 315), new Vector2(510, 10));
+                Walls.Add(wall);
                 firstRun = false;
             }
             else
@@ -65,7 +79,16 @@ namespace GMTB.Content.Levels
                         {
                             SceneManager.getInstance.newEntity(r, (int)r.DefaultPos.X, (int)r.DefaultPos.Y);
                             r.sub();
+                            if (r.UName == "JumpScare")
+                            {
+                                IAI j = r as IAI;
+                                j.Scare = false;
+                            }
+                                
                         }
+
+                foreach (IWall w in Walls)
+                    w.Sub();
 
             }
 
@@ -74,18 +97,6 @@ namespace GMTB.Content.Levels
         public override List<IEntity> Exit()
         {
             base.Exit();
-            foreach (IEntity m in Removables)
-                if (m.UID == MarthaID)
-                {
-                    IAI Martha = m as IAI;
-                    MarthaStatus = Martha.State;
-                }
-            if (MarthaStatus == "Follow")
-            {
-                for (int i = 0; i < Removables.Count; i++)
-                    if (Removables[i].UID == MarthaID)
-                        Removables.Remove(Removables[i]);
-            }
             return Removables;
         }
         #endregion

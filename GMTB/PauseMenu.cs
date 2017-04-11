@@ -39,11 +39,11 @@ namespace GMTB
         public void Initialize(SpriteBatch spriteBatch)
         {
             // create Start button, position a quarter the distance across the screen from the left, near the bottom
-            resumePosition = new Vector2(Kernel.ScreenWidth / 4, Kernel.ScreenHeight - 50);
+            resumePosition = new Vector2(Kernel.ScreenWidth / 4, Kernel.ScreenHeight - 75);
             resumeButton = Content.Load<Texture2D>("resume");
 
             // create Exit button, position a quarter the distance across the screen from the right, near the bottom
-            exitPosition = new Vector2(Kernel.ScreenWidth - (Kernel.ScreenWidth / 4), Kernel.ScreenHeight - 50);
+            exitPosition = new Vector2(Kernel.ScreenWidth - (Kernel.ScreenWidth / 4), Kernel.ScreenHeight - 75);
             exitButton = Content.Load<Texture2D>("Exit");
 
             // create save button, position it center, offset by texture width

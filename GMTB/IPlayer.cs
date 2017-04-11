@@ -9,5 +9,6 @@ namespace GMTB
         bool Visible { get; set; }
         void Collision(object source, CollisionEvent args);
         void CollisionHide();
+        void setPos(Vector2 pos);
     }
 }

@@ -83,6 +83,9 @@ namespace GMTB
                 mEntities.ForEach(IEntity => IEntity.Update(gameTime));
             if (Kernel._gameState == Kernel.GameStates.Paused)
                 Kernel.menu2.Update(gameTime);
+            if (Kernel._gameState == Kernel.GameStates.GameOver)
+                Kernel.GameOverScreen.Update(gameTime);
+
         }
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -106,6 +109,8 @@ namespace GMTB
                         Kernel.menu2.Draw(spriteBatch);
 
             }
+            else if (Kernel.GameOverScreen != null && Kernel._gameState == Kernel.GameStates.GameOver)
+                Kernel.GameOverScreen.Draw(spriteBatch);
 
             spriteBatch.End();
         }

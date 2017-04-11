@@ -16,13 +16,18 @@ namespace GMTB
         // Create a Reference for all onscreen entities
         private IPlayer mPlayer;
         private List<Collidable> AllCollidables;
-
+        private List<IWall> mWalls;
         #endregion
 
         #region Accessors
         public IPlayer currPlayer
         {
             get { return mPlayer; }
+        }
+        public List<IWall> Walls
+        {
+            get { return mWalls; }
+            set { mWalls = value; }
         }
         #endregion
 
@@ -31,6 +36,7 @@ namespace GMTB
         {
             // Initialize AllCollidables list
             AllCollidables = new List<Collidable>();
+            mWalls = new List<IWall>();
             // Initialize Player list
             //IdentifyPlayers();
             //IdentifyCollidable();
@@ -100,13 +106,21 @@ namespace GMTB
 
         public void Update()
         {
+            foreach (IWall w in mWalls)
+                if (mPlayer.HitBox.Intersects(w.HitBox))
+                    PlayerCollide(mPlayer);
+
             //foreach (Collidable entity in AllCollidables)
             for (int i = 0; i < AllCollidables.Count; i++)
                 if (mPlayer.HitBox.Intersects(AllCollidables[i].HitBox))
-                {
-                    onCollide(AllCollidables[i]);
-                    PlayerCollide(mPlayer);
-                }
+                    if (AllCollidables[i].UName == "Door")
+                        onCollide(AllCollidables[i]);
+                    else
+                    {
+                        PlayerCollide(mPlayer);
+                        onCollide(AllCollidables[i]);
+
+                    }
 
             // Load each Collidable Object
             //for (int i = 0; i < AllCollidables.Count; i++)

@@ -19,7 +19,7 @@ namespace GMTB
         #region Constructor
         public HidingPlace()
         {
-            mTexturename = "AdultsBedLong";
+           // mTexturename = "AdultsBedLong";
             mUName = "HidingPlace";
             Hide = false;
             Input.getInstance.SubscribeUse(OnUse);
@@ -29,6 +29,10 @@ namespace GMTB
         #endregion
 
         #region Methods
+        public override void setVars(int uid, string path)
+        {
+            base.setVars(uid, path);
+        }
         public void inProximity(object source, ProximityEvent args)
         {
             if (args.Entity == this)

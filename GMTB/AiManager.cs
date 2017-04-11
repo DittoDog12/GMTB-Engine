@@ -10,6 +10,7 @@ namespace GMTB
         private static AiManager Instance = null;
         private List<IAI> AllAIs;
         private IPlayer Player;
+        private List<INeutralAI> NeutralAIs;
         #endregion
 
         #region Constructor
@@ -28,6 +29,13 @@ namespace GMTB
                 {
                     Player = Entities[i] as IPlayer;
                 }
+            }
+            NeutralAIs = new List<INeutralAI>();
+            foreach (IEntity e in Entities)
+            {
+                var asInterface = e as INeutralAI;
+                if (asInterface != null)
+                    NeutralAIs.Add(asInterface);
             }
         }
         public static AiManager getInstance
@@ -53,6 +61,8 @@ namespace GMTB
                 AllAIs[i].PlayerPos = Player.Position;
                 AllAIs[i].PlayerVisible = Player.Visible;
             }
+            foreach (INeutralAI a in NeutralAIs)
+                a.PlayerPos = Player.Position;
         }
         #endregion
     }

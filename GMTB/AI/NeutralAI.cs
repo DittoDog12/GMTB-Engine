@@ -2,17 +2,31 @@
 
 namespace GMTB.AI
 {
-    class NeutralAI : AllAI
+    class NeutralAI : Entity, Collidable, INeutralAI
     {
+        #region Data Members
+        private string mTexturePath;
+        private Vector2 mPlayerPos;
+        private int TimesHit = 0;
+        #endregion
+        #region Acessors
+        public Vector2 PlayerPos
+        {
+            set { mPlayerPos = value; }
+        }
+        #endregion
+        #region Constructor
         public NeutralAI() : base()
         {
-
+            CollisionManager.getInstance.Subscribe(Collision, this);
         }
-
-        public override void setVars(int uid)
+        #endregion
+        #region Methods
+        public override void setVars(int uid, string path)
         {
             base.setVars(uid);
-            mTexturename = "NPC/PatientZeldaForward";
+            mTexturePath = path;
+            mTexturename = mTexturePath + "Front";
         }
 
         public override void Update(GameTime gameTime)
@@ -22,17 +36,15 @@ namespace GMTB.AI
             switch (mDirection)
             {
                 case "Left":
-                    mTexturename = "NPC/PatientZeldaLeft";
+                    mTexturename = mTexturePath + "Left";
                     break;
                 case "Down":
-                    mTexturename = "NPC/PatientZeldaForward";
+                    mTexturename = mTexturePath + "Front";
                     break;
                 case "Right":
-                    mTexturename = "NPC/PatientZeldaRight";
+                    mTexturename = mTexturePath + "Right";
                     break;
-                case "stop":
-                    CurrentFrame = 0;
-                    break;
+
                 default:
                     break;
             }
@@ -46,7 +58,56 @@ namespace GMTB.AI
                 mDirection = "Left";
             if (mPlayerPos.X == mPosition.X)
                 mDirection = "Down";
+            //if (mPlayerPos.Y > mPosition.Y)
+            //    mDirection = "Right";
+            //if (mPlayerPos.Y < mPosition.Y)
+            //    mDirection = "Left";
+            //if (mPlayerPos.Y == mPosition.Y)
+            //    mDirection = "Down";
 
         }
+
+        public override void Collision(object source, CollisionEvent args)
+        {
+            base.Collision(source, args);
+            if (TimesHit == 4)
+            {
+                Script.getInstance.SingleDialogue("Stop That");
+                TimesHit++;
+            }
+            else if (TimesHit == 7)
+            {
+                Script.getInstance.SingleDialogue("STOP IT!");
+                TimesHit++;
+            }
+            else if (TimesHit == 10)
+            {
+                Script.getInstance.SingleDialogue("STOP!!!");
+                TimesHit++;
+            }
+            else if (TimesHit == 12)
+            {
+                Script.getInstance.SingleDialogue("What are you even doing?");
+                TimesHit++;
+            }
+            else if (TimesHit == 15)
+            {
+                Script.getInstance.SingleDialogue("I don't even");
+                TimesHit++;
+            }
+            else if (TimesHit == 17)
+            {
+                Script.getInstance.SingleDialogue("*Sigh* 'Give me the Booty', there I said it");
+                TimesHit++;
+            }
+            else if (TimesHit >= 20)
+            {
+                Script.getInstance.SingleDialogue("I said it once I won't say it again");
+                TimesHit++;
+            }
+            else
+                TimesHit++;
+        }
+        #endregion
     }
 }

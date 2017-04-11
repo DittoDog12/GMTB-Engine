@@ -28,6 +28,11 @@ namespace GMTB
         static Vector2 _PlayerPos;
 
         /// <summary>
+        /// Static Reference to the Player, used for doors
+        /// </summary>
+        static IPlayer _player;
+
+        /// <summary>
         /// Accessor for _PauseInput
         /// </summary>
         public static bool PauseInput
@@ -60,6 +65,15 @@ namespace GMTB
         {
             get { return _PlayerPos; }
             set { _PlayerPos = value; }
+        }
+
+        /// <summary>
+        /// Accessor for _player
+        /// </summary>
+        public static IPlayer Player
+        {
+            get { return _player; }
+            set { _player = value; }
         }
     }
 }

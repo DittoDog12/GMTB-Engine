@@ -28,6 +28,7 @@ namespace GMTB
             CollisionManager.getInstance.PlayerSubscribe(Collision, this);
             // Set movement update interval, sets the walk speed
             interval = 80f;
+            Global.Player = this;
         }
         #endregion
 
@@ -116,6 +117,11 @@ namespace GMTB
         public void CollisionHide()
         {
             mVisible = false;
+        }
+
+        public void setPos(Vector2 pos)
+        {
+            mPosition = pos;
         }
         #endregion
 

@@ -33,6 +33,7 @@ namespace GMTB
         // Create a Menu Objects
         public static MainMenu menu1;
         public static PauseMenu menu2;
+        public static GameOver GameOverScreen;
 
         public Kernel()
         {
@@ -123,9 +124,16 @@ namespace GMTB
                 if (!menu2.isSubbed)
                     menu2.Sub();
             }
+            else if (_gameState == GameStates.GameOver)
+            {
+                IsMouseVisible = true;
+                Input.getInstance.unSubscribeExit(onEsc);
+                GameOverScreen = new GameOver();
+                GameOverScreen.Initialize(spriteBatch);
+            }
+                
             CoreManager.getInstance.Update(gameTime);
             base.Update(gameTime);
-            // SceneManager.getInstance.Serialize();
         }
 
         /// <summary>

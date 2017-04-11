@@ -14,6 +14,7 @@ namespace GMTB
         {
             mTexturename = "BlueDoll";
             CollisionManager.getInstance.Subscribe(Collision, this);
+            mUName = "Door";
         }
         #endregion
 
@@ -29,7 +30,7 @@ namespace GMTB
             {
                 // Trigger Room change
                 LevelManager.getInstance.NewLevel(ToRoom);
-                Global.PlayerPos = PlayerStart;
+                Global.Player.setPos(PlayerStart);
             }
         }
         public override void Destroy()

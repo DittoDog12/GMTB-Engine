@@ -30,7 +30,7 @@ namespace GMTB
         #region Constructor
         public MainMenu()
         {
-            Background = "Backgrounds/SpawnRoomBackground";
+            Background = "Backgrounds/HomeScreenBackground";
             Content = Global.Content;
             RoomManager.getInstance.Room = Background;
         }
@@ -40,11 +40,11 @@ namespace GMTB
         public void Initialize(SpriteBatch spriteBatch)
         {
             // create Start button, position a quarter the distance across the screen from the left, near the bottom
-            startPosition = new Vector2(Kernel.ScreenWidth /4, Kernel.ScreenHeight - 50);
+            startPosition = new Vector2(Kernel.ScreenWidth /4, Kernel.ScreenHeight - 75);
             startButton = Content.Load<Texture2D>("start");
 
             // create Exit button, position a quarter the distance across the screen from the right, near the bottom
-            exitPosition = new Vector2(Kernel.ScreenWidth - (Kernel.ScreenWidth / 4), Kernel.ScreenHeight - 50);
+            exitPosition = new Vector2(Kernel.ScreenWidth - (Kernel.ScreenWidth / 4), Kernel.ScreenHeight - 75);
             exitButton = Content.Load<Texture2D>("Exit");
 
             // create load button, position it center, offset by texture width

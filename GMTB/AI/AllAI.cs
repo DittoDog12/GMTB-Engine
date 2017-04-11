@@ -5,18 +5,14 @@ namespace GMTB.AI
     public class AllAI : AnimatingEntity, IAI
     {
         #region Data Members
-        private bool mReact;
         protected Vector2 mPlayerPos;
         protected bool mPlayerVisible;
         protected string mState;
         protected string mTexturePath;
+        protected bool mScare;
         #endregion
 
         #region Accessors
-        public bool React
-        {
-            set { mReact = value; }
-        }
         public Vector2 PlayerPos
         {
             set { mPlayerPos = value; }
@@ -29,14 +25,17 @@ namespace GMTB.AI
         {
             get { return mState; }
         }
+        public bool Scare
+        {
+            get { return mScare; }
+            set { mScare = value; }
+        }
         #endregion
 
         #region Constructor
         public AllAI()
         {
-            mReact = false;
             mPlayerVisible = true;
-            
         }
         #endregion
 
@@ -44,10 +43,6 @@ namespace GMTB.AI
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            if (mReact)
-            {
-                // Look at player
-            }
         }
 
         public bool CollisionChecker()

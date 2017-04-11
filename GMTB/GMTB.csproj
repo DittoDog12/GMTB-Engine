@@ -48,10 +48,18 @@
     <Compile Include="AI\HighLevelAI.cs" />
     <Compile Include="AI\HostileAI.cs" />
     <Compile Include="AI\IAI.cs" />
+    <Compile Include="AI\INeutralAI.cs" />
     <Compile Include="AI\JumpScare.cs" />
     <Compile Include="AI\LowLevelAI.cs" />
     <Compile Include="AI\NeutralAI.cs" />
+    <Compile Include="Content\Levels\L3.cs" />
+    <Compile Include="Content\Levels\L4.cs" />
+    <Compile Include="Content\Levels\L5.cs" />
+    <Compile Include="Content\Levels\L6.cs" />
+    <Compile Include="GameOver.cs" />
+    <Compile Include="InvisibleWall.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="IWall.cs" />
     <Compile Include="SaveData.cs" />
     <Compile Include="Collidable.cs" />
     <Compile Include="Content\Levels\L1.cs" />
@@ -101,10 +109,25 @@
     <Content Include="Content\AdultsBedLong.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Backgrounds\BoardRoomBackground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Backgrounds\GameOver.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Backgrounds\PrototypeBackgroundMarthasRoom.png">
+    <Content Include="Content\Backgrounds\Hall1Background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Backgrounds\HallandEnterenceBackground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Backgrounds\HomeScreenBackground.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Backgrounds\MatronsOfficeBackground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Backgrounds\SecondWardBackground.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Backgrounds\SpawnRoomBackground.png">
@@ -128,7 +151,7 @@
     <Content Include="Content\Dialogue\OldManAndSerena.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Enemy\JumpScareDude.png">
+    <Content Include="Content\Enemy\JumpScare\Front.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Enemy\Martha\Back.png">
@@ -180,13 +203,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\NPC\PatientZelda\Front.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\NPC\PatientZelda\Left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\NPC\PatientZelda\Right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\NPC\OldMan\Back.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
