@@ -13,6 +13,7 @@ namespace GMTB.AI
             SearchTime = 1000f;
             mCollidable = true;
             interval = 100f;
+            mSpeed = 2f;
         }
         #endregion
 

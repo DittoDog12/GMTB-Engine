@@ -37,7 +37,7 @@ namespace GMTB.Content.Levels
                 // Hiding Place
                 for (int i = 0; i < BedPositions.Length; i++)
                 {
-                    createdEntity = EntityManager.getInstance.newEntity<HidingPlace>("AdultsBedLong");
+                    createdEntity = EntityManager.getInstance.newEntity<HidingPlace>("Game Items/AdultsBedLong");
                     SceneManager.getInstance.newEntity(createdEntity, BedPositions[i], 150);
                     Removables.Add(createdEntity);
                 }

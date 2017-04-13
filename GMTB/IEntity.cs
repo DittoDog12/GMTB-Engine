@@ -20,8 +20,11 @@ namespace GMTB
         #region Methods
         void setVars(int uid);
         void setVars(int uid, string path);
+        void setVars(string path, bool Dialogue);
         void setVars(int uid, PlayerIndex pPlayer);
         void setVars(string tRoom, Vector2 playerStart);
+        void setVars(bool PatrolVert, string state);
+        void setVars(bool PatrolVert, string state, string dir);
         void setPos(int x, int y);
         void Update(GameTime gameTime);
         void Draw(SpriteBatch spriteBatch);

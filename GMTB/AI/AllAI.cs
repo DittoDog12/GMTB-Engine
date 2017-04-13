@@ -10,6 +10,8 @@ namespace GMTB.AI
         protected string mState;
         protected string mTexturePath;
         protected bool mScare;
+        protected int mWalkDir = -1;
+        protected bool mPatrolVert;
         #endregion
 
         #region Accessors
@@ -30,6 +32,10 @@ namespace GMTB.AI
             get { return mScare; }
             set { mScare = value; }
         }
+        public bool PatrolVert
+        {
+            set { mPatrolVert = value; }
+        }
         #endregion
 
         #region Constructor
@@ -43,6 +49,19 @@ namespace GMTB.AI
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            mPosition += mVelocity;
+            // State controller
+            switch (mState)
+            {
+                case "Idle":
+                    Idle();
+                    break;
+                case "Stand":
+                    Stand();
+                    break;
+                default:
+                    break;
+            }
         }
 
         public bool CollisionChecker()
@@ -54,12 +73,28 @@ namespace GMTB.AI
 
         public override void Collision(object source, CollisionEvent args)
         {
+            if (args.Entity == this && args.Wall != null)
+            {
+                mWalkDir *= -1;
 
+                if (mPatrolVert == true)
+                    mPosition.Y = mPrevPos.Y + (10 * mWalkDir);
+                else
+                    mPosition.X = mPrevPos.X + (10 * mWalkDir);
+            }
         }
 
         public virtual void Idle()
         {
-
+            if (mPatrolVert == true)
+                mVelocity.Y = mSpeed * mWalkDir;
+            else
+                mVelocity.X = mSpeed * mWalkDir;
+        }
+        public virtual void Stand()
+        {
+            mVelocity.X = 0;
+            mVelocity.Y = 0;
         }
         #endregion
     }

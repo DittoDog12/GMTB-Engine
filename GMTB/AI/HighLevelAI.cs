@@ -4,6 +4,12 @@ namespace GMTB.AI
 {
     public class HighLevelAI : HostileAI
     {
+        #region Data Members
+        private float WaitTimer;
+        private bool runonce = false;
+        private float waiting;
+        #endregion
+
         #region Constructor
         public HighLevelAI() : base()
         {
@@ -13,7 +19,8 @@ namespace GMTB.AI
             mCollidable = true;
             mSpeed = 3f;
             interval = 100f;
-            Reset();
+            WaitTimer = 2000f;
+           // Reset();
         }
         #endregion
 
@@ -26,7 +33,15 @@ namespace GMTB.AI
         }
 
         public override void Update(GameTime gameTime)
-        {    
+        {   
+            switch (mState)
+            {
+                case "Wait":
+                    Wait(gameTime);
+                    break;
+                default:
+                    break;
+            } 
             timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (timer > interval)
             {
@@ -58,7 +73,29 @@ namespace GMTB.AI
                 timer = 0f;
                 mDirection = "stop";
             }
-            
+           
+        }
+        public void Wait(GameTime gameTime)
+        {
+            if (runonce == false)
+            {
+                CollisionManager.getInstance.unSubscribe(Collision, this);
+                waiting = 0f;
+                runonce = true;
+            }
+            Visible = false;
+            if (waiting >= WaitTimer)
+            {
+                Visible = true;   
+                CollisionManager.getInstance.Subscribe(Collision, this);
+                ActivityTimer = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                SearchTimer = 0f;
+                mDirection = "Left";
+                mVelocity.Y = 0;
+                mVelocity.X = 0;
+                mState = "Search";
+            }
+            waiting += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
         }
         #endregion
     }

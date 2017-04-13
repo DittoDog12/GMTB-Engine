@@ -39,7 +39,7 @@ namespace GMTB.AI
 
         public override void Collision(object source, CollisionEvent args)
         {
-            if (args.Entity == this)
+            if (args.Entity == this && args.Wall == null)
             {
                 if (!SecondEncounter)
                 {

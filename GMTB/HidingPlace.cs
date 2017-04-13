@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using System.IO;
+using System;
 
 namespace GMTB
 {
@@ -6,13 +8,15 @@ namespace GMTB
     {
         #region Data Members
         private bool Hide;
-
+        private bool TriggerDialouge = false;
+        private string[] Lines;
+        private bool runonce = false;
         // Second Hitbox for proximity detection
         // Make the box twice as big as the texture and off set it by minus half the texture size only on X axis
         public virtual Rectangle ProximityBox
         {
             get { return new Rectangle((int)mPosition.X - mTexture.Width / 2, (int)mPosition.Y, 
-                mTexture.Width *2, mTexture.Height); }
+                mTexture.Width *2, mTexture.Height * 2); }
         }
         #endregion
 
@@ -29,9 +33,11 @@ namespace GMTB
         #endregion
 
         #region Methods
-        public override void setVars(int uid, string path)
+        public override void setVars(string path, bool Dialogue)
         {
-            base.setVars(uid, path);
+            TriggerDialouge = Dialogue;
+            if (TriggerDialouge == true)
+                Lines = File.ReadAllLines(Environment.CurrentDirectory + path);
         }
         public void inProximity(object source, ProximityEvent args)
         {
@@ -41,6 +47,13 @@ namespace GMTB
                 {
                     CollisionManager.getInstance.currPlayer.Visible = false;
                     Hide = false;
+                    if (TriggerDialouge == true)
+                        if (!runonce)
+                        {
+                            Script.getInstance.BeginDialogue(Lines);
+                            runonce = true;
+                        }
+                            
                 }
             }
                

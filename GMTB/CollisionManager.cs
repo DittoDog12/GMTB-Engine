@@ -102,13 +102,24 @@ namespace GMTB
             CollisionEvent args = new CollisionEvent();
             PlayerE(this, args);
         }
+        public virtual void onCollide(Collidable entity, IWall wall)
+        {
+            CollisionEvent args = new CollisionEvent(entity, wall);
+            Colliders(this, args);
+        }
 
 
         public void Update()
         {
-            foreach (IWall w in mWalls)
+            foreach (IWall w in Walls)
+            {
+                foreach (Collidable c in AllCollidables)
+                    if (c.HitBox.Intersects(w.HitBox))
+                        onCollide(c,w);
                 if (mPlayer.HitBox.Intersects(w.HitBox))
                     PlayerCollide(mPlayer);
+            }
+                
 
             //foreach (Collidable entity in AllCollidables)
             for (int i = 0; i < AllCollidables.Count; i++)

@@ -99,6 +99,7 @@ namespace GMTB
             //Kernel.IM.SubscribeSpace(OnSpace);
             lines = Lines;
             DialogueRunning = true;
+            mLine = 0;
             Kernel._gameState = Kernel.GameStates.Dialogue;
             Input.getInstance.SubscribeSpace(this.OnSpace);
         }

@@ -30,7 +30,7 @@ namespace GMTB.AI
         public HostileAI()
         {
             mState = "Idle";
-            mVelocity.Y = mSpeed;            
+            //mVelocity.Y = mSpeed;
             mStartPos = mPosition;
             mUName = "AI";
             sub();
@@ -38,12 +38,21 @@ namespace GMTB.AI
         #endregion
 
         #region Methods
+        public override void setVars(bool PatrolVert, string state)
+        {
+            mState = state;
+            mPatrolVert = PatrolVert;
+        }
+        public override void setVars(bool PatrolVert, string state, string dir)
+        {
+            setVars(PatrolVert, state);
+            mDirection = dir;
+        }
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
             checkPlayerProx(gameTime);
-            mPosition += mVelocity;
-
+            
             if (mVelocity.X > 0)
                 mDirection = "Right";
             else if (mVelocity.X < 0)
@@ -56,15 +65,12 @@ namespace GMTB.AI
                 else if (mVelocity.Y < 0)
                     mDirection = "Up";
             }
-            
 
-            // State controller
             switch (mState)
             {
-                case "Idle":
-                    Idle();
-                    break;
                 case "Follow":
+                    mWalkDir = 1;
+                    mSpeed *= mWalkDir;
                     FollowPlayer(gameTime);
                     break;
                 case "Search":
@@ -78,17 +84,10 @@ namespace GMTB.AI
             }
 
         }
-        public override void Idle()
-        {
-            // Idle walk
-            if (mPosition.X <= 160 || mPosition.X >= 670)
-                mVelocity.X *= -1;
-            if (mPosition.Y <= 150 || mPosition.Y >= 285)
-                mVelocity.Y *= -1;
-        }
         public virtual void FollowPlayer(GameTime gameTime)
         {
             ActivityTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            
             mDistanceToDest = mPlayerPos - mPosition;
             mDistanceToDest.Normalize();
 
@@ -121,12 +120,11 @@ namespace GMTB.AI
 
                 mState = "Reset";
             }
-
-
         }
         public override void Collision(object source, CollisionEvent args)
         {
-            if (args.Entity == this)
+            base.Collision(source, args);
+            if (args.Entity == this && args.Wall == null)
             {
                 RoomManager.getInstance.Room = "Backgrounds/GameOver";
                 Kernel._gameState = Kernel.GameStates.GameOver;
@@ -136,10 +134,8 @@ namespace GMTB.AI
         {
             if (args.Entity == this)
             {
-                if (mState == "Idle")
-                {
+                //if (mState == "Idle")
                     beginFollow = true;
-                }
             }
 
         }
@@ -162,20 +158,25 @@ namespace GMTB.AI
         }
         public void Reset()
         {
-            mDistanceToDest = mStartPos - mPosition;
+            Vector2 start = mStartPos;
+            start.Normalize();
+            mDistanceToDest = start - mPosition;
             mDistanceToDest.Normalize();
             mVelocity = mDistanceToDest * mSpeed;
-            if (mPosition == mStartPos)
+            if ((mPosition.X >= mStartPos.X -5 && mPosition.X <= mStartPos.X + 5) 
+                && (mPosition.Y >= mStartPos.Y - 5 && mPosition.Y <= mStartPos.Y + 5))
             {
                 mState = "Idle";
                 mVelocity.X = 0;
                 mVelocity.Y = mSpeed;
+                Destroy();
             }
         }
 
         public override void Destroy()
         {
             base.Destroy();
+            mState = "Stop";
             CollisionManager.getInstance.unSubscribe(Collision, this);
             ProximityManager.getInstance.unSubscribe(inProximity, this);
         }

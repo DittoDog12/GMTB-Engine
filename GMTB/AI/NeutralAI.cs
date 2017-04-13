@@ -69,44 +69,48 @@ namespace GMTB.AI
 
         public override void Collision(object source, CollisionEvent args)
         {
-            base.Collision(source, args);
-            if (TimesHit == 4)
+            if (args.Entity == this && args.Wall == null)
             {
-                Script.getInstance.SingleDialogue("Stop That");
-                TimesHit++;
+
+                base.Collision(source, args);
+                if (TimesHit == 4)
+                {
+                    Script.getInstance.SingleDialogue("Stop That");
+                    TimesHit++;
+                }
+                else if (TimesHit == 7)
+                {
+                    Script.getInstance.SingleDialogue("STOP IT!");
+                    TimesHit++;
+                }
+                else if (TimesHit == 10)
+                {
+                    Script.getInstance.SingleDialogue("STOP!!!");
+                    TimesHit++;
+                }
+                else if (TimesHit == 12)
+                {
+                    Script.getInstance.SingleDialogue("What are you even doing?");
+                    TimesHit++;
+                }
+                else if (TimesHit == 15)
+                {
+                    Script.getInstance.SingleDialogue("I don't even");
+                    TimesHit++;
+                }
+                else if (TimesHit == 17)
+                {
+                    Script.getInstance.SingleDialogue("*Sigh* 'Give me the Booty', there I said it");
+                    TimesHit++;
+                }
+                else if (TimesHit >= 20)
+                {
+                    Script.getInstance.SingleDialogue("I said it once I won't say it again");
+                    TimesHit++;
+                }
+                else
+                    TimesHit++;
             }
-            else if (TimesHit == 7)
-            {
-                Script.getInstance.SingleDialogue("STOP IT!");
-                TimesHit++;
-            }
-            else if (TimesHit == 10)
-            {
-                Script.getInstance.SingleDialogue("STOP!!!");
-                TimesHit++;
-            }
-            else if (TimesHit == 12)
-            {
-                Script.getInstance.SingleDialogue("What are you even doing?");
-                TimesHit++;
-            }
-            else if (TimesHit == 15)
-            {
-                Script.getInstance.SingleDialogue("I don't even");
-                TimesHit++;
-            }
-            else if (TimesHit == 17)
-            {
-                Script.getInstance.SingleDialogue("*Sigh* 'Give me the Booty', there I said it");
-                TimesHit++;
-            }
-            else if (TimesHit >= 20)
-            {
-                Script.getInstance.SingleDialogue("I said it once I won't say it again");
-                TimesHit++;
-            }
-            else
-                TimesHit++;
         }
         #endregion
     }

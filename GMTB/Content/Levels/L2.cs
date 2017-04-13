@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using GMTB.AI;
 
 namespace GMTB.Content.Levels
 {
@@ -24,8 +25,15 @@ namespace GMTB.Content.Levels
         #region Methods
         public override void Initialise()
         {
-            if(firstRun == true)
+            if (firstRun == true)
             {
+                //Martha
+                createdEntity = EntityManager.getInstance.newEntity<HighLevelAI>("Enemy/Martha/");
+                SceneManager.getInstance.newEntity(createdEntity, 450, 120);
+                createdEntity.setVars(true, "Idle");
+                Removables.Add(createdEntity);
+                MarthaID = createdEntity.UID;
+
                 // Door - Rushout Room
                 createdEntity = EntityManager.getInstance.newEntity<Door>();
                 SceneManager.getInstance.newEntity(createdEntity, (ScreenWidth / 2) - 18, 75);
@@ -47,27 +55,29 @@ namespace GMTB.Content.Levels
                 Script.getInstance.BeginDialogue(lines);
                 firstRun = false;
 
-                // Walls
-                //left
-                wall = new InvisibleWall();
-                wall.setVars(new Vector2(280, 75), new Vector2(10, 460));
-                Walls.Add(wall);
-                //right
-                wall = new InvisibleWall();
-                wall.setVars(new Vector2(505, 75), new Vector2(10, 460));
-                Walls.Add(wall);
-                //top left
-                wall = new InvisibleWall();
-                wall.setVars(new Vector2(250, 75), new Vector2(80, 10));
-                Walls.Add(wall);
-                //top right
-                wall = new InvisibleWall();
-                wall.setVars(new Vector2(360, 75), new Vector2(80, 10));
-                Walls.Add(wall);
-                //bottom
-                wall = new InvisibleWall();
-                wall.setVars(new Vector2(280, 435), new Vector2(195, 10));
-                Walls.Add(wall);
+                //// Walls
+                ////left
+                //wall = new InvisibleWall();
+                //wall.setVars(new Vector2(280, 75), new Vector2(10, 460));
+                //Walls.Add(wall);
+                ////right
+                //wall = new InvisibleWall();
+                //wall.setVars(new Vector2(505, 75), new Vector2(10, 460));
+                //Walls.Add(wall);
+                ////top left
+                //wall = new InvisibleWall();
+                //wall.setVars(new Vector2(250, 75), new Vector2(80, 10));
+                //Walls.Add(wall);
+                ////top right
+                //wall = new InvisibleWall();
+                //wall.setVars(new Vector2(360, 75), new Vector2(80, 10));
+                //Walls.Add(wall);
+                ////bottom
+                //wall = new InvisibleWall();
+                //wall.setVars(new Vector2(280, 435), new Vector2(195, 10));
+                //Walls.Add(wall);
+
+                firstRun = false;
             }
             else
             {
@@ -80,13 +90,26 @@ namespace GMTB.Content.Levels
                         }
                 foreach (IWall w in Walls)
                     w.Sub();
+
             }
-            
+
         }
 
         public override List<IEntity> Exit()
         {
             base.Exit();
+            //foreach (IEntity m in Removables)
+            //    if (m.UID == MarthaID)
+            //    {
+            //        IAI Martha = m as IAI;
+            //        MarthaStatus = Martha.State;
+            //    }
+            //if (MarthaStatus == "Follow")
+            //{
+            //    for (int i = 0; i < Removables.Count; i++)
+            //        if (Removables[i].UID == MarthaID)
+            //            Removables.Remove(Removables[i]);
+            //}
             return Removables;
         }
         #endregion

@@ -77,7 +77,7 @@ namespace GMTB
         public Entity()
         {
             mCollidable = false;
-            mVisible = true;
+            mVisible = true;          
         }
         #endregion
 
@@ -91,12 +91,16 @@ namespace GMTB
             mTexturename = path;
             UID = uid;
         }
+        public virtual void setVars(string path, bool Dialogue){}
         public virtual void setVars(int uid, PlayerIndex pPlayer){}
         public virtual void setVars(string tRoom, Vector2 playerStart){}
+        public virtual void setVars(bool PatrolVert, string state){}
+        public virtual void setVars(bool PatrolVert, string state, string dir){}
         public void setPos(int x, int y)
         {
             mPosition.X = x;
             mPosition.Y = y;
+            mDefaultPos = mPosition;
         }
 
         public virtual void Update(GameTime gameTime)

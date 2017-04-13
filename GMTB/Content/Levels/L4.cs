@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using GMTB.AI;
 
 namespace GMTB.Content.Levels
 {
@@ -20,6 +21,22 @@ namespace GMTB.Content.Levels
         {
             if (firstRun == true)
             {
+                // Desk
+                createdEntity = EntityManager.getInstance.newEntity<SolidObject>("Desk");
+                SceneManager.getInstance.newEntity(createdEntity, 425, 150);
+                Removables.Add(createdEntity);
+
+                // Nurse at Desk
+                createdEntity = EntityManager.getInstance.newEntity<LowLevelAI>("Enemy/NurseA/");
+                SceneManager.getInstance.newEntity(createdEntity, 400, 150);
+                createdEntity.setVars(false, "Stand", "Right");
+                Removables.Add(createdEntity);
+                // Nurse Patroling
+                createdEntity = EntityManager.getInstance.newEntity<LowLevelAI>("Enemy/NurseB/");
+                SceneManager.getInstance.newEntity(createdEntity, 100, ScreenHeight / 2);
+                createdEntity.setVars(true, "Idle");
+                Removables.Add(createdEntity);
+
                 // Door - North Hallway
                 createdEntity = EntityManager.getInstance.newEntity<Door>();
                 SceneManager.getInstance.newEntity(createdEntity, (ScreenWidth / 4) - 10, 60);
@@ -28,7 +45,7 @@ namespace GMTB.Content.Levels
                 // Door - Boardroom
                 createdEntity = EntityManager.getInstance.newEntity<Door>();
                 SceneManager.getInstance.newEntity(createdEntity, 75, 150);
-                createdEntity.setVars("L5", new Vector2(5, ScreenHeight / 2));
+                createdEntity.setVars("L5", new Vector2(540, ScreenHeight / 2));
                 Removables.Add(createdEntity);
                 // Door - Ward
                 createdEntity = EntityManager.getInstance.newEntity<Door>();
@@ -62,10 +79,21 @@ namespace GMTB.Content.Levels
                 wall = new InvisibleWall();
                 wall.setVars(new Vector2(350, 245), new Vector2(375, 175));
                 Walls.Add(wall);
+
+                firstRun = false;
             }
             else
             {
+                foreach (IEntity e in EntityManager.getInstance.Entities)
+                    foreach (IEntity r in Removables)
+                        if (e.UID == r.UID)
+                        {
+                            SceneManager.getInstance.newEntity(r, (int)r.DefaultPos.X, (int)r.DefaultPos.Y);
+                            r.sub();
+                        }
 
+                foreach (IWall w in Walls)
+                    w.Sub();
             }
         }
 
