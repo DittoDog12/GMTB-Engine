@@ -11,32 +11,15 @@ namespace GMTB
         private List<IAI> AllAIs;
         private IPlayer Player;
         private List<INeutralAI> NeutralAIs;
+        List<IEntity> Entities;
         #endregion
 
         #region Constructor
         private AiManager()
         {
-            List<IEntity> Entities = EntityManager.getInstance.Entities;
+            Entities = EntityManager.getInstance.Entities;
             AllAIs = new List<IAI>();
-            for (int i = 0; i < Entities.Count; i++)
-            {
-                var asInterface = Entities[i] as IAI;
-                if (asInterface != null)
-                {
-                    AllAIs.Add(asInterface);
-                }
-                if (Entities[i].UName == "Player")
-                {
-                    Player = Entities[i] as IPlayer;
-                }
-            }
-            NeutralAIs = new List<INeutralAI>();
-            foreach (IEntity e in Entities)
-            {
-                var asInterface = e as INeutralAI;
-                if (asInterface != null)
-                    NeutralAIs.Add(asInterface);
-            }
+            
         }
         public static AiManager getInstance
         {
@@ -56,6 +39,26 @@ namespace GMTB
         }
         public void Update()
         {
+            for (int i = 0; i < Entities.Count; i++)
+            {
+                var asInterface = Entities[i] as IAI;
+                if (asInterface != null)
+                {
+                    AllAIs.Add(asInterface);
+                }
+                if (Entities[i].UName == "Player")
+                {
+                    Player = Entities[i] as IPlayer;
+                }
+            }
+            NeutralAIs = new List<INeutralAI>();
+            foreach (IEntity e in Entities)
+            {
+                var asInterface = e as INeutralAI;
+                if (asInterface != null)
+                    NeutralAIs.Add(asInterface);
+            }
+
             for (int i = 0; i < AllAIs.Count; i++)
             {
                 AllAIs[i].PlayerPos = Player.Position;

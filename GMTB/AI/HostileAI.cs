@@ -87,10 +87,9 @@ namespace GMTB.AI
         public virtual void FollowPlayer(GameTime gameTime)
         {
             ActivityTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            
+
             mDistanceToDest = mPlayerPos - mPosition;
             mDistanceToDest.Normalize();
-
             mVelocity = mDistanceToDest * mSpeed;
 
             if (ActivityTimer >= ChaseTime || !mPlayerVisible)
