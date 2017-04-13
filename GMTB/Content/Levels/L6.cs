@@ -22,6 +22,7 @@ namespace GMTB.Content.Levels
             BedPositions[3] = 390;
         }
         #endregion
+
         #region Methods
         public override void Initialise()
         {
@@ -39,7 +40,7 @@ namespace GMTB.Content.Levels
                 }
                 // Neutral AI
                 createdEntity = EntityManager.getInstance.newEntity<NeutralAI>("NPC/PatientZelda/");
-                SceneManager.getInstance.newEntity(createdEntity, 40, 100);
+                SceneManager.getInstance.newEntity(createdEntity, 250, 100);
                 Removables.Add(createdEntity);
 
                 // Door - South Hallway

@@ -12,9 +12,11 @@ namespace GMTB.AI
     {
         #region Data Members
         private string[] lines;
+        private string[] lines2;
         private bool SecondEncounter;
         private string RepeatedText;
         private string mTexturePath;
+        private bool firstDialogue = false;
         #endregion
 
         #region Constructor
@@ -24,6 +26,7 @@ namespace GMTB.AI
             RepeatedText = "*The Old Man doesn't turn around*";
             mCollidable = true;
             lines = File.ReadAllLines(Environment.CurrentDirectory + "/Content/Dialogue/OldManAndSerena.txt");
+            lines2 = File.ReadAllLines(Environment.CurrentDirectory + "/Content/Dialogue/A.I.AndSerenaAfterOldMan.txt");
             CollisionManager.getInstance.Subscribe(Collision, this);
             
         }
@@ -54,7 +57,16 @@ namespace GMTB.AI
         {
             base.Update(gameTime);
             if (SecondEncounter == true && Kernel._gameState == Kernel.GameStates.Playing)
+            {
                 mTexturename = mTexturePath + "Back";
+                if (firstDialogue == false)
+                {
+                    Script.getInstance.BeginDialogue(lines2);
+                    firstDialogue = true;
+                }
+
+            }
+                
         }
         public override void Destroy()
         {

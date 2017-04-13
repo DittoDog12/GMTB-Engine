@@ -80,6 +80,7 @@ namespace GMTB.AI
             if (runonce == false)
             {
                 CollisionManager.getInstance.unSubscribe(Collision, this);
+                ProximityManager.getInstance.unSubscribe(inProximity, this);
                 waiting = 0f;
                 runonce = true;
             }

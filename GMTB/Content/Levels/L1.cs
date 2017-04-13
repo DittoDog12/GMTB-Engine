@@ -31,7 +31,7 @@ namespace GMTB.Content.Levels
             {
                 // Old Man
                 createdEntity = EntityManager.getInstance.newEntity<FriendlyAI>("NPC/OldMan/");
-                SceneManager.getInstance.newEntity(createdEntity, (ScreenWidth / 2) + 145, 150);
+                SceneManager.getInstance.newEntity(createdEntity, (ScreenWidth / 2) + 145, 160);
                 Removables.Add(createdEntity);
 
                 // Hiding Place
@@ -41,34 +41,35 @@ namespace GMTB.Content.Levels
                     SceneManager.getInstance.newEntity(createdEntity, BedPositions[i], 150);
                     Removables.Add(createdEntity);
                 }
-                // Jumpscare dude
-                //createdEntity = EntityManager.getInstance.newEntity<JumpScare>("Enemy/JumpScare/");
-                //SceneManager.getInstance.newEntity(createdEntity, 160, 150);
-                //Removables.Add(createdEntity);
+                //Jumpscare dude
+                createdEntity = EntityManager.getInstance.newEntity<JumpScare>("Enemy/JumpScare/");
+                SceneManager.getInstance.newEntity(createdEntity, 160, 150);
+                Removables.Add(createdEntity);
+
                 // Door
                 createdEntity = EntityManager.getInstance.newEntity<Door>();
                 SceneManager.getInstance.newEntity(createdEntity, 450, 285);
-                createdEntity.setVars("L2", new Vector2((ScreenWidth/2)-18, 110));
+                createdEntity.setVars("L2", new Vector2((ScreenWidth / 2) - 18, 110));
                 Removables.Add(createdEntity);
 
 
-                // Walls
-                //Left
-                wall = new InvisibleWall();
-                wall.setVars(new Vector2(150, 150), new Vector2(10, 520));
-                Walls.Add(wall);
-                //right
-                wall = new InvisibleWall();
-                wall.setVars(new Vector2(670, 150), new Vector2(10, 520));
-                Walls.Add(wall);
-                //top
-                wall = new InvisibleWall();
-                wall.setVars(new Vector2(150, 150), new Vector2(510, 10));
-                Walls.Add(wall);
-                //bottom
-                wall = new InvisibleWall();
-                wall.setVars(new Vector2(150, 315), new Vector2(510, 10));
-                Walls.Add(wall);
+                //// Walls
+                ////Left
+                //wall = new InvisibleWall();
+                //wall.setVars(new Vector2(150, 150), new Vector2(10, 520));
+                //Walls.Add(wall);
+                ////right
+                //wall = new InvisibleWall();
+                //wall.setVars(new Vector2(670, 150), new Vector2(10, 520));
+                //Walls.Add(wall);
+                ////top
+                //wall = new InvisibleWall();
+                //wall.setVars(new Vector2(150, 150), new Vector2(510, 10));
+                //Walls.Add(wall);
+                ////bottom
+                //wall = new InvisibleWall();
+                //wall.setVars(new Vector2(150, 315), new Vector2(510, 10));
+                //Walls.Add(wall);
                 firstRun = false;
             }
             else
@@ -79,12 +80,6 @@ namespace GMTB.Content.Levels
                         {
                             SceneManager.getInstance.newEntity(r, (int)r.DefaultPos.X, (int)r.DefaultPos.Y);
                             r.sub();
-                            if (r.UName == "JumpScare")
-                            {
-                                IAI j = r as IAI;
-                                j.Scare = false;
-                            }
-                                
                         }
 
                 foreach (IWall w in Walls)

@@ -96,7 +96,6 @@ namespace GMTB
         // Called by Collision triggers to start a conversaion
         public void BeginDialogue(string[] Lines)
         {
-            //Kernel.IM.SubscribeSpace(OnSpace);
             lines = Lines;
             DialogueRunning = true;
             mLine = 0;

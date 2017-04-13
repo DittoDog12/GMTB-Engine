@@ -24,16 +24,22 @@ namespace GMTB.AI
         {
             if (mScare == true)
             {
-                //mDistanceToDest = mPlayerPos - mPosition;
-                //mDistanceToDest.Normalize();
+                mDistanceToDest = mPlayerPos - mPosition;
+                mDistanceToDest.Normalize();
 
-                //mVelocity = mDistanceToDest * mSpeed;
-                //base.Update(gameTime);
+                mVelocity = mDistanceToDest * mSpeed;
+                base.Update(gameTime);
             }
             else
             {
                 mSpeed = 0f;
             }
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+            mScare = false;
         }
     }
 }

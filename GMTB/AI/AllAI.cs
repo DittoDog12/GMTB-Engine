@@ -27,11 +27,6 @@ namespace GMTB.AI
         {
             get { return mState; }
         }
-        public bool Scare
-        {
-            get { return mScare; }
-            set { mScare = value; }
-        }
         public bool PatrolVert
         {
             set { mPatrolVert = value; }
