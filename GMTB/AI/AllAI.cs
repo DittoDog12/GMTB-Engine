@@ -91,6 +91,9 @@ namespace GMTB.AI
             mVelocity.X = 0;
             mVelocity.Y = 0;
         }
+
+        public virtual void setVars(bool PatrolVert, string state) { }
+        public virtual void setVars(bool PatrolVert, string state, string dir) { }
         #endregion
     }
 }

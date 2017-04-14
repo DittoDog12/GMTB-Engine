@@ -94,8 +94,7 @@ namespace GMTB
         public virtual void setVars(string path, bool Dialogue){}
         public virtual void setVars(int uid, PlayerIndex pPlayer){}
         public virtual void setVars(string tRoom, Vector2 playerStart){}
-        public virtual void setVars(bool PatrolVert, string state){}
-        public virtual void setVars(bool PatrolVert, string state, string dir){}
+
         public void setPos(int x, int y)
         {
             mPosition.X = x;

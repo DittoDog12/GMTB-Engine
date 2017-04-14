@@ -29,12 +29,14 @@ namespace GMTB.Content.Levels
                 // Nurse at Desk
                 createdEntity = EntityManager.getInstance.newEntity<LowLevelAI>("Enemy/NurseA/");
                 SceneManager.getInstance.newEntity(createdEntity, 400, 150);
-                createdEntity.setVars(false, "Stand", "Right");
+                var asInstance = createdEntity as IAI;
+                asInstance.setVars(false, "Stand", "Right");
                 Removables.Add(createdEntity);
                 // Nurse Patroling
                 createdEntity = EntityManager.getInstance.newEntity<LowLevelAI>("Enemy/NurseB/");
                 SceneManager.getInstance.newEntity(createdEntity, 100, ScreenHeight / 2);
-                createdEntity.setVars(true, "Idle");
+                asInstance = createdEntity as IAI;
+                asInstance.setVars(true, "Idle");
                 Removables.Add(createdEntity);
 
                 // Door - North Hallway

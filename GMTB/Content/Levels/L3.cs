@@ -22,7 +22,8 @@ namespace GMTB.Content.Levels
                 //Martha
                 createdEntity = EntityManager.getInstance.newEntity<HighLevelAI>("Enemy/Martha/");
                 SceneManager.getInstance.newEntity(createdEntity, 550, ScreenHeight / 2);
-                createdEntity.setVars(true, "Wait");
+                var asInstance = createdEntity as IAI;
+                asInstance.setVars(true, "Wait");
                 Removables.Add(createdEntity);
 
                 // Chair
