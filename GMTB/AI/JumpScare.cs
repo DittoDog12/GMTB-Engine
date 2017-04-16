@@ -2,7 +2,7 @@
 
 namespace GMTB.AI
 {
-    class JumpScare : HostileAI, Collidable
+    class JumpScare : HostileAI
     {
         public JumpScare()
         {

@@ -84,7 +84,7 @@ namespace GMTB.AI
             }
 
         }
-        public virtual void FollowPlayer(GameTime gameTime)
+        public void FollowPlayer(GameTime gameTime)
         {
             ActivityTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
