@@ -5,6 +5,7 @@ namespace GMTB
 {
     /// <summary>
     /// Main Collision detection manager, calls the Entities Collision Method in the event of a collision
+    /// Also checks for AI colliding with walls
     /// </summary>
     public class CollisionManager
     {

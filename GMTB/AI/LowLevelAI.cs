@@ -2,6 +2,9 @@
 
 namespace GMTB.AI
 {
+    /// <summary>
+    /// low Difficulty AI, inherits basic Behaviour from Hostile AI but alters timings
+    /// </summary>   
     class LowLevelAI : HostileAI
     {
         #region Constructor

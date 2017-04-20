@@ -2,6 +2,9 @@
 
 namespace GMTB.AI
 {
+    /// <summary>
+    /// Holds shared behaviour and varibles for all AI
+    /// </summary>
     public class AllAI : AnimatingEntity, IAI
     {
         #region Data Members

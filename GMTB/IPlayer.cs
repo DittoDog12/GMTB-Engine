@@ -2,6 +2,9 @@
 
 namespace GMTB
 {
+    /// <summary>
+    /// Player specific interface
+    /// </summary>
     public interface IPlayer
     {
         Rectangle HitBox { get; }

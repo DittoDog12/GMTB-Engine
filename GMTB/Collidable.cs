@@ -2,6 +2,9 @@
 
 namespace GMTB
 {
+    /// <summary>
+    /// Collidable interface, implemented by any entities with collisions
+    /// </summary>
     public interface Collidable
     {
         Rectangle HitBox { get; }

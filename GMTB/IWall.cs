@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework;
 
 namespace GMTB
 {
+    /// <summary>
+    /// Wall specific interface
+    /// </summary>
     public interface IWall
     {
         Rectangle HitBox { get; }

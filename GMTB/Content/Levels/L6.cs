@@ -11,6 +11,7 @@ namespace GMTB.Content.Levels
     class L6 : Level
     {
         private int[] BedPositions;
+        private int ItemUID;
         #region Constructor
         public L6() :base()
         {
@@ -20,6 +21,7 @@ namespace GMTB.Content.Levels
             BedPositions[1] = 230;
             BedPositions[2] = 300;
             BedPositions[3] = 390;
+
         }
         #endregion
 
@@ -47,6 +49,12 @@ namespace GMTB.Content.Levels
                 createdEntity = EntityManager.getInstance.newEntity<Door>();
                 SceneManager.getInstance.newEntity(createdEntity, (ScreenWidth / 2) - 5, 90);
                 createdEntity.setVars("L4", new Vector2((ScreenWidth / 4) - 10, 330));
+                Removables.Add(createdEntity);
+
+                // Item
+                createdEntity = EntityManager.getInstance.newEntity<Item>("Game Items/TestTubeBottle");
+                SceneManager.getInstance.newEntity(createdEntity, 200, 380);
+                ItemUID = createdEntity.UID;
                 Removables.Add(createdEntity);
 
                 //// Walls
@@ -79,6 +87,19 @@ namespace GMTB.Content.Levels
                     foreach (IEntity r in Removables)
                         if (e.UID == r.UID)
                         {
+                            // Check if the current entity is the Item, only spawn it if it's not been collected
+                            if (r.UID == ItemUID)
+                            {
+                                var asInterface = r as IItem;
+                                if (asInterface.Collected == false)
+                                {
+                                    SceneManager.getInstance.newEntity(r, (int)r.DefaultPos.X, (int)r.DefaultPos.Y);
+                                    r.sub();
+                                }
+                                else
+                                    break;
+
+                            }
                             SceneManager.getInstance.newEntity(r, (int)r.DefaultPos.X, (int)r.DefaultPos.Y);
                             r.sub();
                         }

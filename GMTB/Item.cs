@@ -2,11 +2,14 @@
 
 namespace GMTB
 {
-    class Item : Entity, Collidable, hasProximity
+    /// <summary>
+    /// Collectable item
+    /// </summary>
+    class Item : Entity, Collidable, hasProximity, IItem
     {
         #region Data Members
-        public bool Collected = false;
-        public bool use = false;
+        private bool mCollected = false;
+        private bool use = false;
 
         public virtual Rectangle ProximityBox
         {
@@ -17,11 +20,16 @@ namespace GMTB
             }
         }
         #endregion
-
+        #region Accessors
+        public bool Collected
+        {
+            get { return mCollected; }
+        }
+        #endregion
         #region Constructor
         public Item()
         {
-
+            sub();
         }
         #endregion
 
@@ -30,9 +38,9 @@ namespace GMTB
         {
             if (args.Entity == this)
             {
-                if (use)
+                if (use == true)
                 {
-                    Collected = true;
+                    mCollected = true;
                     Destroy();
                     use = false;
                 }
@@ -47,14 +55,17 @@ namespace GMTB
         public override void Destroy()
         {
             base.Destroy();
+            Input.getInstance.UnSubscribeUse(OnUse);
             CollisionManager.getInstance.unSubscribe(Collision, this);
             ProximityManager.getInstance.unSubscribe(inProximity, this);
-
+            mVisible = false;
         }
         public override void sub()
         {
-            if (!Collected)
+            if (mCollected == false)
             {
+                mVisible = true;
+                Input.getInstance.SubscribeUse(OnUse);
                 CollisionManager.getInstance.Subscribe(Collision, this);
                 ProximityManager.getInstance.Subscribe(inProximity, this);
             }  

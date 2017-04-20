@@ -5,15 +5,15 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GMTB
 {
+    /// <summary>
+    /// Pause menu, suspends all game logic
+    /// </summary>
     public class PauseMenu
     {
         #region Data Members
         Microsoft.Xna.Framework.Content.ContentManager Content;
 
         public bool isSubbed = false;
-
-        private Texture2D saveButton;
-        private Vector2 savePosition;
 
         private Texture2D exitButton;
         private Vector2 exitPosition;

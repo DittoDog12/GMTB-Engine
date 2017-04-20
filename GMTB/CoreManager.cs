@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GMTB
 {
     /// <summary>
-    /// Manager to control all other Managers
+    /// Manager to control all other Managers based on GameState
     /// </summary>
     public class CoreManager
     {

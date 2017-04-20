@@ -128,8 +128,12 @@ namespace GMTB
             {
                 IsMouseVisible = true;
                 Input.getInstance.unSubscribeExit(onEsc);
-                GameOverScreen = new GameOver();
-                GameOverScreen.Initialize(spriteBatch);
+                if (GameOverScreen == null)
+                {
+                    GameOverScreen = new GameOver();
+                    GameOverScreen.Initialize(spriteBatch);
+                }            
+                GameOverScreen.Update(gameTime);
             }
                 
             CoreManager.getInstance.Update(gameTime);

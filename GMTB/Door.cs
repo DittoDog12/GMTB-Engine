@@ -2,6 +2,9 @@
 
 namespace GMTB
 {
+    /// <summary>
+    /// Collidable Object for changing levels
+    /// </summary>
     class Door : Entity, Collidable
     {
         #region Data Members

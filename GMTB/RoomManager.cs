@@ -3,6 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GMTB
 {
+    /// <summary>
+    /// Controls background drawing
+    /// </summary>
     class RoomManager
     {
         #region Data Members

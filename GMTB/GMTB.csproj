@@ -57,6 +57,7 @@
     <Compile Include="Content\Levels\L5.cs" />
     <Compile Include="Content\Levels\L6.cs" />
     <Compile Include="GameOver.cs" />
+    <Compile Include="IItem.cs" />
     <Compile Include="InvisibleWall.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="IWall.cs" />
@@ -65,7 +66,6 @@
     <Compile Include="Content\Levels\L1.cs" />
     <Compile Include="Content\Levels\L2.cs" />
     <Compile Include="Level.cs" />
-    <Compile Include="LevelData.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="PauseMenu.cs" />
     <Compile Include="ProximityEvent.cs" />
@@ -94,7 +94,6 @@
     <Compile Include="RoomManager.cs" />
     <Compile Include="SceneManager.cs" />
     <Compile Include="Script.cs" />
-    <Compile Include="SoundIndicator.cs" />
     <Compile Include="SolidObject.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -221,6 +220,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Game Items\Table.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Game Items\TestTubeBottle.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Game Items\Wardrope.png">

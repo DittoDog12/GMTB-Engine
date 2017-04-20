@@ -3,6 +3,9 @@ using GMTB.Content.Levels;
 
 namespace GMTB
 {
+    /// <summary>
+    /// Main level manager, controls removal of old entities and loading of new level
+    /// </summary>
     class LevelManager
     {
         #region Data Members
@@ -36,6 +39,7 @@ namespace GMTB
 
         public void NewLevel(string LevelID)
         {
+            // Clean up old level
             if (currLevel != null)
             {
                 Removables = currLevel.Exit();
@@ -51,6 +55,7 @@ namespace GMTB
             }
             else
             {
+                // Check if level has already been loaded
                 bool newLevel = true;
                 for (int i = 0; i < AllLoadedLevels.Count; i++)
                 {

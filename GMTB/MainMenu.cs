@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GMTB
 {
+    /// <summary>
+    /// Main menu, displayed on start up and triggers first level load
+    /// </summary>
     public class MainMenu
     {
         #region Data Members
@@ -15,8 +18,6 @@ namespace GMTB
         private Texture2D exitButton;
         private Vector2 exitPosition;
 
-        private Texture2D loadButton;
-        private Vector2 loadPosition;
 
         private string Background;
 

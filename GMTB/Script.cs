@@ -11,7 +11,7 @@ namespace GMTB
         /// </summary>
         #region Data Members
         private static Script Instance = null;
-        private string[] lines; // List holding the current conversation
+        private string[] Lines; // List holding the current conversation
         private string Line; // String to hold a single line of dialogue
         private int mLine; // Currently displayed line
         private bool mNextLine; // Used for spacebar control of text if implemented
@@ -28,7 +28,7 @@ namespace GMTB
         private Script()
         {
             mNextLine = false; // Used for spacebar control of text if implemented
-            lines = File.ReadAllLines(Environment.CurrentDirectory + "/Content/Dialogue/FirstEncounter.txt"); // Initial conversation loaded to list
+            Lines = File.ReadAllLines(Environment.CurrentDirectory + "/Content/Dialogue/FirstEncounter.txt"); // Initial conversation loaded to list
 
             mLine = 0;
 
@@ -54,7 +54,7 @@ namespace GMTB
             if (DialogueRunning)
             {
                 timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                DialogueBox.getInstance.Display(lines[mLine]); // Display current line of loaded list
+                DialogueBox.getInstance.Display(Lines[mLine]); // Display current line of loaded list
                 // Load next line at interval
                 if (timer > interval || mNextLine == true)
                 {
@@ -62,7 +62,7 @@ namespace GMTB
                     mLine++; // increment current line
                     timer = 0f;
                 }
-                if (mLine == lines.Length)
+                if (mLine == Lines.Length)
                 {
                     DialogueBox.getInstance.Display(" ");
                     DialogueRunning = false;
@@ -94,9 +94,9 @@ namespace GMTB
         }
 
         // Called by Collision triggers to start a conversaion
-        public void BeginDialogue(string[] Lines)
+        public void BeginDialogue(string[] lines)
         {
-            lines = Lines;
+            Lines = lines;
             DialogueRunning = true;
             mLine = 0;
             Kernel._gameState = Kernel.GameStates.Dialogue;

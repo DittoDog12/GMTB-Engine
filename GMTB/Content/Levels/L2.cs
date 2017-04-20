@@ -9,7 +9,7 @@ namespace GMTB.Content.Levels
     class L2 : Level
     {
         #region Data Members
-        private string MarthaStatus;
+        //private string MarthaStatus;
         private int MarthaID;
         private string[] lines;
         #endregion

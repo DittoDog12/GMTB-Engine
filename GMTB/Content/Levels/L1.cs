@@ -74,6 +74,7 @@ namespace GMTB.Content.Levels
             }
             else
             {
+                // Check each loaded entity, if it's an entity from this level then respawn it
                 foreach (IEntity e in EntityManager.getInstance.Entities)
                     foreach (IEntity r in Removables)
                         if (e.UID == r.UID)

@@ -2,6 +2,9 @@
 
 namespace GMTB.AI
 {
+    /// <summary>
+    /// Neutral AI, simply follows player, inherits directly from Entity as it doesnt need to animate
+    /// </summary>
     class NeutralAI : Entity, Collidable, INeutralAI
     {
         #region Data Members

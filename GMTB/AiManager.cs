@@ -4,6 +4,9 @@ using GMTB.AI;
 
 namespace GMTB
 {
+    /// <summary>
+    /// Main AI manager, informs AIs of Player location for follwing behaviour
+    /// </summary>
     public class AiManager
     {
         #region Data Members
@@ -11,7 +14,7 @@ namespace GMTB
         private List<IAI> AllAIs;
         private IPlayer Player;
         private List<INeutralAI> NeutralAIs;
-        List<IEntity> Entities;
+        private List<IEntity> Entities;
         #endregion
 
         #region Constructor

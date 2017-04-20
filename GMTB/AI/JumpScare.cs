@@ -2,6 +2,9 @@
 
 namespace GMTB.AI
 {
+    /// <summary>
+    /// AI desigend to chase the player once then stand still
+    /// </summary>
     class JumpScare : HostileAI
     {
         public JumpScare()
@@ -29,6 +32,7 @@ namespace GMTB.AI
 
                 mVelocity = mDistanceToDest * mSpeed;
                 base.Update(gameTime);
+                CurrentFrame++;
             }
             else
             {

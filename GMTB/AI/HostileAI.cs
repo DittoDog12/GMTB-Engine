@@ -2,7 +2,10 @@
 
 namespace GMTB.AI
 {
-    public class HostileAI : AllAI, Collidable, hasProximity
+ /// <summary>
+ /// Main hostile AI behaviours, difficulty modified by child classes
+ /// </summary>
+ public class HostileAI : AllAI, Collidable, hasProximity
     {
         #region Data Members
         protected Vector2 mStartPos;

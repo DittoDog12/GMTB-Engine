@@ -2,6 +2,9 @@
 
 namespace GMTB.Content.Levels
 {
+    /// <summary>
+    /// Main level class, all level descriptors inherit from this
+    /// </summary>
     public abstract class Level
     {
         #region Data Members

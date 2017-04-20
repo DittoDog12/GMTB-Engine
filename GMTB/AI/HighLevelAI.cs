@@ -2,6 +2,9 @@
 
 namespace GMTB.AI
 {
+    /// <summary>
+    /// High Difficulty AI, inherits basic Behaviour from Hostile AI but alters timings
+    /// </summary>
     public class HighLevelAI : HostileAI
     {
         #region Data Members

@@ -2,6 +2,9 @@
 
 namespace GMTB.AI
 {
+    /// <summary>
+    /// AI Specific Interface
+    /// </summary>
     public interface IAI
     {
         Vector2 PlayerPos { set; }

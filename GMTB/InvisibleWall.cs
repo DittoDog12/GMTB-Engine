@@ -2,6 +2,9 @@
 
 namespace GMTB
 {
+    /// <summary>
+    /// Wall to stop player or AI from leaving the world
+    /// </summary>
     class InvisibleWall : IWall
     {
         #region Data Members

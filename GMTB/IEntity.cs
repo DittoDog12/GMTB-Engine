@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GMTB
 {
+    /// <summary>
+    /// Main Entity interface
+    /// </summary>
     public interface IEntity
     {
         #region Accessors
