@@ -33,8 +33,7 @@ namespace GMTB.AI
         {
             timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (timer > interval)
-            {
-                base.Update(gameTime);
+            {               
                 switch (mDirection)
                 {
                     case "Up":
@@ -61,6 +60,7 @@ namespace GMTB.AI
                 }
                 timer = 0f;
                 mDirection = "stop";
+                base.Update(gameTime);
             }
 
         }

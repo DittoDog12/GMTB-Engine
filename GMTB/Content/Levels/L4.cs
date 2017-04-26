@@ -21,6 +21,11 @@ namespace GMTB.Content.Levels
         {
             if (firstRun == true)
             {
+                // Cupboard
+                createdEntity = EntityManager.getInstance.newEntity<HidingPlace>("Game Items/Wardrope");
+                SceneManager.getInstance.newEntity(createdEntity, 375, 50);
+                Removables.Add(createdEntity);
+
                 // Desk
                 createdEntity = EntityManager.getInstance.newEntity<SolidObject>("Desk");
                 SceneManager.getInstance.newEntity(createdEntity, 425, 150);

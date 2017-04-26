@@ -42,8 +42,7 @@ namespace GMTB
         }
         public override void Update(GameTime gameTime)
         {
-            Global.PlayerPos = mPosition;
-            base.Update(gameTime);
+            Global.PlayerPos = mPosition;            
             // Movement controlled by timer
             timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (timer > interval)
@@ -78,6 +77,7 @@ namespace GMTB
                 mVelocity.X = 0;
                 mVelocity.Y = 0;
                 mDirection = "stop";
+                base.Update(gameTime);
             }      
         }
         public void OnNewInput(object source, InputEvent args)

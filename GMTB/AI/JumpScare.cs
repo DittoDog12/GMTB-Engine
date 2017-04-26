@@ -31,8 +31,8 @@ namespace GMTB.AI
                 mDistanceToDest.Normalize();
 
                 mVelocity = mDistanceToDest * mSpeed;
-                base.Update(gameTime);
                 CurrentFrame++;
+                base.Update(gameTime);
             }
             else
             {
